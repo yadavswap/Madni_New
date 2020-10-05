@@ -1,7 +1,7 @@
 <nav class="sidebar">
   <div class="sidebar-header">
     <a href="#" class="sidebar-brand">
-      Madni<span></span>
+      Madni International<span></span>
     </a>
     <div class="sidebar-toggler not-active">
       <span></span>
@@ -13,11 +13,25 @@
     <ul class="nav">
       <li class="nav-item nav-category">Main</li>
       <li class="nav-item {{ active_class(['/']) }}">
-        <a href="{{ url('/') }}" class="nav-link">
+        <a href="{{ route('dashboard.index') }}" class="nav-link">
           <i class="link-icon" data-feather="box"></i>
           <span class="link-title">Dashboard</span>
         </a>
       </li>
+      <li class="nav-item {{ active_class(['ui-components/alerts']) }}">
+        <a href="{{ url('/ui-components/alerts') }}" class="nav-link">
+          <i class="link-icon" data-feather="calendar"></i>
+          <span class="link-title">Price Categories</span>
+        </a>
+      </li>
+
+      <li class="nav-item {{ active_class(['customers']) }}">
+        <a href="{{ route('customers.index') }}" class="nav-link">
+          <i class="link-icon" data-feather="calendar"></i>
+          <span class="link-title">Customers</span>
+        </a>
+      </li>
+
       <li class="nav-item {{ active_class(['apps/chat']) }}">
         <a href="{{ url('/apps/chat') }}" class="nav-link">
           <i class="link-icon" data-feather="message-square"></i>
@@ -30,18 +44,8 @@
           <span class="link-title">Invoice</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['ui-components/alerts']) }}">
-        <a href="{{ url('/ui-components/alerts') }}" class="nav-link">
-          <i class="link-icon" data-feather="calendar"></i>
-          <span class="link-title">Customers</span>
-        </a>
-      </li>
-      <li class="nav-item {{ active_class(['ui-components/alerts']) }}">
-        <a href="{{ url('/ui-components/alerts') }}" class="nav-link">
-          <i class="link-icon" data-feather="calendar"></i>
-          <span class="link-title">Walking Customers</span>
-        </a>
-      </li>
+     
+     
       <li class="nav-item {{ active_class(['ui-components/alerts']) }}">
         <a href="{{ url('/ui-components/alerts') }}" class="nav-link">
           <i class="link-icon" data-feather="calendar"></i>
