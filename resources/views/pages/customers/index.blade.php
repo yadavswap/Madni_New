@@ -17,10 +17,10 @@
     
    
     
-      <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
-        <i class="fa fa-users"></i>
+    <a href="{{route('customers.create')}}"><button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
+        <i class="fa fa-user"></i>
       Create New Customer
-      </button>
+      </button></a>
     </div>
   </div>
 
@@ -37,40 +37,28 @@
                   <th>#</th>
                   <th>First Name</th>
                   <th>LAST NAME</th>
-                  <th>USERNAME</th>
+                  <th>Email</th>
+                  <th>Mobile</th>
+                  <th>Price Category</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <th>1</th>
                   <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
+                  <td>LastName</td>
+                  <td>Otto@mdo.com</td>
+                  <td>+91-1122334455</td>
+                  <td>Premium Category</td>
+                  <td>
+                      <div class="row">
+                          <div class="col-md-6"><button class="btn btn-sm btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></div>
+                          <div class="col-md-6"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
+                      </div>
+                  </td>
                 </tr>
-                <tr>
-                  <th>2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th>3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <th>4</th>
-                  <td>Larry</td>
-                  <td>Jellybean</td>
-                  <td>@lajelly</td>
-                </tr>
-                <tr>
-                  <th>5</th>
-                  <td>Larry</td>
-                  <td>Kikat</td>
-                  <td>@lakitkat</td>
-                </tr>
+               
               </tbody>
             </table>
         </div>

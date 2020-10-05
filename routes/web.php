@@ -20,6 +20,8 @@ Route::get('/dashboard','DashboardController@index' )->name('dashboard.index');
 Route::group(['prefix' => 'customers'], function()  
 {  
    Route::get('/','CustomersController@index')->name('customers.index');
+   Route::get('/create','CustomersController@create')->name('customers.create');
+   Route::post('/create','CustomersController@store')->name('customers.store');
 
 });  
 
