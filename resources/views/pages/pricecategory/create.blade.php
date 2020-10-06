@@ -15,8 +15,8 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{route('customers.index')}}">Customers</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Create Customers</li>
+    <li class="breadcrumb-item"><a href="{{route('pricecategory.index')}}">Price Category</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Create Category</li>
   </ol>
 </nav>
 
@@ -26,81 +26,27 @@
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Create New Customer</h4>
+        <h4 class="card-title">Create New Category</h4>
       
-        <form class="cmxform" id="signupForm" method="post" action="{{route('customers.store')}}">
+        <form class="cmxform" id="signupForm" method="post" action="{{route('pricecategory.store')}}" enctype="multipart/form-data">
           <fieldset>
               @csrf
             <div class="form-group">
-              <label for="name">Fullname</label>
-              <input id="name" class="form-control" name="fullname" type="text" required="">
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input id="email" class="form-control" name="email" type="email"  required="">
-            </div>
-            <div class="form-group">
-              <label for="mobile">Mobile</label>
-              <input id="mobile" class="form-control" name="mobile" type="text" maxlength="10"  required="">
+              <label for="price_category_name">Price Category Name</label>
+              <input id="price_category_name" class="form-control" name="price_category_name" type="text" required="">
             </div>
 
             <div class="form-group">
-                <label for="gstin">GSTIN</label>
-                <input id="gstin" class="form-control" name="gstin" type="text" >
-              </div>
-
+              <label>Upload Sheet</label>
               
-              <div class="form-group">
-                <label for="country">Country</label>
-                <select class="js-example-basic-single w-100" name="country" required="" id="country">
+              <input id="file_path" class="form-control" name="file_path" type="file" required="">
+            </div>
 
-                    <option value="" selected="selected">--Select Country -- </option>
-                    @foreach($countries as $country)
-                    <option value="{{$country->id}}">{{$country->emoji}} - {{$country->name}}</option>
-                    @endforeach
-                    
-                   
-                  </select>
-              </div>
-
-              
-
-
-
-              <div class="form-group">
-                <label for="state">State</label>
-                <input id="state" class="form-control" name="state" type="text" required="">
-              </div>
-
-              <div class="form-group">
-                <label for="pincode">Pincode</label>
-                <input id="pincode" class="form-control" name="pincode" type="text" required="required">
-              </div>
-
-
-
-              <div class="form-group">
-                <label for="price_category">Price Category</label>
-                <select class="js-example-basic-single w-100" name="price_category" required="">
-                    <option value="">--Select Categories--</option>
-
-                    @foreach($pricecategories as $category)
-                <option value="{{$category->id}}">{{$category->price_category_name}}</option>
-
-                    @endforeach
-                  
-                  </select>
-              </div>
-
-              <div class="form-group">
-                <label for="kind_attn">KIND ATTN</label>
-                <input id="kind_attn" class="form-control" name="kind_attn" type="text" >
-              </div>
-
+     
 
            
          
-            <input class="btn btn-primary" type="submit" value="Submit">
+            <button class="btn btn-primary" type="submit" id="submit">Create</button>
           </fieldset>
         </form>
       </div>

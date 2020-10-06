@@ -9,6 +9,40 @@
 
 </nav>
 
+
+@if(Session::has('success'))
+
+<div class="alert alert-success">
+
+    {{ Session::get('success') }}
+
+    @php
+
+    Session::forget('success');
+
+    @endphp
+
+</div>
+
+@endif
+
+@if(Session::has('error'))
+
+<div class="alert alert-danger">
+
+    {{ Session::get('danger') }}
+
+    @php
+
+    Session::forget('danger');
+
+    @endphp
+
+</div>
+
+@endif
+
+
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
     <div>
       <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>

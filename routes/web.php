@@ -11,6 +11,19 @@
 |
 */
 
+Auth::routes();
+
+
+
+
+Route::group(['middleware' => 'auth'], function()  
+{ 
+
+    // User routes
+
+    Route::get('/user_logout','DashboardController@logout' )->name('dashboard.logout');
+
+
 Route::get('/dashboard','DashboardController@index' )->name('dashboard.index');
 // Route::get('/customers','CustomersController@index' );
 
@@ -24,6 +37,21 @@ Route::group(['prefix' => 'customers'], function()
    Route::post('/create','CustomersController@store')->name('customers.store');
 
 });  
+
+
+Route::group(['prefix' => 'price_category'], function()  
+{  
+   Route::get('/','PriceCategoriesController@index')->name('pricecategory.index');
+   Route::get('/create','PriceCategoriesController@create')->name('pricecategory.create');
+   Route::post('/create','PriceCategoriesController@store')->name('pricecategory.store');
+   Route::get('/edit/{id}','PriceCategoriesController@edit')->name('pricecategory.edit');
+   Route::post('/update/{id}','PriceCategoriesController@update')->name('pricecategory.update');
+   
+
+});  
+
+
+});
 
 // Customers Route::End
 
@@ -125,6 +153,6 @@ Route::any('/{page?}',function(){
     return View::make('pages.error.404');
 })->where('page','.*');
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');

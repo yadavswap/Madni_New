@@ -2,9 +2,6 @@ $(function() {
   'use strict';
 
   $.validator.setDefaults({
-    submitHandler: function() {
-      alert("submitted!");
-    }
   });
   $(function() {
     // validate signup form on keyup and submit

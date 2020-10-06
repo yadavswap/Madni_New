@@ -19,15 +19,15 @@
         </a>
       </li>
       <li class="nav-item {{ active_class(['ui-components/alerts']) }}">
-        <a href="{{ url('/ui-components/alerts') }}" class="nav-link">
-          <i class="link-icon" data-feather="calendar"></i>
+        <a href="{{ route('pricecategory.index') }}" class="nav-link">
+          <i class="fa fa-inr"></i>
           <span class="link-title">Price Categories</span>
         </a>
       </li>
 
       <li class="nav-item {{ active_class(['customers']) }}">
         <a href="{{ route('customers.index') }}" class="nav-link">
-          <i class="link-icon" data-feather="calendar"></i>
+          <i class="fa fa-users"></i>
           <span class="link-title">Customers</span>
         </a>
       </li>
