@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth'], function()
     // User routes
 
     Route::get('/user_logout','DashboardController@logout' )->name('dashboard.logout');
+    Route::get('/','HomeController@index' )->name('home.index');
 
 
 Route::get('/dashboard','DashboardController@index' )->name('dashboard.index');

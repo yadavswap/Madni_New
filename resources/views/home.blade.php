@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+               <p>     {{ __('You are logged in!') }}  <a href="{{route('dashboard.index')}}">Click Here To Go To Dashboard</a></p>
                 </div>
             </div>
         </div>

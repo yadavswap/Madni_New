@@ -46,7 +46,7 @@
 
             <div class="form-group">
                 <label for="gstin">GSTIN</label>
-                <input id="gstin" class="form-control" name="gstin" type="text" >
+                <input id="gstin" class="form-control" name="gstin" type="text" maxlength="24">
               </div>
 
               
@@ -74,7 +74,12 @@
 
               <div class="form-group">
                 <label for="pincode">Pincode</label>
-                <input id="pincode" class="form-control" name="pincode" type="text" required="required">
+                <input id="pincode" class="form-control" name="pincode" type="pincode" required="required" maxlength="7">
+              </div>
+
+              <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" class="form-control" name="address" type="address" required="required"></textarea>
               </div>
 
 

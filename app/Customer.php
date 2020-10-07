@@ -7,4 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     //
+    
+    protected $fillable = ['fullname','mobile','email','mobile','gstin','country_id','state','pincode','address','price_categories_id'];
+   
+    public function category()
+
+    {
+
+        return $this->hasOne('App\PriceCategory','id','price_categories_id');
+
+    }
 }

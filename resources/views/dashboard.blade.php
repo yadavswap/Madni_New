@@ -52,7 +52,7 @@
             </div>
             <div class="row">
               <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2">3,897</h3>
+                <h3 class="mb-2">{{$customerscount}}</h3>
                 <div class="d-flex align-items-baseline">
                  
                 </div>
@@ -84,12 +84,9 @@
             </div>
             <div class="row">
               <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2">35,084</h3>
+              <h3 class="mb-2">{{$totalinvoicecount}}</h3>
                 <div class="d-flex align-items-baseline">
-                  <p class="text-danger">
-                    <span>-2.8%</span>
-                    <i data-feather="arrow-down" class="icon-sm mb-1"></i>
-                  </p>
+                 
                 </div>
               </div>
               <div class="col-6 col-md-12 col-xl-7">
@@ -103,7 +100,7 @@
         <div class="card">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-baseline">
-              <h6 class="card-title mb-0">Total Categories</h6>
+              <h6 class="card-title mb-0">Total Price Categories</h6>
               <div class="dropdown mb-2">
                 <button class="btn p-0" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -119,7 +116,7 @@
             </div>
             <div class="row">
               <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2">89.87%</h3>
+                <h3 class="mb-2">{{$pricecategorycount}}</h3>
                
               </div>
               <div class="col-6 col-md-12 col-xl-7">
