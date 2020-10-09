@@ -14,7 +14,7 @@ class Customer extends Model
 
     {
 
-        return $this->hasOne('App\PriceCategory','id','price_categories_id');
+        return $this->belongsTo('App\PriceCategory', 'price_categories_id','id');
 
     }
 }

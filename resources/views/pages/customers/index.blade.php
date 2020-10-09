@@ -45,23 +45,24 @@
                 </tr>
               </thead>
               <tbody>
-              
-                  @php
-                    $i =1;
-                  @endphp
+                @php
+                $i =1;
+              @endphp
+    
                   @foreach ($customers as $customer)
                   <tr>
+                
                   <th>{{$i}}</th>
                     <td>{{$customer->fullname}}</td>
                     <td>{{$customer->email}}</td>
                     <td>{{$customer->mobile}}</td>
-                    <td>{{$customer->price_category_name}}</td>
-                    <td><i class="fa fa-files"></i></td>
+                    <td>{{$customer->category->price_category_name}}</td>
+                    <td><a href="{{url('uploads/'.$customer->category->file_path)}}">  <button class="btn btn-sm btn-info"><i class="fa fa-files-o"></i></button></a></td>
                    
                     <td>
                         <div class="row">
                             <div class="col-md-6"><button class="btn btn-sm btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></div>
-                            <div class="col-md-6"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
+                            <div class="col-md-6"><a onclick="return confirm('Are you sure you want to delete this record?')" href="{{route('customers.delete',$customer->id)}}"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>
                         </div>
                     </td>
 
