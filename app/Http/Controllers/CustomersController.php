@@ -12,7 +12,7 @@ use App\Customer;
 class CustomersController extends Controller
 {
     public function index(){
-        $customers = Customer::with('category')->get();
+        $customers = Customer::with('category')->orderBy('created_at','desc')->get();
         //$lists = $customers->category();
 
       //  dd($customers);
@@ -59,7 +59,7 @@ class CustomersController extends Controller
 
         if($customer)
         {
-            return back()->with('success','User Created Successfully');
+            return redirect()->route('customers.index')->with('success','User Created Successfully');
         }
 
         return back()->with('error','Something Went Wrong!');
@@ -111,21 +111,9 @@ class CustomersController extends Controller
             ]);
         }
 
-
-
-
-        
-      
-
-
-
         $data =$request->input();
 
         $customer->update($data);
-
-
-
-
 
         return back()->with('success','Profile Updated Successfully');
     }
@@ -133,8 +121,6 @@ class CustomersController extends Controller
     public function delete($id){
         $customer = Customer::findOrFail($id);
         $customer->delete();
-        return back()->with('success','Customer Deleted Successfully!');
-
-      
+        return back()->with('error','Customer Deleted Successfully!');
     }
 }

@@ -50,7 +50,7 @@ Route::group(['prefix' => 'price_category'], function()
    Route::post('/create','PriceCategoriesController@store')->name('pricecategory.store');
    Route::get('/edit/{id}','PriceCategoriesController@edit')->name('pricecategory.edit');
    Route::post('/update/{id}','PriceCategoriesController@update')->name('pricecategory.update');
-   
+   Route::get('/delete/{id}','PriceCategoriesController@delete')->name('pricecategory.delete');
 
 });  
 

@@ -38,7 +38,22 @@
                 <tr>
                   <th>#</th>
                   <th>Price Category Name</th>
-                  <th>View Sheet</th>
+                  <th>
+                    
+                    
+                    <div class="row">
+                      <div class="col-md-4">
+                        TNT SHEET
+                      </div>
+                      <div class="col-md-4">
+                        FEDEX SHEEt
+                      </div>
+                    </div>
+
+                  </th>
+                  <th>Action</th>
+
+                 
                 </tr>
               </thead>
               <tbody>
@@ -53,10 +68,23 @@
                 <td>{{$category->price_category_name}}</td>
 
                 <td>
-
-                  <a href="{{url('uploads/'.$category->file_path)}}" target="_blank"> <button class="btn btn-sm btn-success"><i class="fa fa-download"></i></button></a>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <a href="{{url('uploads/'.$category->tnt_file_path)}}" target="_blank"> <button class="btn btn-sm btn-success"><i class="fa fa-download"></i></button></a>
+                    </div>
+                    <div class="col-md-4">
+                      <a href="{{url('uploads/'.$category->fedex_file_path)}}" target="_blank"> <button class="btn btn-sm btn-success"><i class="fa fa-download"></i></button></a>
+                    </div>
+                  </div>
+                 
 
             </td>
+
+            <td>
+
+              <a  onclick="return confirm('Are you sure you want to delete this record?')" href="{{route('pricecategory.delete',$category->id)}}" > <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></a>
+
+        </td>
 
                 @php
                 $i++;

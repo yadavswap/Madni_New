@@ -37,9 +37,16 @@
             </div>
 
             <div class="form-group">
-              <label>Upload Sheet</label>
+              <label>Upload TNT Sheet</label>
               
-              <input id="file_path" class="form-control" name="file_path" type="file" required="">
+              <input id="tnt_file_path" class="form-control" name="tnt_file_path" type="file" required="">
+            </div>
+
+
+            <div class="form-group">
+              <label>Upload Fedex Sheet</label>
+              
+              <input id="fedex_file_path" class="form-control" name="fedex_file_path" type="file" required="">
             </div>
 
      

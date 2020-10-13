@@ -28,19 +28,40 @@ class PriceCategoriesController extends Controller
        
             $request->validate([
 
-                'file_path' => 'required|mimes:xlx,xlsx,xlsm,xlsb,xls|max:10020',
-                'price_category_name'=>'required|string'
+                'tnt_file_path' => 'required|mimes:xlx,xlsx,xlsm,xlsb,xls|max:10020',
+                'price_category_name'=>'required|string',
+                'fedex_file_path' => 'required|mimes:xlx,xlsx,xlsm,xlsb,xls|max:10020',
     
             ]);
-            $originalName = $request->file_path;  
-            $fileName = "MADNI-".rand(11111,99999).time().'.'.$request->file_path->extension();  
-            $request->file_path->move(public_path('uploads'), $fileName);
+           
+          
+
+            // Fedex Import
+
+            $originalNameFDX = $request->fedex_file_path; 
+            $fileNameFDX = "MADNI-FEDEX".rand(11111,99999).time().'.'.$request->fedex_file_path->extension(); 
+            $request->fedex_file_path->move(public_path('uploads'), $fileNameFDX); 
+           
+
+             // TNT Import
+
+             $originalNameTNT = $request->tnt_file_path; 
+             $fileNameTNT = "MADNI-TNT".rand(11111,99999).time().'.'.$request->tnt_file_path->extension();
+             $request->tnt_file_path->move(public_path('uploads'), $fileNameTNT); 
+             
+             
+            
+
         
 
             $pricecategory = PriceCategory::create([
-                'file_path' => $fileName,
                 'price_category_name' => $request->price_category_name,
-                'filename'=>  $fileName
+                'fedex_file_path' =>  $fileNameFDX,
+                'fedex_file_name' => $fileNameFDX,
+                'tnt_file_path' =>     $fileNameTNT,
+                'filename' =>  $originalNameTNT
+
+
             ]);
 
             return back()->with('success','You have successfully created category and upload file.');
@@ -62,6 +83,8 @@ class PriceCategoriesController extends Controller
     }
 
     public function delete($id){
-        return view('pages.customers.index');
+        $price = PriceCategory::findOrFail($id);
+        $price->delete();
+        return back()->with('success','Deleted!');
     }
 }
