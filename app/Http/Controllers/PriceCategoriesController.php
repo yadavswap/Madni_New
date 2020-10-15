@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\PriceCategory;
+use App\Imports\TntEconomyNonDocImport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\TntImport;
 
 class PriceCategoriesController extends Controller
 {
@@ -64,7 +67,20 @@ class PriceCategoriesController extends Controller
 
             ]);
 
+        //    $excel =  Excel::import(new TntEconomyNonDocImport, );
+       // dd(request()->file('tnt_file_path'));
+
+       $tntpath = "uploads/".$fileNameTNT;
+
+        Excel::import(new TntImport,$tntpath);
+
+
+
+            
+
             return back()->with('success','You have successfully created category and upload file.');
+
+
 
 
             
