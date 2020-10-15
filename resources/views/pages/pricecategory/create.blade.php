@@ -37,14 +37,14 @@
             </div>
 
             <div class="form-group">
-              <label>Upload TNT Sheet</label>
+            <label>Upload TNT Sheet : <small> <a href="{{url('uploads/madniTNTImportsSample.xlsx')}}"> Download Sample Sheet</a></small></label>
               
               <input id="tnt_file_path" class="form-control" name="tnt_file_path" type="file" required="">
             </div>
 
 
             <div class="form-group">
-              <label>Upload Fedex Sheet</label>
+              <label>Upload Fedex Sheet :  <small> <a href="{{url('uploads/madniTNTImportsSample.xlsx')}}"> Download Sample Sheet</a></small></label>
               
               <input id="fedex_file_path" class="form-control" name="fedex_file_path" type="file" required="">
             </div>
@@ -53,7 +53,7 @@
 
            
          
-            <button class="btn btn-primary" type="submit" id="submit">Create</button>
+            <button class="btn btn-primary" type="submit" id="submit">Create Pricing Category</button>
           </fieldset>
         </form>
       </div>
@@ -100,4 +100,9 @@
   <script src="{{ asset('assets/js/bootstrap-colorpicker.js') }}"></script>
   <script src="{{ asset('assets/js/datepicker.js') }}"></script>
   <script src="{{ asset('assets/js/timepicker.js') }}"></script>
+  <script>
+    $('#submit').click({
+      this.prop('disabled', true);
+    });
+  </script>
 @endpush

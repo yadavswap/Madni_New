@@ -67,18 +67,38 @@ class PriceCategoriesController extends Controller
 
             ]);
 
-        //    $excel =  Excel::import(new TntEconomyNonDocImport, );
-       // dd(request()->file('tnt_file_path'));
+            if($pricecategory){
+                $pricecategoryid = $pricecategory->id;
+                $tntpath = "uploads/".$fileNameTNT;
+                $fedexpath = "uploads/".$fileNameFDX;
 
-       $tntpath = "uploads/".$fileNameTNT;
+                // Import TNT From Sheet
 
-        Excel::import(new TntImport,$tntpath);
+                /*
+                    1. TntExpressDocImport
+                    2.TntExpressNonDocImport
+                    3.TntEconomyNonDocImport
 
+                    php artisan make:import TntExpressDocExport --model=TntPrice
 
+                */
 
-            
-
+            Excel::import(new TntImport($pricecategoryid),$tntpath);
             return back()->with('success','You have successfully created category and upload file.');
+            }
+
+            return back()->with('error','Unable To Update Price List. Failed!');
+
+
+       
+
+
+
+
+
+
+        
+       
 
 
 

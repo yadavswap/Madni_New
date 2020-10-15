@@ -18,7 +18,7 @@
           <span class="link-title">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['ui-components/alerts']) }}">
+      <li class="nav-item {{ active_class(['price_categories']) }}">
         <a href="{{ route('pricecategory.index') }}" class="nav-link">
           <i class="fa fa-inr"></i>
           <span class="link-title">Price Categories</span>
@@ -28,36 +28,27 @@
       <li class="nav-item {{ active_class(['customers']) }}">
         <a href="{{ route('customers.index') }}" class="nav-link">
           <i class="fa fa-users"></i>
-          <span class="link-title">Customers</span>
+          <span class="link-title">Manage Customers</span>
+        </a>
+      </li>
+
+      <li class="nav-item {{ active_class(['apps/calendar']) }}">
+        <a href="{{ url('/apps/calendar') }}" class="nav-link">
+          <i class="fa fa-file-o"></i>
+          <span class="link-title">Manage Invoice</span>
         </a>
       </li>
 
       <li class="nav-item {{ active_class(['apps/chat']) }}">
         <a href="{{ url('/apps/chat') }}" class="nav-link">
-          <i class="link-icon" data-feather="message-square"></i>
-          <span class="link-title">Docket</span>
-        </a>
-      </li>
-      <li class="nav-item {{ active_class(['apps/calendar']) }}">
-        <a href="{{ url('/apps/calendar') }}" class="nav-link">
-          <i class="link-icon" data-feather="calendar"></i>
-          <span class="link-title">Invoice</span>
+          <i class="fa fa-file-excel-o"></i>
+          <span class="link-title">View Price List</span>
         </a>
       </li>
      
      
-      <li class="nav-item {{ active_class(['ui-components/alerts']) }}">
-        <a href="{{ url('/ui-components/alerts') }}" class="nav-link">
-          <i class="link-icon" data-feather="calendar"></i>
-          <span class="link-title">Import Price List</span>
-        </a>
-      </li>
-      <li class="nav-item {{ active_class(['ui-components/alerts']) }}">
-        <a href="{{ url('/ui-components/alerts') }}" class="nav-link">
-          <i class="link-icon" data-feather="list"></i>
-          <span class="link-title">Import Price List</span>
-        </a>
-      </li>
+     
+      
       
      
     </ul>

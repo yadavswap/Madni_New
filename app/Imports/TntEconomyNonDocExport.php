@@ -6,7 +6,7 @@ use App\TntPrice;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
-class TntExpressNonDocImport implements ToCollection
+class TntEconomyNonDocExport implements ToCollection
 {
 
     private $pricecategoryid;
@@ -27,8 +27,8 @@ class TntExpressNonDocImport implements ToCollection
                 $price->weight = $rows[$i][0];
                 $price->zone = $rows[0][$j];
                 $price->is_doc =0;
-                $price->is_express = 1;
-                $price->is_import = 1;
+                $price->is_express = 0;
+                $price->is_import = 0;
                 $price->price_categories_id =  $this->pricecategoryid;
                 $price->save();
             }

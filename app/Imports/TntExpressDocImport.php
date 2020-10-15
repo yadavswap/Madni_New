@@ -8,6 +8,13 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 
 class TntExpressDocImport implements ToCollection
 {
+
+    private $pricecategoryid;
+
+    public function __construct($pricecategoryid)
+    {
+        $this->pricecategoryid = $pricecategoryid;
+    }
   
     public function collection(Collection $rows)
     {
@@ -22,7 +29,7 @@ class TntExpressDocImport implements ToCollection
                 $price->is_doc =1;
                 $price->is_express = 1;
                 $price->is_import = 1;
-                $price->price_categories_id = 1;
+                $price->price_categories_id =  $this->pricecategoryid;
                 $price->save();
             }
         }
