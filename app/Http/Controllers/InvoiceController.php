@@ -74,7 +74,7 @@ class InvoiceController extends Controller
         //     TNT Provider
         // Check For Type
 
-            if($request->type == 1){
+            if($request->type == 0){
                 //  TNT Import
 
                 $pricelists = TntPrice::where('price_categories_id',$customerdetails->price_categories_id)
@@ -86,11 +86,15 @@ class InvoiceController extends Controller
                     return back()->with('error','Data Not Available Right Now! Please Update Sheet');
                 }
 
+                return view('pages.invoice.new',compact(['pricelist','customerdetails']));
+
+              //  return $pricelists;
+
 
 
             }
 
-            if($request->type == 2){
+            if($request->type == 1){
                 //  TNT Export
                 
                 $pricelists = TntPrice::where('price_categories_id',$customerdetails->price_categories_id)
@@ -101,6 +105,7 @@ class InvoiceController extends Controller
                 if(!$pricelists){
                     return back()->with('error','Data Not Available Right Now! Please Update Sheet');
                 }
+                return view('pages.invoice.new',compact(['pricelist','customerdetails']));
             }
             
          
@@ -112,14 +117,14 @@ class InvoiceController extends Controller
 
              // Check For Type
 
-             if($request->type == 1){
+             if($request->type == 0){
                 //  TNT Import
 
                 return "FedeX IMPORT";
 
             }
 
-            if($request->type == 2){
+            if($request->type == 1){
                 //  TNT Export
                 
                 return "FedeX EXPORT";

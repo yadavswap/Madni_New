@@ -19,13 +19,12 @@
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
    
     <div class="d-flex align-items-center flex-wrap text-nowrap">
-    
-   
-    
-    <a href="{{route('customers.create')}}"><button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
+    <a href="{{route('customers.create')}}">
+      <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
         <i class="fa fa-plus"></i>
       Create New Customer
-      </button></a>
+      </button>
+    </a>
     </div>
   </div>
 
