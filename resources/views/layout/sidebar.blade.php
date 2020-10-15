@@ -32,8 +32,8 @@
         </a>
       </li>
 
-      <li class="nav-item {{ active_class(['apps/calendar']) }}">
-        <a href="{{ url('/apps/calendar') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['invoice']) }}">
+        <a href="{{ route('invoice.index') }}" class="nav-link">
           <i class="fa fa-file-o"></i>
           <span class="link-title">Manage Invoice</span>
         </a>

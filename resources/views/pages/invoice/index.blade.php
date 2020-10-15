@@ -7,7 +7,7 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{route('customers.index')}}">Customers</a></li>
+    <li class="breadcrumb-item"><a href="{{route('customers.index')}}">Invoice</a></li>
     <li class="breadcrumb-item active" aria-current="page">Lists</li>
   </ol>
 
@@ -22,9 +22,9 @@
     
    
     
-    <a href="{{route('customers.create')}}"><button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
+    <a href="{{route('invoice.create')}}"><button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
         <i class="fa fa-plus"></i>
-      Create New Customer
+      Create New Invoice
       </button></a>
     </div>
   </div>
@@ -39,11 +39,11 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Fullname</th>
-                  <th>Email</th>
-                  <th>Mobile</th>
-                  <th>Price Category</th>
-                  <th>Download Sheet</th>
+                  <th>Invoice ID</th>
+                  <th>Customer Name</th>
+                  <th>Invoice Date</th>
+                  <th>Gross Amount</th>
+                  <th>Generate Invoice</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -53,25 +53,26 @@
                 $i =1;
               @endphp
 
-@foreach ($customers as $customer)
+@foreach ($invoices as $invoice)
 <tr>
 
 <th>{{$i}}</th>
+  <td>{{$invoices->id}}</td>
   <td>{{$customer->fullname}}</td>
-  <td>{{$customer->email}}</td>
-  <td>{{$customer->mobile}}</td>
-  <td>{{$customer->category->price_category_name}}</td>
+  <td>{{$customer->invoice_date}}</td>
+  <td>{{$customer->gross_amount}}</td>
+  <td><button class="btn btn-sm btn-info">Generate Invoice</button></td>
   <td>
     
     <div class="row">
       <div class="col-md-6">    
-        <a href="{{url('uploads/'.$customer->category->tnt_file_path)}}" title="tnt sheet"> 
-           <button class="btn btn-sm btn-info"><i class="fa fa-files-o"></i></button>
+        <a href="" title="edit"> 
+           <button class="btn btn-sm btn-info"><i class="fa fa-pencile"></i></button>
           </a>
         </div>
         <div class="col-md-6">    
-          <a href="{{url('uploads/'.$customer->category->fedex_file_path)}}"> 
-             <button class="btn btn-sm btn-info"><i class="fa fa-files-o" title="fedex sheet"></i></button>
+          <a href=""> 
+             <button class="btn btn-sm btn-info"><i class="fa fa-trash-o" title="delete"></i></button>
             </a>
           </div>
       </div>
@@ -82,17 +83,12 @@
   <td>
       <div class="row">
           <div class="col-md-4"><button class="btn btn-sm btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></div>
-          <div class="col-md-4"><a onclick="return confirm('Are you sure you want to delete this record?')" href="{{route('customers.delete',$customer->id)}}"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a></div>
-            <div class="col-md-4"><a href="{{route('invoice.create',$customer->id)}}"><button class="btn btn-sm btn-info"><i class="fa fa-file-o" aria-hidden="true"></i></button></a></div>
+          <div class="col-md-4"><a onclick="return confirm('Are you sure you want to delete this record?')" href="{{route('customers.delete',$customer->id)}}"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a></button></div>
+            <div class="col-md-4"><button class="btn btn-sm btn-info"><a href="{{route('customers.delete',$customer->id)}}"><i class="fa fa-file-o" aria-hidden="true"></i></a></button></div>
 
       </div>
   </td>
 
-  @php
-      
-      $i ++;
-  
-  @endphp
 @endforeach
 
 
