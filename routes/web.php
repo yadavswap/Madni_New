@@ -60,7 +60,7 @@ Route::group(['prefix' => 'invoice'], function()
    Route::get('/','InvoiceController@index')->name('invoice.index');
    Route::get('/create/{id?}','InvoiceController@create')->name('invoice.create');
    Route::get('/new/invoice','InvoiceController@newInvoice')->name('invoice.new');
-   Route::post('/create','InvoiceController@store')->name('invoice.store');
+   Route::post('/generate','InvoiceController@store')->name('invoice.store');
    Route::get('/edit/{id}','InvoiceController@edit')->name('invoice.edit');
    Route::post('/update/{id}','InvoiceController@update')->name('invoice.update');
    Route::get('/delete/{id}','InvoiceController@delete')->name('invoice.delete');

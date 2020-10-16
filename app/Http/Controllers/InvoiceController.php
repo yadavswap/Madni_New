@@ -7,7 +7,7 @@ use App\CustomerInvoice;
 use App\PriceCategory;
 use App\Customer;
 use App\TntPrice;
-
+use Khsing\World\World;
 
 
 
@@ -55,6 +55,7 @@ class InvoiceController extends Controller
             $customerdetails = Customer::findOrFail($request->customer_id);
             $is_express = $request->class;
             $is_import = $request->type;
+            $countries = World::Countries();
 
 
         /*
@@ -77,16 +78,32 @@ class InvoiceController extends Controller
             if($request->type == 0){
                 //  TNT Import
 
+                $tntimport = [
+                    'provider' => "TNT",
+                    'type' => "Import",
+                    "class" => ($request->class) ? ("Express") : ("Economy"),
+                ];
+               
+
                 $pricelists = TntPrice::where('price_categories_id',$customerdetails->price_categories_id)
                 ->where('is_import',$is_import)
                 ->where('is_express',$is_express)
                 ->get();
 
+                
+                $zones =  TntPrice::where('is_import',$is_import)
+                ->where('is_express',$is_express)
+                ->orderBy('zone', 'ASC')
+                ->get()
+                ->unique('zone');
+                
+
                 if(!$pricelists){
                     return back()->with('error','Data Not Available Right Now! Please Update Sheet');
                 }
 
-                return view('pages.invoice.new',compact(['pricelist','customerdetails']));
+
+                return view('pages.invoice.new',compact(['pricelist','customerdetails','countries','zones','tntimport']));
 
               //  return $pricelists;
 
@@ -96,16 +113,30 @@ class InvoiceController extends Controller
 
             if($request->type == 1){
                 //  TNT Export
+
+                $tntimport = [
+                    'provider' => "TNT",
+                    'type' => "EXPORT",
+                    "class" => ($request->class) ? ("Express") : ("Economy"),
+                ];
                 
                 $pricelists = TntPrice::where('price_categories_id',$customerdetails->price_categories_id)
                 ->where('is_import',$is_import)
                 ->where('is_express',$is_express)
                 ->get();
 
+              
+
+                $zones =  TntPrice::where('is_import',$is_import)
+                ->where('is_express',$is_express)
+                ->orderBy('zone', 'ASC')
+                ->get()
+                ->unique('zone');
+
                 if(!$pricelists){
                     return back()->with('error','Data Not Available Right Now! Please Update Sheet');
                 }
-                return view('pages.invoice.new',compact(['pricelist','customerdetails']));
+                return view('pages.invoice.new',compact(['pricelist','customerdetails','countries','zones','tntexport']));
             }
             
          
@@ -135,5 +166,9 @@ class InvoiceController extends Controller
 
        
 
+    }
+
+    public function store(Request $request){
+        return $request;
     }
 }
