@@ -82,6 +82,10 @@ class InvoiceController extends Controller
                     'provider' => "TNT",
                     'type' => "Import",
                     "class" => ($request->class) ? ("Express") : ("Economy"),
+                    'provider_id' => $request->provider,
+                    'type_id' => $request->type,
+                    'class_id' => $request->class
+
                 ];
                
 
@@ -103,7 +107,7 @@ class InvoiceController extends Controller
                 }
 
 
-                return view('pages.invoice.new',compact(['pricelist','customerdetails','countries','zones','tntimport']));
+                return view('pages.invoice.newinvoice',compact(['pricelist','customerdetails','countries','zones','tntimport']));
 
               //  return $pricelists;
 
@@ -118,6 +122,9 @@ class InvoiceController extends Controller
                     'provider' => "TNT",
                     'type' => "EXPORT",
                     "class" => ($request->class) ? ("Express") : ("Economy"),
+                    'provider_id' => $request->provider,
+                    'type_id' => $request->type,
+                    'class_id' => $request->class
                 ];
                 
                 $pricelists = TntPrice::where('price_categories_id',$customerdetails->price_categories_id)
@@ -136,7 +143,7 @@ class InvoiceController extends Controller
                 if(!$pricelists){
                     return back()->with('error','Data Not Available Right Now! Please Update Sheet');
                 }
-                return view('pages.invoice.new',compact(['pricelist','customerdetails','countries','zones','tntexport']));
+                return view('pages.invoice.newinvoice',compact(['pricelist','customerdetails','countries','zones','tntexport']));
             }
             
          
