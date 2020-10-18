@@ -86,17 +86,36 @@
                                                 <thead>
                                                     <tr>
                                                         <th>
+                                                            
+                                                                <label for="invoice_date">Select Invoice Date * </label>
+                                    
+                                                                <input id="invoice_date" class="form-control datepicker invoice_date"
+                                                                                                    name="invoice_date" type="text" placeholder="dd/mm/yyyy">
+                                    
+                                                          
+                                                        </th>
+
+                                                        <th>
+                                                            <label for="statecode">Enter State Code * </label>
+                                    
+                                                                <input id="statecode" class="form-control  statecode"
+                                                                                                    name="statecode" type="text" placeholder="00">
+                                    
+                                                          
+                                                        </th>
+
+                                                        <th>
                                                             <button class="btn btn-md btn-success" type="button"
-                                                                id="addrow"><i class="fa fa-plus"></i> Add New</button>
+                                                                id="addrow"> Add New <i class="fa fa-plus"></i></button>
 
                                                         </th>
                                                         <th>
                                                             <button class="btn btn-md btn-danger" type="button"
-                                                                id="deleterow"><i class="fa fa-trash-o"></i>
-                                                                Delete</button>
+                                                                id="deleterow">
+                                                                Delete <i class="fa fa-trash-o"></i></button>
                                                         </th>
-                                                        <th></th>
-                                                        <th></th>
+                                                       
+                                                       
                                                         <th></th>
                                                         <th></th>
                                                         <th></th>
@@ -274,26 +293,50 @@
 
 
 
-                        <button class="btn btn-success" type="submit" id="submit">Calculate Pricing</button>
+                        <button class="btn btn-success" type="submit" id="submit"> Process Next</button>
+                    </br>
                     </fieldset>
-                </form>
-            </div>
-        </div>
 
-
-        {{-- Second Card Start --}}
+                      {{-- Second Card Start --}}
 
 
         <div class="card 2" id="calculationbody">
+
+            {{-- Card Body Start --}}
             <div class="card-body">
                 <h4 class="card-title">Calculation Details</h4>
 
+                {{-- Row Start --}}
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="customer_id">Invoice Date</label>
+
+                            <input id="invoice_date" class="form-control datepicker invoice_date"
+                                                                name="invoice_date" type="text" placeholder="dd/mm/yyyy">
+
+                        </div>
+                    </div>
+
+
+                </div>
+                {{-- Row End --}}
+
             </div>
+            {{-- Card Body End --}}
 
         </div>
 
 
         {{-- Second Card End --}}
+
+                </form>
+            </div>
+        </div>
+
+
+      
     </div>
 
 </div>
@@ -341,11 +384,17 @@
     
     $(document).ready(function () {
 
+        $("#calculationbody").hide();
+
         var total = 0;
+       
 
 
             $('.booking_date').datepicker({
             format: 'dd/mm/yyyy',
+            });
+            $('.invoice_date').datepicker({
+                format:'dd/mm/yyyy',
             });
 
             $(".actual_weight").inputmask('decimal', {
@@ -491,6 +540,7 @@ $(document).on("change", ".zone", function(){
     var currentid = "#"+ $(this).attr('id');
         var suffix = this.id.match(/\d+/)[0];
         console.log($(currentid).val());
+        
 
         // Check All Fields
 
@@ -550,8 +600,28 @@ $(document).on("change", ".zone", function(){
 
 
 
-$("#submit").click(function () {
-     $('#invoiceform').submit();
+$("#submit").click(function (e) {
+
+
+
+    e.preventDefault();
+
+    $("#calculationbody").toggle();
+
+    $('html, body').animate({
+        scrollTop: $('#calculationbody').offset().top
+    }, 500);
+
+    var gross = 0;
+
+
+
+$('.amount').each(function(index,element){
+    gross = gross + parseFloat($(element).val());
+    console.log(gross);
+});
+
+    // $('#invoiceform').submit();
 
     // $('[name="consignment_no[]"]').val();
 
