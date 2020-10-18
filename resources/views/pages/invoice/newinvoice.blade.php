@@ -116,7 +116,9 @@
                                                         </th>
                                                        
                                                        
-                                                        <th></th>
+                                                        <th>
+                                                            <button class="btn btn-warning" type="submit" id="submit"> Process Next</button>
+                                                        </th>
                                                         <th></th>
                                                         <th></th>
                                                         <th></th>
@@ -145,7 +147,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="itembody">
-                                                    <tr id="itemrow" class="itemrow">
+                                                    <tr id="itemrow" class="itemrow perfect-scrollbar-example">
 
                                                         <td>
                                                             <input id="consignment_no1" class="form-control consignment_no"
@@ -293,7 +295,7 @@
 
 
 
-                        <button class="btn btn-success" type="submit" id="submit"> Process Next</button>
+                        <button class="btn btn-warning" type="submit" id="submit"> Process Next</button>
                     </br>
                     </fieldset>
 
@@ -306,22 +308,49 @@
             <div class="card-body">
                 <h4 class="card-title">Calculation Details</h4>
 
+                <h6 class="card-title">GST Details : 18%</h6>
                 {{-- Row Start --}}
                 <div class="row">
+                   
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="cgst">CGST Amount: *</label>
+
+                            <input id="cgst" class="form-control cgst"
+                                                                name="cgst" type="text" placeholder="" disabled>
+
+                        </div>
+
+                    </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="customer_id">Invoice Date</label>
+                            <label for="sgst">SGST Amount: *</label>
 
-                            <input id="invoice_date" class="form-control datepicker invoice_date"
-                                                                name="invoice_date" type="text" placeholder="dd/mm/yyyy">
+                            <input id="sgst" class="form-control sgst"
+                                                                name="sgst" type="text" placeholder="" disabled>
 
                         </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="igst">IGST Amount: *</label>
+
+                            <input id="igst" class="form-control igst"
+                                                                name="igst" type="text" placeholder="" disabled>
+
+                        </div>
+
                     </div>
 
 
                 </div>
                 {{-- Row End --}}
+
+                <h6 class="card-title">Other Charges</h6>
+
 
             </div>
             {{-- Card Body End --}}
@@ -381,8 +410,12 @@
 <script src="{{ asset('assets/js/timepicker.js') }}"></script>
 
 <script>
+
+var scrollbarExample = new PerfectScrollbar('.perfect-scrollbar-example');
     
     $(document).ready(function () {
+
+        
 
         $("#calculationbody").hide();
 
@@ -606,7 +639,14 @@ $("#submit").click(function (e) {
 
     e.preventDefault();
 
+    if($('#invoice_date').val() == "" || $('#statecode').val() == "" || $('.amount').val() == "")
+    {
+        alert('Please Check Invoice Date or State Code or Final Amount !');
+        return false;
+    }
+
     $("#calculationbody").toggle();
+
 
     $('html, body').animate({
         scrollTop: $('#calculationbody').offset().top
