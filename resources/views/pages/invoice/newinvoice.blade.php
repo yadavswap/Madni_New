@@ -39,6 +39,7 @@
             <input type="hidden" name="provider_id" value="{{$tntimport['provider_id']}}">
             <input type="hidden" name="type_id" value="{{$tntimport['type_id']}}">
             <input type="hidden" name="class_id" value="{{$tntimport['class_id']}}">
+            <input type="hidden" name="price_categories_id" value="{{$customerdetails->price_categories_id}}">
                     <fieldset>
                         @csrf
 
@@ -273,11 +274,26 @@
 
 
 
-                        <button class="btn btn-success" type="submit" id="submit">Generate Invoice</button>
+                        <button class="btn btn-success" type="submit" id="submit">Calculate Pricing</button>
                     </fieldset>
                 </form>
             </div>
         </div>
+
+
+        {{-- Second Card Start --}}
+
+
+        <div class="card 2" id="calculationbody">
+            <div class="card-body">
+                <h4 class="card-title">Calculation Details</h4>
+
+            </div>
+
+        </div>
+
+
+        {{-- Second Card End --}}
     </div>
 
 </div>
@@ -505,6 +521,7 @@ $(document).on("change", ".zone", function(){
 
                         }
                         else{
+                            $("#amount"+suffix).val("");
                             alert("No Price Available! Please Enter Price Manually");
                         }
 
@@ -534,7 +551,16 @@ $(document).on("change", ".zone", function(){
 
 
 $("#submit").click(function () {
-    $('#invoiceform').submit();
+     $('#invoiceform').submit();
+
+    // $('[name="consignment_no[]"]').val();
+
+//    $('[name="consignment_no[]"]').each(function() {
+//     console.log( this.value +);
+// });
+
+
+
 });
 
 
