@@ -68,6 +68,9 @@ Route::group(['prefix' => 'invoice'], function()
 
 });  
 
+Route::get('/getCalculateAmount','ApiMadniController@calculateAmount');
+
+
 
 });
 

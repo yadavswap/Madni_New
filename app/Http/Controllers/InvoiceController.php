@@ -1,5 +1,14 @@
 <?php
 
+
+/*
+
+Author: Shantanu Kulkarni
+Date: 13/10/2020
+Github: @heyshantu13
+
+*/
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -56,6 +65,7 @@ class InvoiceController extends Controller
             $is_express = $request->class;
             $is_import = $request->type;
             $countries = World::Countries();
+        
 
 
         /*
@@ -76,11 +86,11 @@ class InvoiceController extends Controller
         // Check For Type
 
             if($request->type == 0){
-                //  TNT Import
+                //  TNT Export
 
                 $tntimport = [
                     'provider' => "TNT",
-                    'type' => "Import",
+                    'type' => "Export",
                     "class" => ($request->class) ? ("Express") : ("Economy"),
                     'provider_id' => $request->provider,
                     'type_id' => $request->type,
@@ -116,11 +126,11 @@ class InvoiceController extends Controller
             }
 
             if($request->type == 1){
-                //  TNT Export
+                //  TNT Import
 
                 $tntimport = [
                     'provider' => "TNT",
-                    'type' => "EXPORT",
+                    'type' => "Import",
                     "class" => ($request->class) ? ("Express") : ("Economy"),
                     'provider_id' => $request->provider,
                     'type_id' => $request->type,
@@ -143,7 +153,7 @@ class InvoiceController extends Controller
                 if(!$pricelists){
                     return back()->with('error','Data Not Available Right Now! Please Update Sheet');
                 }
-                return view('pages.invoice.newinvoice',compact(['pricelist','customerdetails','countries','zones','tntexport']));
+                return view('pages.invoice.newinvoice',compact(['pricelist','customerdetails','countries','zones','tntimport']));
             }
             
          

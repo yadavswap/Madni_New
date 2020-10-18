@@ -113,7 +113,6 @@
                                                         <th>Select Booking Date</th>
                                                         <th>Select Origin</th>
                                                         <th>Select Destination</th>
-                                                        <th>Select Zone</th>
                                                         <th>Product Type</th>
                                                         <th>Actual Wt.( In Kg)</th>
                                                         <th>L(Volumetric)</th>
@@ -121,6 +120,7 @@
                                                         <th>H (Volumetric)</th>
                                                         <th>Select Mode</th>
                                                         <th>Chargable Wt (In Kg)</th>
+                                                        <th>Select Zone</th>
                                                         <th>Amount (INR)</th>
                                                     </tr>
                                                 </thead>
@@ -139,7 +139,7 @@
 
                                                         <td>
                                                             <input id="booking_date1" class="form-control datepicker booking_date"
-                                                                name="booking_date[]" type="text" placeholder="booking_date">
+                                                                name="booking_date[]" type="text" placeholder="dd/mm/yyyy">
                                                         </td>
 
                                                         <td>
@@ -169,17 +169,7 @@
                                                             </select>
                                                         </td>
 
-                                                        <td>
-                                                            <select class="basic-single w-100 zone" name="zone[]"
-                                                                required="" id="zone1" >
-                                                                <option value="" selected="selected">--Select Zone --
-                                                                </option>
-                                                                @foreach($zones as $zone)
-                                                                <option value="{{$zone->zone}}">{{$zone->zone}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </td>
-
+                                                     
                                                         <td>
                                                             <select class="w-100 type"
                                                                 name="product_type[]" required="" id="type1" >
@@ -232,13 +222,25 @@
                                         </td>
 
                                                         <td>
-                                                            <input id="chargable_weight" class="form-control chargable_weight"
+                                                            <input id="chargable_weight1" class="form-control chargable_weight"
                                                                 name="chargable_weight[]" type="text"
-                                                                placeholder="Chargable Wt" >
+                                                                placeholder="Chargable Wt" disabled="disabled" >
                                                         </td>
 
                                                         <td>
-                                                            <input id="amount" class="form-control amount" name="amount[]"
+                                                            <select class="basic-single w-100 zone" name="zone[]"
+                                                                required="" id="zone1" >
+                                                                <option value="" selected="selected">--Select Zone --
+                                                                </option>
+                                                                @foreach($zones as $zone)
+                                                                <option value="{{$zone->zone}}">{{$zone->zone}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </td>
+
+
+                                                        <td>
+                                                            <input id="amount1" class="form-control amount" name="amount[]"
                                                                 type="text" placeholder="0" required >
 
                                                         </td>
@@ -320,11 +322,19 @@
 <script src="{{ asset('assets/js/timepicker.js') }}"></script>
 
 <script>
+    
     $(document).ready(function () {
 
-        $('.booking_date').datepicker({
+        var total = 0;
+
+
+            $('.booking_date').datepicker({
             format: 'dd/mm/yyyy',
-        });
+            });
+
+            $(".actual_weight").inputmask('decimal', {
+    rightAlign: true
+  });
 
         
     });
@@ -339,7 +349,6 @@
 
     var consignment_id = $('input[id^="consignment_no"]:last');
     var num = parseInt(consignment_id.prop("id").match(/\d+/g), 10) + 1;
-
     var itemrow = $('#itemrow').clone();
     itemrow.find("input").val("");
     itemrow.find(".consignment_no:last").attr("id","consignment_no"+num);
@@ -360,8 +369,6 @@
     itemrow.find(".h:last").attr("id","h"+num);
     itemrow.find(".amontError:last").attr("id","amontError"+num);
     itemrow.find(".amontLoading:last").attr("id","amontLoading"+num);
-
-
     itemrow.find(".amount:last").val("0");
     $("#itembody").append(itemrow);
 
@@ -387,24 +394,69 @@ $(document).on("change", ".mode", function(){
         var currentLid = "#l"+suffix;
         var currentWid = "#w"+suffix;
         var currentHid = "#h"+suffix;
+        var chargablewtid = "#chargable_weight"+suffix;
+
 
         console.log(currentid);
 
       
         if(currentvalue != "" && $(actualwtid).val() != "")
         {
-            // Courier Mode Calculation
+            // Courier Normal Mode Calculation
                 if(currentvalue == 0 && $(currentLid).val() != "" && $(currentWid).val() != "" && $(currentHid).val() != "" )
                 {
                     var total = ( parseFloat($("#l"+suffix).val()) * parseFloat($("#w"+suffix).val()) * parseFloat($("#h"+suffix).val()) ) / 5000;
                     console.log(total);
-                    var final = Math.max((total * 1000),($("#actual_weight"+suffix).val() * 1000));
-                    console.log(final);
+                    // var final = Math.max((total * 1000));
+                    // console.log("Final Weight "+final);
+                    if($(actualwtid).val() > total )
+                    {
+                        var total = $(actualwtid).val();
+                        $(chargablewtid).val(total);
+                    }
+                    if(total > $(actualwtid).val())
+                    {
+                        $(chargablewtid).val(total);
+                    }
+                   
+
+
                 }
 
 
 
                 // End Courier Mode Calculation 
+
+
+                // Courier Cargo Mode
+
+                if(currentvalue == 1 && $(currentLid).val() != "" && $(currentWid).val() != "" && $(currentHid).val() != "" )
+                {
+                   
+                    var total = ( parseFloat($("#l"+suffix).val()) * parseFloat($("#w"+suffix).val()) * parseFloat($("#h"+suffix).val()) ) / 6000;
+                   var total = total.toFixed(3);
+
+                    console.log(total);
+                    // var final = Math.max((total * 1000));
+                    // console.log("Final Weight "+final);
+
+                    if(total > $(actualwtid).val())
+                    {
+                        $(chargablewtid).val(total);
+
+                    }
+                   else{
+                       $(chargablewtid).val($(actualwtid).val());
+                   }
+                   
+                   
+                   
+                   
+
+
+                }
+
+                // End Courier Cargo Mode
         }
 
         else{
@@ -413,6 +465,67 @@ $(document).on("change", ".mode", function(){
         }
 
 });
+
+
+
+
+// Select Zone
+
+$(document).on("change", ".zone", function(){
+    var currentid = "#"+ $(this).attr('id');
+        var suffix = this.id.match(/\d+/)[0];
+        console.log($(currentid).val());
+
+        // Check All Fields
+
+        if($("#chargable_weight"+suffix).val() != "" && $("#type"+suffix).val() != "" && $("#mode"+suffix).val())
+        {
+            // Start Ajax Call
+            $.ajax({
+
+                url: "{{url('/getCalculateAmount')}}",
+                    data: {
+                        "provider_id" : "{{$tntimport['provider_id']}}",
+                        "is_import": "{{$tntimport['type_id']}}",
+                        "class_id": "{{$tntimport['class_id']}}",
+                        "is_doc" :  $("#type"+suffix).val(),
+                        "chargable_weight": $("#chargable_weight"+suffix).val(),
+                        "zone": $("#zone"+suffix).val(),
+                        "price_categories_id":{{$customerdetails->price_categories_id}}
+                    },
+                    dataType: "json",
+                    method: "GET",
+                    success: function(response){
+                        console.log(response);
+
+                        if(response[0] != null){
+
+                            console.log(Math.round(response[0].price));
+                            $("#amount"+suffix).val(Math.round(response[0].price));
+
+                        }
+                        else{
+                            alert("No Price Available! Please Enter Price Manually");
+                        }
+
+
+                    }
+
+            })
+
+            // End Ajax Call
+        }
+        else{
+            alert("select all values first");
+                $(currentid).val("");
+
+        }
+
+
+
+});
+
+// End Select Zone
 
 
 
