@@ -129,17 +129,17 @@
 
                                                         <td>
                                                             <input id="consignment_no1" class="form-control consignment_no"
-                                                                name="consignment_no[]" type="text">
+                                                                name="consignment_no[]" type="text" placeholder="consignment_no">
                                                         </td>
 
                                                         <td>
                                                             <input id="referance_no1" class="form-control referance_no"
-                                                                name="referance_no[]" type="text">
+                                                                name="referance_no[]" type="text" placeholder="referance_no">
                                                         </td>
 
                                                         <td>
                                                             <input id="booking_date1" class="form-control datepicker booking_date"
-                                                                name="booking_date[]" type="text">
+                                                                name="booking_date[]" type="text" placeholder="booking_date">
                                                         </td>
 
                                                         <td>
@@ -196,27 +196,27 @@
 
 
                                                         <td>
-                                                            <input id="actual_weight1" class="form-control"
-                                                                name="actual_weight[]" type="text" class="actual_weight1">
+                                                            <input id="actual_weight1" class="form-control actual_weight"
+                                                                name="actual_weight[]" type="text" placeholder="Actual Weight">
                                                         </td>
 
                                                         <td>
                                                             
-                                                                    <input id="l1" class="form-control" name="l[]"
-                                                                        type="text" placeholder="L" class="l">
+                                                                    <input id="l1" class="form-control l" name="l[]"
+                                                                        type="text" placeholder="L" >
                                                               
                                                         </td>
 
                                                         <td>
                                                             
-                                                            <input id="w1" class="form-control" name="w[]"
-                                                                type="text" placeholder="W" class="w">
+                                                            <input id="w1" class="form-control w" name="w[]"
+                                                                type="text" placeholder="W" >
                                                       
                                                 </td>
                                                 <td>
                                                             
-                                                    <input id="h1" class="form-control" name="h[]"
-                                                        type="text" placeholder="H" class="h">
+                                                    <input id="h1" class="form-control h" name="h[]"
+                                                        type="text" placeholder="H" >
                                               
                                         </td>
                                         <td>
@@ -232,14 +232,14 @@
                                         </td>
 
                                                         <td>
-                                                            <input id="chargable_weight" class="form-control"
+                                                            <input id="chargable_weight" class="form-control chargable_weight"
                                                                 name="chargable_weight[]" type="text"
-                                                                placeholder="Chargable Wt" class="chargable_weight">
+                                                                placeholder="Chargable Wt" >
                                                         </td>
 
                                                         <td>
-                                                            <input id="amount" class="form-control" name="amount[]"
-                                                                type="text" placeholder="0" required class="amount">
+                                                            <input id="amount" class="form-control amount" name="amount[]"
+                                                                type="text" placeholder="0" required >
 
                                                         </td>
 
@@ -322,7 +322,7 @@
 <script>
     $(document).ready(function () {
 
-        $('#booking_date1').datepicker({
+        $('.booking_date').datepicker({
             format: 'dd/mm/yyyy',
         });
 
@@ -335,7 +335,7 @@
    
    $("#addrow").click(function(){
 
-if($("#itembody .itemrow").length < 5){
+
 
     var consignment_id = $('input[id^="consignment_no"]:last');
     var num = parseInt(consignment_id.prop("id").match(/\d+/g), 10) + 1;
@@ -364,7 +364,7 @@ if($("#itembody .itemrow").length < 5){
 
     itemrow.find(".amount:last").val("0");
     $("#itembody").append(itemrow);
-}
+
 
 });
 
@@ -374,57 +374,50 @@ $("#deleterow").click(function () {
     if ($("#itembody .itemrow").length > 1) {
 
         $(".itemrow:last").remove();
-        rowNum--;
+        
     }
 });
 
 
-// Cargo Or Not
+$(document).on("change", ".mode", function(){
+    var currentid = "#"+ $(this).attr('id');
+        var suffix = this.id.match(/\d+/)[0];
+        var currentvalue = $(this).val();
+        var actualwtid = "#actual_weight"+suffix;
+        var currentLid = "#l"+suffix;
+        var currentWid = "#w"+suffix;
+        var currentHid = "#h"+suffix;
 
+        console.log(currentid);
 
-$(".mode").change(function() {
-
-    var modeval = $(this).val();
-    var suffix = this.id.match(/\d+/)[0];
-    actualwtid = "#actual_weight"+suffix;
-
-    if(modeval != "" && $(actualwtid).val() != "")
+      
+        if(currentvalue != "" && $(actualwtid).val() != "")
         {
-            if(modeval == 0)
-            {
-                    currentlid = "#l"+suffix;
-                    currentwid = "#w"+suffix;
-                    currenthid = "#h"+suffix;
-                   
-                    if($(currentlid).val() != "" && $(currentwid).val() != "" && $(currenthid).val() != "")
-                    {
-                        var total = parseFloat($(currentlid).val() * $(currentwid).val() * $(currenthid).val()) / 5000;
-                        console.log(total);
+            // Courier Mode Calculation
+                if(currentvalue == 0 && $(currentLid).val() != "" && $(currentWid).val() != "" && $(currentHid).val() != "" )
+                {
+                    var total = ( parseFloat($("#l"+suffix).val()) * parseFloat($("#w"+suffix).val()) * parseFloat($("#h"+suffix).val()) ) / 5000;
+                    console.log(total);
+                    var final = Math.max((total * 1000),($("#actual_weight"+suffix).val() * 1000));
+                    console.log(final);
+                }
 
-                        if(parseFloat(total) > parseFloat($(actualwtid).val()))
-                        {
-                            $(actualwtid).val(total);
-                        
-                        }
 
-                        if(parseFloat(total) < parseFloat($(actualwtid).val()))
-                        {
-                            $(actualwtid).val($(actualwtid).val());
-                        }
-                    }
-                    else{
-                        alert("NOT OK");
-                    }
-            }
+
+                // End Courier Mode Calculation 
         }
-    else{
-        alert("Enter All Values");
-    }    
-            
+
+        else{
+            $(currentid).val("");
+            alert ("Enter Actual Value First!");
+        }
+
 });
 
 
-// End Cargo Or Not
+
+
+
 
 
 $("#submit").click(function () {
