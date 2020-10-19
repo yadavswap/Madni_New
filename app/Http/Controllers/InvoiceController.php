@@ -17,6 +17,7 @@ use App\PriceCategory;
 use App\Customer;
 use App\TntPrice;
 use Khsing\World\World;
+use App\Exceptions\Handler;
 
 
 
@@ -186,6 +187,38 @@ class InvoiceController extends Controller
     }
 
     public function store(Request $request){
+       // dd($request);
+
+        $invoice = CustomerInvoice::create([
+            'customer_id' => $request->customer_id,
+            'price_categories_id' => $request->price_categories_id,
+            'state_code' => $request->statecode,
+            'invoice_date'=> $request->invoice_date,
+            'gross_amount'=> $request->gross_amount,
+            'fuel_surcharge' => $request->fuel_surcharge,
+            'enhance_security_charge' => $request->enhance_security_charge,
+            'custom_clearance' => $request->custom_clearance,
+            'oda_charge' => $request->oda_charge,
+            'adc_noc_charge' => $request->adc_noc_charge,
+            'do_charge'=> $request->do_charges,
+            'non_conveyar_charge' => $request->non_conveyar_charge,
+            'address_correction_charge' => $request->address_correction_charge,
+            'war_surcharge' => $request->war_surcharge,
+            'warehousing_charge' => $request->warehousing_charge,
+            'ad_code_registration_charge' => $request->ad_code_registration_charge,
+            'air_cargo_registration_charge' => $request->air_cargo_registration_charge,
+            'gst_percentage' => 18,
+            'cgst_amount' => $request->cgst,
+            'sgst_amount'=> $request->sgst,
+            'igst_amount'=> $request->igst,
+            'is_express' => $request->class_id,
+            'is_import' => $request->type_id,
+            'provider' => $request->provider_id,
+            'net_amount' => $request->net_amount
+
+        ]);
+       
+       
         return $request;
     }
 }

@@ -300,7 +300,7 @@
 
                                                         <td>
                                                             <input id="amount1" class="form-control amount" name="amount[]"
-                                                                type="text" placeholder="0" required >
+                                                                type="text" placeholder="0" required  readonly>
 
                                                         </td>
 
@@ -342,7 +342,7 @@
         <div class="card 2" id="calculationbody">
 
             {{-- Card Body Start --}}
-            <div class="card-body">
+            <div class="card-body calculationbody2">
                 <h4 class="card-title">Calculation Details 
                     <button class="btn btn-danger float-right" id="recalculate" type="button">Return & Recalculate</button>
                 </h4>
@@ -356,7 +356,7 @@
                             <label for="cgst">CGST Amount: * <small class="text-success" id="cgsttext"></small></label>
 
                             <input id="cgst" class="form-control cgst"
-                                                                name="cgst" type="text" placeholder="" >
+                                                                name="cgst" type="text" placeholder="" readonly>
 
                         </div>
 
@@ -367,7 +367,7 @@
                             <label for="sgst">SGST Amount: * <small class="text-success" id="sgsttext"></small></label>
 
                             <input id="sgst" class="form-control sgst"
-                                                                name="sgst" type="text" placeholder="" >
+                                                                name="sgst" type="text" placeholder="" readonly>
 
                         </div>
 
@@ -378,7 +378,7 @@
                             <label for="igst">IGST Amount: * <small class="text-success" id="igsttext"></small></label>
 
                             <input id="igst" class="form-control igst"
-                                                                name="igst" type="text" placeholder="" >
+                                                                name="igst" type="text" placeholder="" readonly>
 
                         </div>
 
@@ -396,17 +396,17 @@
                             <label for="gross_amount">Gross Amount: * <small class="text-success" id="grossamounttext"></small></label>
 
                             <input id="gross_amount" class="form-control grossamount"
-                                        name="gross_amount" type="text" placeholder="" >
+                                        name="gross_amount" type="text" placeholder="" readonly>
 
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="fuel_surcharge ">Total Fuel Charge: * <small class="text-success" id="fuelsurchargetext">25%</small></label>
+                            <label for="fuel_surcharge">Total Fuel Charge: * <small class="text-success" id="fuelsurchargetext">25%</small></label>
 
                             <input id="fuel_surcharge " class="form-control fuel_surcharge"
-                                        name="fuel_surcharge " type="text" placeholder="" >
+                                        name="fuel_surcharge" type="text" placeholder="" required value="0" readonly>
 
                         </div>
                     </div>
@@ -532,10 +532,10 @@
                             <label for="net_amount">Final Amount: *
 
                             <input id="net_amount" class="form-control net_amount"
-                                        name="net_amount" type="text" placeholder="" >
+                                        name="net_amount" type="text" placeholder="" readonly>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <small class="text-primary"><a href="javascript:void(0)" id="manually">Enter Manually?<a></small>
+                                                <small class="text-primary"><a href="javascript:void(0)" id="manually">Enter Manually?</a></small>
                                             </div>
                                         </div>
                                        
@@ -548,7 +548,7 @@
                 {{-- 2nd row end --}}
                  {{-- Row End For Price Calculator --}}
 
-                 <button class="btn btn-secondary btn-md" type="button" id="calculate"> Calculate Final Price </button>
+                 <button class="btn btn-secondary btn-lg text-center" type="button" id="calculate"> Calculate Final Price </button>
 
             </div>
             {{-- Card Body End --}}
@@ -556,9 +556,12 @@
         </div>
         <br/>
         
-      <small>Confirm TO Generate Invoice</small>  
+        <div class="row">
+            <div class="col-md-8">
+      <small><input type="checkbox" id="checkbox"/>Above Calculation is correct & Process To Generare New Invoice </small>  
       <button class="btn btn-success text-center btn-md" type="submit" id="submitform"> Generate Invoice </button>
-
+            </div>    
+    </div>
         {{-- Second Card End --}}
 
                 </form>
@@ -610,8 +613,10 @@
 
 var scrollbarExample = new PerfectScrollbar('.perfect-scrollbar-example');
 var is_import = "{{$tntimport['type_id']}}";
-    
+    var calculated = 0;
+
     $(document).ready(function () {
+        $('#checkbox').prop('checked', false); // Unchecks it
       
         console.log(is_import);
         $("#submitform").prop('disabled',true);
@@ -855,6 +860,11 @@ $("#recalculate").click(function(e){
         scrollTop: $('#itembody').offset().top
     }, 500);
 
+    $('.calculationbody2:input', $(this)).each(function(index) {
+      this.value = "0";
+    })
+
+
 });
 
 
@@ -963,10 +973,25 @@ $('#calculate').click(function(e){
     totalamount = totalamount + finalgst;
     
     $('.net_amount').val(totalamount.toFixed(2));
-    $("#submitform").prop('disabled',false);
+    calculated++;
+   
 
 
 });
+
+$('#checkbox').on('change', function() { 
+    // From the other examples
+    if (this.checked && calculated > 0) {
+        $("#submitform").prop('disabled',false);
+    }
+
+    else{
+        alert("Please Calculate Price First");
+        $("#submitform").prop('disabled',true);
+        $('#checkbox').prop('checked', false); // Unchecks it
+    }
+});
+
 
 $('#submitform').click(function(e){
 
