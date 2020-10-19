@@ -60,9 +60,16 @@ class ApiMadniController extends Controller
                 ->where('price_categories_id',$request->price_categories_id)
                 ->where('weight',$chargablewt)
                 ->orderBy('weight','DESC')
+                ->limit(1)
                 ->get();
-                if(!$amount)
+               // dd($amount->count() > 0);
+                if($amount->count() > 0)
                 {
+                    return response()->json($amount,200);
+                }
+
+                else{    
+                    
                  /*
                 SELECT * FROM `tnt_prices` WHERE `is_doc` = 0 AND`is_express` = 1 AND `is_import` = 0 AND`price_categories_id` = 3
                 ORDER BY abs(weight - 501) LIMIT 1
@@ -77,7 +84,7 @@ class ApiMadniController extends Controller
                   ));
                 return response()->json($amount,200);
                 }
-                return response()->json($amount,200);
+                
             }
 
             if($request->provider == 2)

@@ -11,6 +11,8 @@
 <link href="{{ asset('assets/plugins/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css') }}"
     rel="stylesheet" />
 
+    <link href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" />    
+
 @endpush
 
 @section('content')
@@ -46,30 +48,34 @@
                         {{-- Customer Name --}}
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="customer_id">Customer Name</label>
+                                    <label for="customer_id">Customer Name <small class="text-danger">*</small></label>
 
                                     <select class="js-example-basic-single w-100" name="customer_id" required="">
 
                                         <option value="{{$customerdetails->id}}" selected="selected">
-                                            {{$customerdetails->fullname}} </option>
+                                        {{$customerdetails->fullname}} - {{$customerdetails->email}}</option>
 
                                     </select>
 
                                 </div>
                             </div>
                             <div class="col-md-2">
+                                <label for="date">Date : </label>
+                                <b class="text-success">{{date('d/m/Y')}}</b>
+                            </div>
+                            <div class="col-md-2">
                                 <label for="provider">Provider : </label>
-                                <b>{{$tntimport['provider']}}</b>
+                                <b class="text-primary">{{$tntimport['provider']}}</b>
                             </div>
                             <div class="col-md-2">
                                 <label for="type">Type : </label>
-                                <b>{{$tntimport['type']}}</b>
+                                <b class="text-primary">{{$tntimport['type']}}</b>
                             </div>
                             <div class="col-md-2">
                                 <label for="class">Class : </label>
-                                <b>{{$tntimport['class']}}</b>
+                                <b class="text-primary">{{$tntimport['class']}}</b>
                             </div>
                         </div>
 
@@ -87,7 +93,7 @@
                                                     <tr>
                                                         <th>
                                                             
-                                                                <label for="invoice_date">Select Invoice Date * </label>
+                                                                <label for="invoice_date">Select Invoice Date <small class="text-danger">*</small> </label>
                                     
                                                                 <input id="invoice_date" class="form-control datepicker invoice_date"
                                                                                                     name="invoice_date" type="text" placeholder="dd/mm/yyyy">
@@ -96,7 +102,7 @@
                                                         </th>
 
                                                         <th>
-                                                            <label for="statecode">Enter State Code * </label>
+                                                            <label for="statecode">Enter State Code <small class="text-danger">*</small> </label>
                                     
                                                                 <input id="statecode" class="form-control  statecode"
                                                                                                     name="statecode" type="text" placeholder="00">
@@ -114,10 +120,16 @@
                                                                 id="deleterow">
                                                                 Delete <i class="fa fa-trash-o"></i></button>
                                                         </th>
-                                                       
-                                                       
+
                                                         <th>
                                                             <button class="btn btn-warning" type="submit" id="submit"> Process Next</button>
+                                                        </th>
+                                                        <th>
+                                                           
+                                                                <button class="btn btn-md btn-info" type="button"
+                                                                    id="resetall">
+                                                                    Reset All <i class="fa fa-times"></i></button>
+                                                           
                                                         </th>
                                                         <th></th>
                                                         <th></th>
@@ -130,20 +142,20 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Consignment No</th>
-                                                        <th>Referance No</th>
-                                                        <th>Select Booking Date</th>
-                                                        <th>Select Origin</th>
-                                                        <th>Select Destination</th>
-                                                        <th>Product Type</th>
-                                                        <th>Actual Wt.( In Kg)</th>
-                                                        <th>L(Volumetric)</th>
-                                                        <th>W(Volumetric)</th>
-                                                        <th>H (Volumetric)</th>
-                                                        <th>Select Mode</th>
-                                                        <th>Chargable Wt (In Kg)</th>
-                                                        <th>Select Zone</th>
-                                                        <th>Amount (INR)</th>
+                                                        <th>Consignment No <small class="text-danger">*</small></th>
+                                                        <th>Referance No <small class="text-danger">*</small></th>
+                                                        <th>Select Booking Date <small class="text-danger">*</small></th>
+                                                        <th>Select Origin <small class="text-danger">*</small></th>
+                                                        <th>Select Destination <small class="text-danger">*</small></th>
+                                                        <th>Product Type <small class="text-danger">*</small></th>
+                                                        <th>Actual Wt.( In Kg) <small class="text-danger">*</small></th>
+                                                        <th>L(Volumetric)<small class="text-danger">*</small></th>
+                                                        <th>W(Volumetric)<small class="text-danger">*</small></th>
+                                                        <th>H (Volumetric)<small class="text-danger">*</small></th>
+                                                        <th>Select Mode<small class="text-danger">*</small></th>
+                                                        <th>Chargable Wt (In Kg) <small class="text-danger">*</small></th>
+                                                        <th>Select Zone <small class="text-danger">*</small></th>
+                                                        <th>Amount (INR) <small class="text-danger">*</small></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="itembody">
@@ -167,9 +179,21 @@
                                                         <td>
                                                             <select class="basic-single w-100 origin"
                                                                 name="origin[]" required="" id="origin1">
+                                                       
 
-                                                                <option value="" selected="selected" class="origin">--Select Country --
-                                                                </option>
+                                                                @php
+                                                                if($tntimport['type_id'] == 0)
+                                                                {
+                                                                
+                                                                  echo  '<option value="85" selected="selected" class="origin">India
+                                                                </option>';
+                                                                }
+                                                                else{
+                                                                    echo  '<option value="" selected="selected" class="origin">-- Select Country--
+                                                                </option>';
+                                                                }
+                                                                @endphp
+                                                              
                                                                 @foreach($countries as $country)
                                                                 <option value="{{$country->id}}">{{$country->name}}
                                                                 </option>
@@ -182,8 +206,21 @@
                                                         <td>
                                                             <select class="basic-single w-100 destination"
                                                                 name="destination[]" required="" id="destination1" >
-                                                                <option value="" selected="selected">--Select Country --
-                                                                </option>
+                                                                @php
+                                                                if($tntimport['type_id'] == 1)
+                                                                {
+                                                                
+                                                                  echo  '<option value="85" selected="selected" class="origin">India
+                                                                </option>';
+                                                                }
+                                                                else{
+                                                                    echo  '<option value="" selected="selected" class="origin">-- Select Country--
+                                                                </option>';
+                                                                }
+                                                                @endphp
+                                                              
+
+                                                                
                                                                 @foreach($countries as $country)
                                                                 <option value="{{$country->id}}">{{$country->name}}
                                                                 </option>
@@ -295,7 +332,7 @@
 
 
 
-                        <button class="btn btn-warning" type="submit" id="submit"> Process Next</button>
+                       
                     </br>
                     </fieldset>
 
@@ -306,15 +343,17 @@
 
             {{-- Card Body Start --}}
             <div class="card-body">
-                <h4 class="card-title">Calculation Details</h4>
+                <h4 class="card-title">Calculation Details 
+                    <button class="btn btn-danger float-right" id="submit" type="button">Return & Recalculate</button>
+                </h4>
 
-                <h6 class="card-title">GST Details : 18%</h6>
+                <h6 class="card-title text-primary">GST Details : </h6>
                 {{-- Row Start --}}
                 <div class="row">
                    
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="cgst">CGST Amount: *</label>
+                            <label for="cgst">CGST Amount: * <small class="text-success" id="cgsttext"></small></label>
 
                             <input id="cgst" class="form-control cgst"
                                                                 name="cgst" type="text" placeholder="" disabled>
@@ -325,7 +364,7 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="sgst">SGST Amount: *</label>
+                            <label for="sgst">SGST Amount: * <small class="text-success" id="sgsttext"></small></label>
 
                             <input id="sgst" class="form-control sgst"
                                                                 name="sgst" type="text" placeholder="" disabled>
@@ -336,7 +375,7 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="igst">IGST Amount: *</label>
+                            <label for="igst">IGST Amount: * <small class="text-success" id="igsttext"></small></label>
 
                             <input id="igst" class="form-control igst"
                                                                 name="igst" type="text" placeholder="" disabled>
@@ -349,14 +388,135 @@
                 </div>
                 {{-- Row End --}}
 
-                <h6 class="card-title">Other Charges</h6>
+                <h6 class="card-title text-primary" >Price Calculator</h6>
+                {{-- Row Start For Price Calculator --}}
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="gross_amount">Gross Amount: * <small class="text-success" id="grossamounttext"></small></label>
 
+                            <input id="gross_amount" class="form-control grossamount"
+                                        name="gross_amount" type="text" placeholder="" disabled>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="fuel_surcharge ">Total Fuel Charge: * <small class="text-success" id="fuelsurchargetext">25%</small></label>
+
+                            <input id="fuel_surcharge " class="form-control fuel_surcharge"
+                                        name="fuel_surcharge " type="text" placeholder="" disabled>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="enhance_security_charge">Enhanced Security Charge: * <small class="text-success" id="enhancesecuritychargetext"></small></label>
+
+                            <input id="enhance_security_charge" class="form-control enhance_security_charge"
+                                        name="enhance_security_charge" type="text" placeholder="" disabled value="40">
+
+                        </div>
+                    </div>
+                   
+                </div>
+                {{-- 1st row ended --}}
+
+                {{-- 2nd row start --}}
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="custom_clearance">Custom Clearence: *
+
+                            <input id="custom_clearance" class="form-control custom_clearance"
+                                        name="custom_clearance" type="text" placeholder="" value="0">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="oda_charge ">ODA Charge: *
+
+                            <input id="oda_charge" class="form-control oda_charge"
+                                        name="oda_charge" type="text" placeholder="" value="0">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="adc_noc_charge">ADC NOC Charge: *
+
+                            <input id="enhance_security_charge" class="form-control enhance_security_charge"
+                                        name="enhance_security_charge" type="text" placeholder=""  value="0">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="do_charges">DO Charge: *
+
+                            <input id="do_charges" class="form-control do_charges"
+                                        name="do_charges" type="text" placeholder=""  value="0">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="non_conveyar_charge">NON Conveyar Charge: *
+
+                            <input id="non_conveyar_charge" class="form-control non_conveyar_charge"
+                                        name="non_conveyar_charge" type="text" placeholder=""  value="0">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="address_correction_charge">Address Correction Charge: *
+
+                            <input id="address_correction_charge" class="form-control address_correction_charge"
+                                        name="address_correction_charge" type="text" placeholder=""  value="0">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="war_surcharge">WAR Surcharges Charge: *
+
+                            <input id="war_surcharge" class="form-control war_surcharge"
+                                        name="war_surcharge" type="text" placeholder=""  value="0">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="warehousing_charge ">Warehouse Charge: *
+
+                            <input id="warehousing_charge" class="form-control warehousing_charge"
+                                        name="warehousing_charge" type="text" placeholder=""  value="0">
+
+                        </div>
+                    </div>
+                   
+                </div>
+
+                {{-- 2nd row end --}}
+                 {{-- Row End For Price Calculator --}}
 
             </div>
             {{-- Card Body End --}}
 
         </div>
-
+        <button class="btn btn-info" type="submit" id="submitform"> Generate Invoice </button>
 
         {{-- Second Card End --}}
 
@@ -388,12 +548,10 @@
 <script src="{{ asset('assets/plugins/select2/select2.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/typeahead-js/typeahead.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/dropzone/dropzone.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/dropify/js/dropify.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/bootstrap-colorpicker/bootstrap-colorpicker.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js') }}"></script>
+<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
 @endpush
 
 @push('custom-scripts')
@@ -404,30 +562,34 @@
 <script src="{{ asset('assets/js/typeahead.js') }}"></script>
 <script src="{{ asset('assets/js/tags-input.js') }}"></script>
 <script src="{{ asset('assets/js/dropzone.js') }}"></script>
-<script src="{{ asset('assets/js/dropify.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap-colorpicker.js') }}"></script>
 <script src="{{ asset('assets/js/datepicker.js') }}"></script>
 <script src="{{ asset('assets/js/timepicker.js') }}"></script>
 
 <script>
 
 var scrollbarExample = new PerfectScrollbar('.perfect-scrollbar-example');
+var is_import = "{{$tntimport['type_id']}}";
     
     $(document).ready(function () {
-
-        
-
+      
+        console.log(is_import);
+        $(".amount").prop('disabled', true);
+        $("#submitform").prop('disabled',true);
         $("#calculationbody").hide();
-
         var total = 0;
+        $("#cgsttext").text("");
+        $("#sgsttext").text("");
+        $("#igsttext").text("");
        
 
 
             $('.booking_date').datepicker({
             format: 'dd/mm/yyyy',
+            autoclose: true,
             });
             $('.invoice_date').datepicker({
                 format:'dd/mm/yyyy',
+                autoclose: true,
             });
 
             $(".actual_weight").inputmask('decimal', {
@@ -481,6 +643,14 @@ $("#deleterow").click(function () {
         $(".itemrow:last").remove();
         
     }
+});
+
+$('#resetall').click(function(){
+
+    $('#invoiceform').trigger('reset');
+    alert("All Field Reset");
+   
+
 });
 
 
@@ -543,13 +713,11 @@ $(document).on("change", ".mode", function(){
                         $(chargablewtid).val(total);
 
                     }
-                   else{
+                   if($(actualwtid).val() > total ){
+                       console.log(total);
+                       console.log($(actualwtid).val());
                        $(chargablewtid).val($(actualwtid).val());
                    }
-                   
-                   
-                   
-                   
 
 
                 }
@@ -601,10 +769,12 @@ $(document).on("change", ".zone", function(){
 
                             console.log(Math.round(response[0].price));
                             $("#amount"+suffix).val(Math.round(response[0].price));
+                            $("#amount"+suffix).prop('disabled', true);
 
                         }
                         else{
                             $("#amount"+suffix).val("");
+                            $("#amount"+suffix).prop('disabled', false);
                             alert("No Price Available! Please Enter Price Manually");
                         }
 
@@ -658,7 +828,32 @@ $("#submit").click(function (e) {
 
 $('.amount').each(function(index,element){
     gross = gross + parseFloat($(element).val());
+   
+    if(is_import == "1")
+    {
+        console.log("Import");
+        var cgst = (total * 9) / 100;
+        var sgst = (total * 9) / 100;
+
+        $('input[name="c_gst"]').val(cgst);
+        $('input[name="s_gst"]').val(sgst);
+
+                    total = total + cgst + sgst;
+
+        $('#cgsttext').text("9%");
+         $('#sgsttext').text("9%");
+    }
+    if(is_import == "0")
+    {
+        console.log("Export");
+        $('#igsttext').text("18%");
+    }
+    
     console.log(gross);
+    $("#gross_amount").val(gross);
+    var surcharge = (gross/100)*25;
+    console.log(surcharge);
+    $('.fuel_surcharge').val(surcharge);
 });
 
     // $('#invoiceform').submit();

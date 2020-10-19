@@ -80,7 +80,7 @@
 
   <td>
       <div class="row">
-          <div class="col-md-4"><button class="btn btn-sm btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></div>
+      <div class="col-md-4"><a href="{{route('customers.edit',$customer->id)}}"><button class="btn btn-sm btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></div>
           <div class="col-md-4"><a onclick="return confirm('Are you sure you want to delete this record?')" href="{{route('customers.delete',$customer->id)}}"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a></div>
             <div class="col-md-4"><a href="{{route('invoice.create',$customer->id)}}"><button class="btn btn-sm btn-info"><i class="fa fa-file-o" aria-hidden="true"></i></button></a></div>
 

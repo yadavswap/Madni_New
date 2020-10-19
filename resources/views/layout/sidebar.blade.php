@@ -21,7 +21,7 @@
       <li class="nav-item {{ active_class(['price_categories']) }}">
         <a href="{{ route('pricecategory.index') }}" class="nav-link">
           <i class="fa fa-inr"></i>
-          <span class="link-title">Price Categories</span>
+          <span class="link-title">Pricing Categories</span>
         </a>
       </li>
 
