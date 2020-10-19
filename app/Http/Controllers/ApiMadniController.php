@@ -96,6 +96,10 @@ class ApiMadniController extends Controller
 
     }
 
+    public function generateInvoice(Request $request){
+        return dd($request);
+    }
+
     private function roundWeight($price)
         {
 

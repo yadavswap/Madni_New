@@ -283,7 +283,7 @@
                                                         <td>
                                                             <input id="chargable_weight1" class="form-control chargable_weight"
                                                                 name="chargable_weight[]" type="text"
-                                                                placeholder="Chargable Wt" disabled="disabled" >
+                                                                placeholder="Chargable Wt"  >
                                                         </td>
 
                                                         <td>
@@ -344,7 +344,7 @@
             {{-- Card Body Start --}}
             <div class="card-body">
                 <h4 class="card-title">Calculation Details 
-                    <button class="btn btn-danger float-right" id="submit" type="button">Return & Recalculate</button>
+                    <button class="btn btn-danger float-right" id="recalculate" type="button">Return & Recalculate</button>
                 </h4>
 
                 <h6 class="card-title text-primary">GST Details : </h6>
@@ -356,7 +356,7 @@
                             <label for="cgst">CGST Amount: * <small class="text-success" id="cgsttext"></small></label>
 
                             <input id="cgst" class="form-control cgst"
-                                                                name="cgst" type="text" placeholder="" disabled>
+                                                                name="cgst" type="text" placeholder="" >
 
                         </div>
 
@@ -367,7 +367,7 @@
                             <label for="sgst">SGST Amount: * <small class="text-success" id="sgsttext"></small></label>
 
                             <input id="sgst" class="form-control sgst"
-                                                                name="sgst" type="text" placeholder="" disabled>
+                                                                name="sgst" type="text" placeholder="" >
 
                         </div>
 
@@ -378,7 +378,7 @@
                             <label for="igst">IGST Amount: * <small class="text-success" id="igsttext"></small></label>
 
                             <input id="igst" class="form-control igst"
-                                                                name="igst" type="text" placeholder="" disabled>
+                                                                name="igst" type="text" placeholder="" >
 
                         </div>
 
@@ -396,7 +396,7 @@
                             <label for="gross_amount">Gross Amount: * <small class="text-success" id="grossamounttext"></small></label>
 
                             <input id="gross_amount" class="form-control grossamount"
-                                        name="gross_amount" type="text" placeholder="" disabled>
+                                        name="gross_amount" type="text" placeholder="" >
 
                         </div>
                     </div>
@@ -406,7 +406,7 @@
                             <label for="fuel_surcharge ">Total Fuel Charge: * <small class="text-success" id="fuelsurchargetext">25%</small></label>
 
                             <input id="fuel_surcharge " class="form-control fuel_surcharge"
-                                        name="fuel_surcharge " type="text" placeholder="" disabled>
+                                        name="fuel_surcharge " type="text" placeholder="" >
 
                         </div>
                     </div>
@@ -416,7 +416,7 @@
                             <label for="enhance_security_charge">Enhanced Security Charge: * <small class="text-success" id="enhancesecuritychargetext"></small></label>
 
                             <input id="enhance_security_charge" class="form-control enhance_security_charge"
-                                        name="enhance_security_charge" type="text" placeholder="" disabled value="40">
+                                        name="enhance_security_charge" type="text" placeholder="" value="40">
 
                         </div>
                     </div>
@@ -451,8 +451,8 @@
                         <div class="form-group">
                             <label for="adc_noc_charge">ADC NOC Charge: *
 
-                            <input id="enhance_security_charge" class="form-control enhance_security_charge"
-                                        name="enhance_security_charge" type="text" placeholder=""  value="0">
+                            <input id="adc_noc_charge" class="form-control adc_noc_charge"
+                                        name="adc_noc_charge" type="text" placeholder=""  value="0">
 
                         </div>
                     </div>
@@ -489,7 +489,7 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="war_surcharge">WAR Surcharges Charge: *
+                            <label for="war_surcharge">WAR Surcharges Charges: *
 
                             <input id="war_surcharge" class="form-control war_surcharge"
                                         name="war_surcharge" type="text" placeholder=""  value="0">
@@ -499,10 +499,46 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="warehousing_charge ">Warehouse Charge: *
+                            <label for="warehousing_charge">Warehouse Charges: *
 
                             <input id="warehousing_charge" class="form-control warehousing_charge"
                                         name="warehousing_charge" type="text" placeholder=""  value="0">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ad_code_registration_charge ">AD Code Registration Charge: *
+
+                            <input id="ad_code_registration_charge" class="form-control ad_code_registration_charge"
+                                        name="ad_code_registration_charge" type="text" placeholder=""  value="0">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="air_cargo_registration_charge">Air Cargo Registration Charges: *
+
+                            <input id="air_cargo_registration_charge" class="form-control air_cargo_registration_charge"
+                                        name="air_cargo_registration_charge" type="text" placeholder=""  value="0">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="net_amount">Final Amount: *
+
+                            <input id="net_amount" class="form-control net_amount"
+                                        name="net_amount" type="text" placeholder="" >
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <small class="text-primary"><a href="javascript:void(0)" id="manually">Enter Manually?<a></small>
+                                            </div>
+                                        </div>
+                                       
 
                         </div>
                     </div>
@@ -512,11 +548,16 @@
                 {{-- 2nd row end --}}
                  {{-- Row End For Price Calculator --}}
 
+                 <button class="btn btn-secondary btn-md" type="button" id="calculate"> Calculate Final Price </button>
+
             </div>
             {{-- Card Body End --}}
 
         </div>
-        <button class="btn btn-info" type="submit" id="submitform"> Generate Invoice </button>
+        <br/>
+        
+      <small>Confirm TO Generate Invoice</small>  
+      <button class="btn btn-success text-center btn-md" type="submit" id="submitform"> Generate Invoice </button>
 
         {{-- Second Card End --}}
 
@@ -573,7 +614,6 @@ var is_import = "{{$tntimport['type_id']}}";
     $(document).ready(function () {
       
         console.log(is_import);
-        $(".amount").prop('disabled', true);
         $("#submitform").prop('disabled',true);
         $("#calculationbody").hide();
         var total = 0;
@@ -653,6 +693,14 @@ $('#resetall').click(function(){
 
 });
 
+$(document).on("focus",".actual_weight",function(){
+    var suffix = this.id.match(/\d+/)[0];
+    var currentid = "#"+ $(this).attr('id');
+    $("#mode"+suffix).val("");
+    $("#zone"+suffix).val("");
+    $("#amount"+sufffix).val("0");
+
+});
 
 $(document).on("change", ".mode", function(){
     var currentid = "#"+ $(this).attr('id');
@@ -769,12 +817,12 @@ $(document).on("change", ".zone", function(){
 
                             console.log(Math.round(response[0].price));
                             $("#amount"+suffix).val(Math.round(response[0].price));
-                            $("#amount"+suffix).prop('disabled', true);
+                            // $("#amount"+suffix).prop('disabled', true);
 
                         }
                         else{
                             $("#amount"+suffix).val("");
-                            $("#amount"+suffix).prop('disabled', false);
+                            // $("#amount"+suffix).prop('disabled', false);
                             alert("No Price Available! Please Enter Price Manually");
                         }
 
@@ -798,14 +846,21 @@ $(document).on("change", ".zone", function(){
 // End Select Zone
 
 
+$("#recalculate").click(function(e){
+    e.preventDefault();
+    $("#calculationbody").toggle();
 
+
+    $('html, body').animate({
+        scrollTop: $('#itembody').offset().top
+    }, 500);
+
+});
 
 
 
 
 $("#submit").click(function (e) {
-
-
 
     e.preventDefault();
 
@@ -832,14 +887,6 @@ $('.amount').each(function(index,element){
     if(is_import == "1")
     {
         console.log("Import");
-        var cgst = (total * 9) / 100;
-        var sgst = (total * 9) / 100;
-
-        $('input[name="c_gst"]').val(cgst);
-        $('input[name="s_gst"]').val(sgst);
-
-                    total = total + cgst + sgst;
-
         $('#cgsttext').text("9%");
          $('#sgsttext').text("9%");
     }
@@ -854,6 +901,8 @@ $('.amount').each(function(index,element){
     var surcharge = (gross/100)*25;
     console.log(surcharge);
     $('.fuel_surcharge').val(surcharge);
+
+    
 });
 
     // $('#invoiceform').submit();
@@ -866,6 +915,63 @@ $('.amount').each(function(index,element){
 
 
 
+});
+
+
+$('#calculate').click(function(e){
+
+    var finalgst = 0;
+
+    var gross_amount = parseFloat($('#gross_amount').val());
+    var fuel_surcharge = parseFloat($('.fuel_surcharge').val());
+    var enhance_security_charge = parseFloat($('#enhance_security_charge').val());
+    var custom_clearance = parseFloat($('.custom_clearance').val());
+
+    var oda_charge = parseFloat($('#oda_charge').val());
+    var adc_noc_charge = parseFloat($('.adc_noc_charge').val());
+    var do_charge = parseFloat($('.do_charges').val());
+    var non_conveyar_charge = parseFloat($('.non_conveyar_charge').val());
+    var address_correction_charge = parseFloat($('.address_correction_charge').val());
+    var war_surcharge = parseFloat($('.war_surcharge').val());
+    var warehousing_charge = parseFloat($('.warehousing_charge').val());
+    var ad_code_registration_charge = parseFloat($('.ad_code_registration_charge').val());
+    var air_cargo_registration_charge = parseFloat($('.air_cargo_registration_charge').val());
+    
+
+    var totalamount = gross_amount + fuel_surcharge + enhance_security_charge + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge;
+   
+
+  
+
+    if(is_import == "1")
+    {
+        var cgst = (totalamount * 9) / 100;
+    var sgst = (totalamount * 9) / 100;
+    finalgst = parseFloat(cgst) + parseFloat(sgst);
+    $("#cgst").val(cgst);
+    $("#sgst").val(sgst);
+        console.log("Import GST Calculation");
+      
+    }
+    if(is_import == "0")
+    {
+    var igst = (totalamount * 18) / 100;
+    finalgst = parseFloat(igst);
+    $("#igst").val(igst);
+    console.log("Export GST Calculation");
+    }
+    totalamount = totalamount + finalgst;
+    
+    $('.net_amount').val(totalamount.toFixed(2));
+    $("#submitform").prop('disabled',false);
+
+
+});
+
+$('#submitform').click(function(e){
+
+ this.submit();
+   
 });
 
 
