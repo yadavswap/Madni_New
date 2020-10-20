@@ -18,7 +18,6 @@ class CreatePriceCategoriesTable extends Migration
             $table->string('price_category_name');
             $table->string('file_path');
             $table->string('filename');
-            $table->unsignedBigInteger('price_categories_id');
             $table->timestamps();
         });
     }

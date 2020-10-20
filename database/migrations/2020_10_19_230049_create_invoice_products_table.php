@@ -21,16 +21,16 @@ class CreateInvoiceProductsTable extends Migration
             $table->char('booking_date',100);
             $table->char('origin',100);
             $table->char('destination',100);
-            $table->float('actual_weight', 8,2);
-            $table->float('l', 8,2);
-            $table->float('w', 8,2);
-            $table->float('h', 8,2);
+            $table->char('actual_weight',10);
+            $table->char('l',10);
+            $table->char('w',10);
+            $table->char('h', 10);
             $table->char('mode',2);
-            $table->float('chargable_weight', 8,2);
-            $table->float('volumetric_weight', 8,2);
+            $table->char('chargable_weight', 10);
+            $table->char('volumetric_weight', 10);
             $table->char('product_type',1);
             $table->char('zone',10);
-            $table->float('amount', 8,2);
+            $table->double('amount', 16,2);
             $table->timestamps();
         });
     }

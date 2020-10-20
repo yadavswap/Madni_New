@@ -1,0 +1,27 @@
+Run sudo if you are getting errors
+
+1. Run Composer install
+2. npm install
+3.php artisan key:generate
+4. configure .env
+5. php artisan migrate
+6.composer require laravel/ui
+7. php artisan ui bootstrap --auth
+8. npm install
+9. npm run dev
+10. composer dump-autoload
+11. php artisan world:init
+
+IF you are getting any errors 
+
+ 1. php artisan cache:clear
+2. php artisan route:clear
+3.php artisan config:clear
+4. php artisan view:clear
+
+
+ composer dump-autoload
+
+Now Create first user by running
+
+Make sure to check folder permissions

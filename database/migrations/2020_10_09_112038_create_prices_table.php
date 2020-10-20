@@ -16,7 +16,7 @@ class CreatePricesTable extends Migration
         Schema::create('tnt_prices', function (Blueprint $table) {
             $table->id();
             $table->string('zone',100);
-            $table->float('price', 8,2);
+            $table->double('price', 16,2);
             $table->string('weight',10);
             $table->char('is_doc',1);
             $table->char('is_express',1);

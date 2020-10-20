@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Madni Admin',
             'email' => 'madni@admin.com',
-            'password' => bcrypt('12345678'),
+            'password' => '$2y$10$0CqwahO2E/ngzJntA.0J5./jkYoxd/UxXSAr30SzyHvvuAJ2DR8bu',
         ]);
     }
 }
