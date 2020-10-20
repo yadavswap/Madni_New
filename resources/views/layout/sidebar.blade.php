@@ -39,10 +39,10 @@
         </a>
       </li>
 
-      <li class="nav-item {{ active_class(['apps/chat']) }}">
-        <a href="{{ url('/apps/chat') }}" class="nav-link">
-          <i class="fa fa-file-excel-o"></i>
-          <span class="link-title">View Price List</span>
+      <li class="nav-item {{ active_class(['dashboard.logout']) }}">
+        <a href="{{ route('dashboard.logout') }}" class="nav-link">
+          <i class="fa fa-sign-out"></i>
+          <span class="link-title">Log out</span>
         </a>
       </li>
      

@@ -114,6 +114,48 @@
 </div> <!-- row -->
 
 
+<div class="col-lg-12 col-xl-12 stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-baseline mb-2">
+      <h6 class="card-title mb-0">Todays Generated Invoice : {{date('d/m/Y')}}</h6> </br>
+        
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th class="pt-0">#</th>
+              <th class="pt-0">Invoice ID</th>
+              <th class="pt-0">Invoice Date</th>
+              <th class="pt-0">Customer Name</th>
+              <th class="pt-0">Net Amount</th>
+              <th class="pt-0">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @php
+              $i = 1;
+            @endphp
+            @foreach ($invoices as $invoice)
+            <tr>
+            <td>{{$i}}</td>
+            <td>{{$invoice->id}}</td>
+            <td>{{$invoice->invoice_date}}</td>
+            <td>{{$invoice->customer->fullname}}</td>
+            <td><span class="badge badge-danger">&#x20B9; {{$invoice->net_amount}}</span></td>
+              <td><button class="btn btn-md btn-success"><i class="fa fa-eye"></i></button></td>
+            </tr>
+            @endforeach
+           
+           
+          </tbody>
+        </table>
+      </div>
+    </div> 
+  </div>
+</div>
+
 
 
 

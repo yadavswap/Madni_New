@@ -186,7 +186,7 @@
                                                                 if($tntimport['type_id'] == 0)
                                                                 {
                                                                 
-                                                                  echo  '<option value="85" selected="selected" class="origin">India
+                                                                  echo  '<option value="India" selected="selected" class="origin">India
                                                                 </option>';
                                                                 }
                                                                 else{
@@ -196,7 +196,7 @@
                                                                 @endphp
                                                               
                                                                 @foreach($countries as $country)
-                                                                <option value="{{$country->id}}">{{$country->name}}
+                                                                <option value="{{$country->name}}">{{$country->name}}
                                                                 </option>
                                                                 @endforeach
 
@@ -211,7 +211,7 @@
                                                                 if($tntimport['type_id'] == 1)
                                                                 {
                                                                 
-                                                                  echo  '<option value="85" selected="selected" class="origin">India
+                                                                  echo  '<option value="India" selected="selected" class="origin">India
                                                                 </option>';
                                                                 }
                                                                 else{
@@ -223,7 +223,7 @@
 
                                                                 
                                                                 @foreach($countries as $country)
-                                                                <option value="{{$country->id}}">{{$country->name}}
+                                                                <option value="{{$country->name}}">{{$country->name}}
                                                                 </option>
                                                                 @endforeach
                                                             </select>
@@ -284,7 +284,7 @@
                                                         <td>
                                                             <input id="chargable_weight1" class="form-control chargable_weight"
                                                                 name="product_details[chargable_weight][]" type="text"
-                                                                placeholder="Chargable Wt"  >
+                                                                placeholder="Chargable Wt" readonly />
                                                         </td>
 
                                                         <td>

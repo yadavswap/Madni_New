@@ -17,7 +17,8 @@ class DashboardController extends Controller
         $totalinvoicecount = CustomerInvoice::all()->count();
         $customerscount = Customer::all()->count();
         $pricecategorycount = PriceCategory::all()->count();
-        return view('dashboard',compact(['customerscount','pricecategorycount','totalinvoicecount']));
+        $invoices = CustomerInvoice::with('customer')->where('invoice_date',date('d/m/Y'))->orderBy('created_at','desc')->get();
+        return view('dashboard',compact(['customerscount','pricecategorycount','totalinvoicecount','invoices']));
     }
 
     public function logout(){

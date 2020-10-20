@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePricesTable extends Migration
+class CreateFedexPricesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tnt_prices', function (Blueprint $table) {
+        Schema::create('fedex_prices', function (Blueprint $table) {
             $table->id();
             $table->string('zone',100);
             $table->float('price', 8,2);
@@ -33,6 +33,6 @@ class CreatePricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prices');
+        Schema::dropIfExists('fedex_prices');
     }
 }
