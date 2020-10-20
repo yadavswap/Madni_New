@@ -18,6 +18,8 @@ use App\Customer;
 use App\TntPrice;
 use Khsing\World\World;
 use App\Exceptions\Handler;
+use App\InvoiceProduct;
+
 
 
 
@@ -27,7 +29,8 @@ class InvoiceController extends Controller
 
     public function index(){
 
-        $invoices = CustomerInvoice::all()->sortByDesc("created_at");
+        $invoices = CustomerInvoice::with('customer')->orderBy('created_at','desc')->get();
+        //return $invoices;
         return view('pages.invoice.index',compact('invoices'));
 
     }
@@ -187,7 +190,10 @@ class InvoiceController extends Controller
     }
 
     public function store(Request $request){
-       // dd($request);
+       // dd($request->product_details['consignment_no']);
+
+       $i = 0;
+       $volumetricwt = 0;
 
         $invoice = CustomerInvoice::create([
             'customer_id' => $request->customer_id,
@@ -208,17 +214,66 @@ class InvoiceController extends Controller
             'ad_code_registration_charge' => $request->ad_code_registration_charge,
             'air_cargo_registration_charge' => $request->air_cargo_registration_charge,
             'gst_percentage' => 18,
-            'cgst_amount' => $request->cgst,
+            'cgst_amount' =>  round((float)$request->cgst,2),
             'sgst_amount'=> $request->sgst,
             'igst_amount'=> $request->igst,
             'is_express' => $request->class_id,
             'is_import' => $request->type_id,
             'provider' => $request->provider_id,
-            'net_amount' => $request->net_amount
+            'net_amount' => round((float)$request->net_amount,2),
 
         ]);
+
+        if($invoice)
+        {
+            //dd($request->product_details);
+
+           for($i = 0; $i < count($request->product_details["consignment_no"]); $i++){
+            $productlists = new InvoiceProduct();
+            $productlists->customer_invoice_id = $invoice->id;
+            $productlists->consignment_no = $request->product_details["consignment_no"][$i];
+            $productlists->referance_no = $request->product_details["referance_no"][$i];
+            $productlists->booking_date = $request->product_details["booking_date"][$i];
+            $productlists->origin = $request->product_details["origin"][$i];
+            $productlists->destination = $request->product_details["destination"][$i];
+            $productlists->actual_weight = $request->product_details["actual_weight"][$i];
+            $productlists->l = $request->product_details["l"][$i];
+            $productlists->w = $request->product_details["w"][$i];
+            $productlists->h = $request->product_details["h"][$i];
+            $productlists->mode = $request->product_details["mode"][$i];
+            $productlists->chargable_weight = $request->product_details["chargable_weight"][$i];
+            if($request->product_details["mode"][$i] == 0){
+                $volumetricwt = ($request->product_details["l"][$i] +  $request->product_details["w"][$i] + $request->product_details["h"][$i])/5000;
+            }
+            if($request->product_details["mode"][$i] == 1){
+                $volumetricwt = ($request->product_details["l"][$i] +  $request->product_details["w"][$i] + $request->product_details["h"][$i])/6000;
+
+            }
+          
+            $productlists->volumetric_weight = $volumetricwt;
+            $productlists->product_type = $request->product_details["product_type"][$i];
+            $productlists->zone = $request->product_details["zone"][$i];
+            $productlists->amount = $request->product_details["amount"][$i];
+            $saved = $productlists->save();
+           }
+            
+           if($saved)
+           {
+            return back()->with('success','Invoice Created Successfully.');   
+           }
+           else{
+               $invoice = CustomerInvoice::find($invoice->id);
+               $invoice->delete();
+               return back()->with('errors','Unable To Save Invoice At That Movement');
+
+             }
+        }
+        else{
+            return back()->with('errors','Unable To Create Invoice At That Movement');
+        }
+        
        
        
-        return $request;
+        //return $request;
     }
 }

@@ -42,57 +42,37 @@
                   <th>Invoice ID</th>
                   <th>Customer Name</th>
                   <th>Invoice Date</th>
-                  <th>Gross Amount</th>
-                  <th>Generate Invoice</th>
-                  <th>Action</th>
+                  <th>Net Amount</th>
+                  <th>View Invoice</th>
+                  <th>Download Invoice</th>
+                  <th>Invoice Lists</th>
                 </tr>
               </thead>
               <tbody>
 
-                @php
-                $i =1;
-              @endphp
+         @php $i=0; @endphp
 
-@foreach ($invoices as $invoice)
-<tr>
+         @foreach ($invoices as $invoice)
+         <tr>
 
-<th>{{$i}}</th>
-  <td>{{$invoices->id}}</td>
-  <td>{{$customer->fullname}}</td>
-  <td>{{$customer->invoice_date}}</td>
-  <td>{{$customer->gross_amount}}</td>
-  <td><button class="btn btn-sm btn-info">Generate Invoice</button></td>
-  <td>
-    
-    <div class="row">
-      <div class="col-md-6">    
-        <a href="" title="edit"> 
-           <button class="btn btn-sm btn-info"><i class="fa fa-pencile"></i></button>
-          </a>
-        </div>
-        <div class="col-md-6">    
-          <a href=""> 
-             <button class="btn btn-sm btn-info"><i class="fa fa-trash-o" title="delete"></i></button>
-            </a>
-          </div>
-      </div>
-        </td>
-      
-    
+          <th>#</th>
+            <td class="text-success"><b>MDN-{{$invoice->id}}</b></td>
+            <td>{{$invoice->customer->fullname}}</td>
+            <td class="text-primary">{{$invoice->invoice_date}}</td>
+            <td class="text-danger"> <b> &#8377;  {{$invoice->net_amount}} </b></td>
+            <td><button class="btn btn-md btn-warning"><i class="fa fa-eye"></i></button></td>
+            <td><button class="btn btn-md btn-primary"><i class="fa fa-files-o"></i></button></td>
+            <td><button class="btn btn-md btn-secondary"><i class="fa fa-list"></i></button></td>
+                
+              
+          
+          
+          
+          
+          
+          </tr>
+         @endforeach
 
-  <td>
-      <div class="row">
-          <div class="col-md-4"><button class="btn btn-sm btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></div>
-          <div class="col-md-4"><a onclick="return confirm('Are you sure you want to delete this record?')" href="{{route('customers.delete',$customer->id)}}"><button class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></a></button></div>
-            <div class="col-md-4"><button class="btn btn-sm btn-info"><a href="{{route('customers.delete',$customer->id)}}"><i class="fa fa-file-o" aria-hidden="true"></i></a></button></div>
-
-      </div>
-  </td>
-
-@endforeach
-
-
-</tr>
     
                
              

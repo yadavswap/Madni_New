@@ -10,6 +10,7 @@
 <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/plugins/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css') }}"
     rel="stylesheet" />
+    
 
     <link href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" />    
 
@@ -96,7 +97,7 @@
                                                                 <label for="invoice_date">Select Invoice Date <small class="text-danger">*</small> </label>
                                     
                                                                 <input id="invoice_date" class="form-control datepicker invoice_date"
-                                                                                                    name="invoice_date" type="text" placeholder="dd/mm/yyyy">
+                                                        name="invoice_date" type="text" placeholder="dd/mm/yyyy" value="{{date('d/m/Y')}}">
                                     
                                                           
                                                         </th>
@@ -163,22 +164,22 @@
 
                                                         <td>
                                                             <input id="consignment_no1" class="form-control consignment_no"
-                                                                name="consignment_no[]" type="text" placeholder="consignment_no">
+                                                                name="product_details[consignment_no][]" type="text" placeholder="consignment_no">
                                                         </td>
 
                                                         <td>
                                                             <input id="referance_no1" class="form-control referance_no"
-                                                                name="referance_no[]" type="text" placeholder="referance_no">
+                                                                name="product_details[referance_no][]" type="text" placeholder="referance_no">
                                                         </td>
 
                                                         <td>
                                                             <input id="booking_date1" class="form-control datepicker booking_date"
-                                                                name="booking_date[]" type="text" placeholder="dd/mm/yyyy">
+                                                                name="product_details[booking_date][]" type="text" placeholder="dd/mm/yyyy">
                                                         </td>
 
                                                         <td>
                                                             <select class="basic-single w-100 origin"
-                                                                name="origin[]" required="" id="origin1">
+                                                                name="product_details[origin][]" required="" id="origin1">
                                                        
 
                                                                 @php
@@ -205,7 +206,7 @@
 
                                                         <td>
                                                             <select class="basic-single w-100 destination"
-                                                                name="destination[]" required="" id="destination1" >
+                                                                name="product_details[destination][]" required="" id="destination1" >
                                                                 @php
                                                                 if($tntimport['type_id'] == 1)
                                                                 {
@@ -231,7 +232,7 @@
                                                      
                                                         <td>
                                                             <select class="w-100 type"
-                                                                name="product_type[]" required="" id="type1" >
+                                                                name="product_details[product_type][]" required="" id="type1" >
                                                                 <option value="" selected="selected">--Select Type --
                                                                 </option>
 
@@ -246,31 +247,31 @@
 
                                                         <td>
                                                             <input id="actual_weight1" class="form-control actual_weight"
-                                                                name="actual_weight[]" type="text" placeholder="Actual Weight">
+                                                                name="product_details[actual_weight][]" type="text" placeholder="Actual Weight">
                                                         </td>
 
                                                         <td>
                                                             
-                                                                    <input id="l1" class="form-control l" name="l[]"
+                                                                    <input id="l1" class="form-control l" name="product_details[l][]"
                                                                         type="text" placeholder="L" >
                                                               
                                                         </td>
 
                                                         <td>
                                                             
-                                                            <input id="w1" class="form-control w" name="w[]"
+                                                            <input id="w1" class="form-control w" name="product_details[w][]"
                                                                 type="text" placeholder="W" >
                                                       
                                                 </td>
                                                 <td>
                                                             
-                                                    <input id="h1" class="form-control h" name="h[]"
+                                                    <input id="h1" class="form-control h" name="product_details[h][]"
                                                         type="text" placeholder="H" >
                                               
                                         </td>
                                         <td>
                                             <select class="w-100 mode"
-                                                name="mode[]" required="" id="mode1" >
+                                                name="product_details[mode][]" required="" id="mode1" >
                                                 <option value="" selected="selected">--Select Type --
                                                 </option>
 
@@ -282,12 +283,12 @@
 
                                                         <td>
                                                             <input id="chargable_weight1" class="form-control chargable_weight"
-                                                                name="chargable_weight[]" type="text"
+                                                                name="product_details[chargable_weight][]" type="text"
                                                                 placeholder="Chargable Wt"  >
                                                         </td>
 
                                                         <td>
-                                                            <select class="basic-single w-100 zone" name="zone[]"
+                                                            <select class="basic-single w-100 zone" name="product_details[zone][]"
                                                                 required="" id="zone1" >
                                                                 <option value="" selected="selected">--Select Zone --
                                                                 </option>
@@ -299,7 +300,7 @@
 
 
                                                         <td>
-                                                            <input id="amount1" class="form-control amount" name="amount[]"
+                                                            <input id="amount1" class="form-control amount" name="product_details[amount][]"
                                                                 type="text" placeholder="0" required  readonly>
 
                                                         </td>
@@ -827,7 +828,7 @@ $(document).on("change", ".zone", function(){
                         }
                         else{
                             $("#amount"+suffix).val("");
-                            // $("#amount"+suffix).prop('disabled', false);
+                             $("#amount"+suffix).attr("readonly", false);
                             alert("No Price Available! Please Enter Price Manually");
                         }
 
@@ -852,6 +853,9 @@ $(document).on("change", ".zone", function(){
 
 
 $("#recalculate").click(function(e){
+    calculated = 0;
+    $('#checkbox').prop('checked', false);
+
     e.preventDefault();
     $("#calculationbody").toggle();
 
@@ -994,8 +998,8 @@ $('#checkbox').on('change', function() {
 
 
 $('#submitform').click(function(e){
+    this.submit();
 
- this.submit();
    
 });
 
