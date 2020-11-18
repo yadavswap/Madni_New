@@ -42,6 +42,7 @@
                   <th>Invoice ID</th>
                   <th>Customer Name</th>
                   <th>Invoice Date</th>
+                  <th>Provider Name</th>
                   <th>Net Amount</th>
                   <th>View Invoice</th>
                   <th>Download Invoice</th>
@@ -59,6 +60,7 @@
             <td class="text-success"><b>MDN-{{$invoice->id}}</b></td>
             <td>{{$invoice->customer->fullname}}</td>
             <td class="text-primary">{{$invoice->invoice_date}}</td>
+            <td class="text-secondary">@php echo ($invoice->provider == 1)? "TNT" :"FeDex" @endphp</td>
             <td class="text-danger"> <b> &#8377;  {{$invoice->net_amount}} </b></td>
             <td><button class="btn btn-md btn-warning"><i class="fa fa-eye"></i></button></td>
             <td><button class="btn btn-md btn-primary"><i class="fa fa-files-o"></i></button></td>

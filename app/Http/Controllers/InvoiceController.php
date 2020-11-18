@@ -163,23 +163,32 @@ class InvoiceController extends Controller
          
           }
 
+
+        //   For Fedex Calculation Start
+
          if($request->provider == 2)
          {
             //  Fedex Provider
 
              // Check For Type
 
-             if($request->type == 0){
-                //  TNT Import
+             if($request->class == 0 )
+             {
+                  return back()->with('error','Price Sheet Not Availalbe at this Movement');
+             }
 
-                return "FedeX IMPORT";
+
+             if($request->type == 0){
+                //  Fedex Export
+
+              return "FedeX Export";
 
             }
 
             if($request->type == 1){
-                //  TNT Export
+                //  Fedex Export
                 
-                return "FedeX EXPORT";
+                return "FedeX Import";
             }
          } 
 

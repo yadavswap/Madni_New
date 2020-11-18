@@ -140,7 +140,7 @@
             @foreach ($invoices as $invoice)
             <tr>
             <td>{{$i}}</td>
-            <td>{{$invoice->id}}</td>
+            <td>MDN-{{$invoice->id}}</td>
             <td>{{$invoice->invoice_date}}</td>
             <td>{{$invoice->customer->fullname}}</td>
             <td><span class="badge badge-danger">&#x20B9; {{$invoice->net_amount}}</span></td>
