@@ -647,6 +647,17 @@ var is_import = "{{$tntimport['type_id']}}";
 
 </script>
 
+  @php 
+                if($tntimport['provider_id'] == 1)
+                {
+                    $fetchurl = url('/getCalculateAmount');
+                }
+                else{
+                    $fetchurl = route('fedex.calculte');
+                }
+                @endphp
+
+
 <script>
    
    $("#addrow").click(function(){
@@ -804,7 +815,9 @@ $(document).on("change", ".zone", function(){
             // Start Ajax Call
             $.ajax({
 
-                url: "{{url('/getCalculateAmount')}}",
+
+
+                url: "{{ $fetchurl}}",
                     data: {
                         "provider_id" : "{{$tntimport['provider_id']}}",
                         "is_import": "{{$tntimport['type_id']}}",

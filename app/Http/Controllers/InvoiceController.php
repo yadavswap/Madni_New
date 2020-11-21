@@ -45,7 +45,6 @@ class InvoiceController extends Controller
             $customerbyid = Customer::findOrFail($id);
             $pricecategory = PriceCategory::findorFail($customerbyid->price_categories_id);
             return view('pages.invoice.details',compact(['customers','customerbyid','id']));
-
         }
 
         else{
@@ -170,26 +169,72 @@ class InvoiceController extends Controller
          {
             //  Fedex Provider
 
-             // Check For Type
+            // Fedex Express
 
-             if($request->class == 0 )
-             {
-                  return back()->with('error','Price Sheet Not Availalbe at this Movement');
-             }
+             
 
 
-             if($request->type == 0){
-                //  Fedex Export
+          if($request->class == 1)
+          {
 
-              return "FedeX Export";
 
-            }
+                if($request->type == 0)
+                   {
+                        $tntimport = [
+                        'provider' => "Fedex",
+                        'type' => "Export",
+                        "class" => ($request->class) ? ("Express") : ("Economy"),
+                        'provider_id' => $request->provider,
+                        'type_id' => $request->type,
+                        'class_id' => $request->class
 
-            if($request->type == 1){
-                //  Fedex Export
+                        ];
+
+                          $pricelists = \App\FedexPrice::where('price_categories_id',$customerdetails->price_categories_id)
+                ->where('is_import',$is_import)
+                ->where('is_express',$is_express)
+                ->get();
+
                 
-                return "FedeX Import";
-            }
+                $zones = \App\FedexPrice::where('is_import',$is_import)
+                ->where('is_express',$is_express)
+                ->orderBy('zone', 'ASC')
+                ->get()
+                ->unique('zone');
+
+
+                     if(!$pricelists){
+                    return back()->with('error','Data Not Available Right Now! Please Update Sheet');
+                }
+
+
+                return view('pages.invoice.newinvoice',compact(['pricelist','customerdetails','countries','zones','tntimport']));
+
+
+
+                   }
+                    
+
+                if($request->type == 1)
+                   {
+                        // Fedex Import
+
+                    return "Fedex Import";
+
+                   } 
+
+
+          }
+
+           if($request->class == 0)
+          {
+                return back()->with('error','Price Sheet Not Available in This Version');
+          }
+
+
+            // Fedex Express End
+
+            
          } 
 
 

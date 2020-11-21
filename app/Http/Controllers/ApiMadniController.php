@@ -87,14 +87,51 @@ class ApiMadniController extends Controller
                 
             }
 
-            if($request->provider == 2)
-            {
 
-            }
-            
         
 
     }
+
+    public function calculateFedexPrice(Request $request){
+
+          $chargablewt = (float)$this->roundWeight($request->chargable_weight);
+
+                $amount = \App\FedexPrice::where('zone',$request->zone)
+                ->where('is_import',$request->is_import)
+                ->where('is_express',$request->class_id)
+                ->where('is_doc',$request->is_doc)
+                ->where('price_categories_id',$request->price_categories_id)
+                ->where('weight',$chargablewt)
+                ->orderBy('weight','DESC')
+                ->limit(1)
+                ->get();
+               // dd($amount->count() > 0);
+                if($amount->count() > 0)
+                {
+                    return response()->json($amount,200);
+                }
+
+                else{    
+                    
+                 /*
+                SELECT * FROM `tnt_prices` WHERE `is_doc` = 0 AND`is_express` = 1 AND `is_import` = 0 AND`price_categories_id` = 3
+                ORDER BY abs(weight - 501) LIMIT 1
+                 */
+                $amount = DB::select( DB::raw("SELECT * FROM `fedex_prices` WHERE `is_doc` = :is_doc AND `is_express`=:is_express AND `is_import` = :is_import AND `price_categories_id` = :price_categories_id AND `zone` = :zonevar ORDER BY abs(weight - :weightval) LIMIT 1"), array(
+                    'is_doc' => $request->is_doc,
+                    'is_express' => $request->class_id,
+                    'is_import' => $request->is_import,
+                    'price_categories_id' => $request->price_categories_id,
+                    'weightval' => $chargablewt,
+                    'zonevar' => $request->zone
+                  ));
+                return response()->json($amount,200);
+                }
+
+    }
+
+
+    
 
     public function generateInvoice(Request $request){
         return dd($request);

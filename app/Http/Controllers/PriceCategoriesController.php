@@ -7,6 +7,7 @@ use App\PriceCategory;
 use App\Imports\TntEconomyNonDocImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\TntImport;
+use App\Imports\FedexImport;
 
 class PriceCategoriesController extends Controller
 {
@@ -19,8 +20,6 @@ class PriceCategoriesController extends Controller
 
     public function create(){
         $countries = null;
-       
-
         return view('pages.pricecategory.create',compact('countries'));
     }
 
@@ -84,28 +83,11 @@ class PriceCategoriesController extends Controller
                 */
 
             Excel::import(new TntImport($pricecategoryid),$tntpath);
+            Excel::import(new FedexImport($pricecategoryid),$fedexpath);
             return back()->with('success','You have successfully created category and upload file.');
             }
 
             return back()->with('error','Unable To Update Price List. Failed!');
-
-
-       
-
-
-
-
-
-
-        
-       
-
-
-
-
-            
-
-
 
        
     }

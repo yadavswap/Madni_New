@@ -52,7 +52,7 @@
                     <div class="form-group">
                         <label for="provider">Select Provider</label>
           
-                        <select class="js-example-basic-single w-100" name="provider" required="">
+                        <select class="js-example-basic-single w-100" name="provider" required="" id="provider">
                           <option value="">--Select Provider --</option>
                           <option value="1">TNT</option>
                           <option value="2">Fedex</option>
@@ -82,11 +82,11 @@
                     <div class="form-group">
                         <label for="class">Select Class</label>
           
-                        <select class="js-example-basic-single w-100" name="class" required="">
+                        <select class="js-example-basic-single w-100" name="class" required="" id="selectclass">
                           <option value="">--Select Class --</option>
                        
                       <option value="0">Economy</option>
-                      <option value="1">Express</option>
+                      <option value="1" selected="">Express</option>
                          
                         </select>
                       
@@ -151,8 +151,19 @@
   <script src="{{ asset('assets/js/datepicker.js') }}"></script>
   <script src="{{ asset('assets/js/timepicker.js') }}"></script>
   <script>
-    $('#submit').click({
-      this.prop('disabled', true);
+
+
+    $("#provider").on('change',function(){
+    var value = $("#provider").val();
+    if(value == 2)
+      {
+
+        $("#selectclass").prop('readonly');
+
+      }
+      else{
+         $("#selectclass").prop('readonly');
+      }
     });
   </script>
 @endpush
