@@ -617,8 +617,10 @@
 var scrollbarExample = new PerfectScrollbar('.perfect-scrollbar-example');
 var is_import = "{{$tntimport['type_id']}}";
     var calculated = 0;
+    var totalcount = 1;
 
     $(document).ready(function () {
+         
         $('#checkbox').prop('checked', false); // Unchecks it
       
         console.log(is_import);
@@ -690,6 +692,8 @@ var is_import = "{{$tntimport['type_id']}}";
     itemrow.find(".amontLoading:last").attr("id","amontLoading"+num);
     itemrow.find(".amount:last").val("0");
     $("#itembody").append(itemrow);
+    totalcount++;
+      console.log(totalcount);
 
 
 });
@@ -700,6 +704,8 @@ $("#deleterow").click(function () {
     if ($("#itembody .itemrow").length > 1) {
 
         $(".itemrow:last").remove();
+        totalcount = totalcount-1;
+        console.log(totalcount);
         
     }
 });
@@ -901,6 +907,10 @@ $("#submit").click(function (e) {
 
     $("#calculationbody").toggle();
 
+      var enhancedcharge = parseFloat($('#enhance_security_charge').val()) * totalcount;
+      $('#enhance_security_charge').val(enhancedcharge);
+    
+
 
     $('html, body').animate({
         scrollTop: $('#calculationbody').offset().top
@@ -929,7 +939,7 @@ $('.amount').each(function(index,element){
     $("#gross_amount").val(gross);
     var surcharge = (gross/100)*25;
     console.log(surcharge);
-    $('.fuel_surcharge').val(surcharge);
+    $('.fuel_surcharge').val(surcharge.toFixed(2));
 
     
 });

@@ -45,7 +45,6 @@
                   <th>Provider Name</th>
                   <th>Net Amount</th>
                   <th>View Invoice</th>
-                  <th>Download Invoice</th>
                   <th>Invoice Lists</th>
                 </tr>
               </thead>
@@ -70,13 +69,7 @@
             </button>
               </a>
           </td>
-            <td>
-              <a href="{{route('invoice.download',$invoice->id)}}"  target="_blank">
-              <button class="btn btn-md btn-primary"><i class="fa fa-files-o"></i>
-             
-            </button>
-               </a>
-          </td>
+          
             <td><button class="btn btn-md btn-secondary"><i class="fa fa-list"></i></button></td>
                 
               
