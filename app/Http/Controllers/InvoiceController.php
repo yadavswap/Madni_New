@@ -59,6 +59,16 @@ class InvoiceController extends Controller
 
     public function newInvoice(Request $request){
 
+
+        if($request->provider == 0)
+        {
+            $data = [
+                'customer_id' => $request->customer_id,
+            ];
+
+            return $this->allInvoice($data);
+        }
+
         $request->validate([
             'customer_id' => 'required',
             'type' => 'required',
@@ -416,5 +426,12 @@ class InvoiceController extends Controller
     $paise = ($decimal > 0) ? "." . ($words[$decimal / 10] . " " . $words[$decimal % 10]) . ' Paise' : '';
     return ($Rupees ? $Rupees . 'Rupees ' : '') . $paise;
 }
+
+
+    public function allInvoice($data){
+           $customerdetails = Customer::findOrFail($request->customer_id);
+            $countries = World::Countries();
+        return $data;
+    }
     
 }

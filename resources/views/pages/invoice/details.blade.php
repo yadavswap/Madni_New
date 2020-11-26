@@ -54,6 +54,7 @@
           
                         <select class="js-example-basic-single w-100" name="provider" required="" id="provider">
                           <option value="">--Select Provider --</option>
+                            <option value="0" selected="">All</option>
                           <option value="1">TNT</option>
                           <option value="2">Fedex</option>
                         </select>
@@ -66,7 +67,7 @@
                     <div class="form-group">
                         <label for="type">Select Type</label>
           
-                        <select class="js-example-basic-single w-100" name="type" required="">
+                        <select class="js-example-basic-single w-100" name="type" >
                           <option value="">--Select Type --</option>
                        
                     <option value="0">Export</option>
@@ -82,7 +83,7 @@
                     <div class="form-group">
                         <label for="class">Select Class</label>
           
-                        <select class="js-example-basic-single w-100" name="class" required="" id="selectclass">
+                        <select class="js-example-basic-single w-100" name="class" id="selectclass">
                           <option value="">--Select Class --</option>
                        
                       <option value="0">Economy</option>

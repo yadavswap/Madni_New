@@ -39,9 +39,6 @@
 
                 <form class="cmxform" id="invoiceform" method="post" action="{{route('invoice.store')}}"
                     enctype="multipart/form-data">
-            <input type="hidden" name="provider_id" value="{{$tntimport['provider_id']}}">
-            <input type="hidden" name="type_id" value="{{$tntimport['type_id']}}">
-            <input type="hidden" name="class_id" value="{{$tntimport['class_id']}}">
             <input type="hidden" name="price_categories_id" value="{{$customerdetails->price_categories_id}}">
                     <fieldset>
                         @csrf
@@ -66,18 +63,8 @@
                                 <label for="date">Date : </label>
                                 <b class="text-success">{{date('d/m/Y')}}</b>
                             </div>
-                            <div class="col-md-2">
-                                <label for="provider">Provider : </label>
-                                <b class="text-primary">{{$tntimport['provider']}}</b>
-                            </div>
-                            <div class="col-md-2">
-                                <label for="type">Type : </label>
-                                <b class="text-primary">{{$tntimport['type']}}</b>
-                            </div>
-                            <div class="col-md-2">
-                                <label for="class">Class : </label>
-                                <b class="text-primary">{{$tntimport['class']}}</b>
-                            </div>
+                           
+                           
                         </div>
 
 
@@ -145,6 +132,9 @@
                                                     </tr>
 
                                                     <tr>
+                                                        <th>Select Provider <small class="text-danger">*</small></th>
+                                                         <th>Select Type <small class="text-danger">*</small></th>
+                                                          <th>Select Class <small class="text-danger">*</small></th>
                                                         <th>Consignment No <small class="text-danger">*</small></th>
                                                         <th>Referance No <small class="text-danger">*</small></th>
                                                         <th>Select Booking Date <small class="text-danger">*</small></th>
@@ -163,6 +153,10 @@
                                                 </thead>
                                                 <tbody id="itembody">
                                                     <tr id="itemrow" class="itemrow perfect-scrollbar-example">
+
+                                                         <td></td>
+                                                          <td></td>
+                                                           <td></td>
 
                                                         <td>
                                                             <input id="consignment_no1" class="form-control consignment_no"
