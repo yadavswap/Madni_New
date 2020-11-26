@@ -85,9 +85,11 @@
 
                         {{-- Product --}}
                         <div class="row">
+
                             <div class="col-md-12 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body">
+                                         <button class="btn btn-danger pull-right" type="submit" id="submit"> Process Next To Invoice</button>
                                         <div class="table-responsive">
                                             <table id="dataTableExample" class="table">
                                                 <thead>
@@ -106,7 +108,9 @@
                                                             <label for="statecode">Enter State Code <small class="text-danger">*</small> </label>
                                     
                                                                 <input id="statecode" class="form-control  statecode"
-                                                                                                    name="statecode" type="text" placeholder="00">
+                                                                name="statecode" type="text" placeholder="00"
+                                                                value="27" 
+                                                                >
                                     
                                                           
                                                         </th>
@@ -122,9 +126,7 @@
                                                                 Delete <i class="fa fa-trash-o"></i></button>
                                                         </th>
 
-                                                        <th>
-                                                            <button class="btn btn-warning" type="submit" id="submit"> Process Next</button>
-                                                        </th>
+                                                       
                                                         <th>
                                                            
                                                                 <button class="btn btn-md btn-info" type="button"

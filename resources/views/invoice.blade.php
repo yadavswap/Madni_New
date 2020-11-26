@@ -210,7 +210,7 @@
                  {{$product->actual_weight}} KG
             </font></td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="6" sdnum="1033;0;0.000"><font face="Tahoma" size=1>
-                {{$product->chargable_weight}} KG
+                {{round($product->chargable_weight)}} KG -( {{$product->l}} X {{$product->w}} X {{$product->h}} )
             </font></td>
             <center><td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="4488" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
                Rs. {{$product->amount}}
