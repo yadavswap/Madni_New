@@ -221,7 +221,41 @@ class InvoiceController extends Controller
                    {
                         // Fedex Import
 
-                    return "Fedex Import";
+
+                      $tntimport = [
+                        'provider' => "Fedex",
+                        'type' => "Export",
+                        "class" => ($request->class) ? ("Express") : ("Economy"),
+                        'provider_id' => $request->provider,
+                        'type_id' => $request->type,
+                        'class_id' => $request->class
+
+                        ];
+
+
+                        $pricelists = \App\FedexPrice::where('price_categories_id',$customerdetails->price_categories_id)
+                ->where('is_import',$is_import)
+                ->where('is_express',$is_express)
+                ->get();
+
+                  $zones = \App\FedexPrice::where('is_import',$is_import)
+                ->where('is_express',$is_express)
+                ->orderBy('zone', 'ASC')
+                ->get()
+                ->unique('zone');
+
+                   if(!$pricelists){
+                    return back()->with('error','Data Not Available Right Now! Please Update Sheet');
+                }
+
+
+                
+                return view('pages.invoice.newinvoice',compact(['pricelist','customerdetails','countries','zones','tntimport']));
+
+
+
+
+                    
 
                    } 
 
