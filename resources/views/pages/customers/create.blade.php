@@ -33,20 +33,29 @@
               @csrf
             <div class="form-group">
               <label for="name">Fullname</label>
-              <input id="name" class="form-control" name="fullname" type="text" required="">
+              <input id="name" class="form-control" name="fullname" type="text" required=""
+              value="{{old('fullname')}}" 
+              >
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input id="email" class="form-control" name="email" type="email"  required="">
+              <input id="email" class="form-control" name="email" type="email"  required=""
+               value="{{old('email')}}" 
+              >
             </div>
             <div class="form-group">
               <label for="mobile">Mobile</label>
-              <input id="mobile" class="form-control" name="mobile" type="text" maxlength="10"  required="">
+              <input id="mobile" class="form-control" name="mobile" type="text" maxlength="10"  required=""
+              value="{{old('mobile')}}" 
+              >
             </div>
 
             <div class="form-group">
                 <label for="gstin">GSTIN</label>
-                <input id="gstin" class="form-control" name="gstin" type="text" maxlength="24">
+                <input id="gstin" class="form-control" name="gstin" type="text" maxlength="24"
+
+                  value="{{old('gstin')}}" 
+                >
               </div>
 
               
@@ -74,12 +83,15 @@
 
               <div class="form-group">
                 <label for="pincode">Pincode</label>
-                <input id="pincode" class="form-control" name="pincode" type="pincode" required="required" maxlength="7">
+                <input id="pincode" class="form-control" name="pincode" type="pincode" required="required" maxlength="7"
+                   value="{{old('pincode')}}" 
+
+                >
               </div>
 
               <div class="form-group">
                 <label for="address">Address</label>
-                <textarea id="address" class="form-control" name="address" type="address" required="required"></textarea>
+                <textarea id="address" class="form-control" name="address" type="address" required="required">{{old('address')}}</textarea>
               </div>
 
 
