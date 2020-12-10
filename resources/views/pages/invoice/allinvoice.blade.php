@@ -37,8 +37,11 @@
             <div class="card-body">
                 <h4 class="card-title">Create New Invoice</h4>
 
-                <form class="cmxform" id="invoiceform" method="post" action="{{route('invoice.store')}}"
+                <form class="cmxform" id="invoiceform" method="post" action="{{route('invoice.store.new')}}"
                     enctype="multipart/form-data">
+           
+            <input type="hidden" name="type_id" value="{{$data['type_id']}}">
+         
             <input type="hidden" name="price_categories_id" value="{{$customerdetails->price_categories_id}}">
                     <fieldset>
                         @csrf
@@ -63,8 +66,26 @@
                                 <label for="date">Date : </label>
                                 <b class="text-success">{{date('d/m/Y')}}</b>
                             </div>
-                           
-                           
+                            <div class="col-md-2">
+                                <label for="provider">Provider : </label>
+                                <b class="text-primary">NA</b>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="type">Type : </label>
+                                <b class="text-primary">
+                                    @if($data['type_id'])
+                                    {{'Import'}}
+                                    @else
+                                    {{'Export'}}
+                                    @endif
+                                
+                                
+                            </b>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="class">Class : </label>
+                                <b class="text-primary">NA</b>
+                            </div>
                         </div>
 
 
@@ -132,10 +153,10 @@
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Select Provider <small class="text-danger">*</small></th>
-                                                         <th>Select Type <small class="text-danger">*</small></th>
-                                                          <th>Select Class <small class="text-danger">*</small></th>
                                                         <th>Consignment No <small class="text-danger">*</small></th>
+                                                          <th>Select Provider <small class="text-danger">*</small></th>
+                                                         <th>Select Class <small class="text-danger">*</small></th>
+
                                                         <th>Referance No <small class="text-danger">*</small></th>
                                                         <th>Select Booking Date <small class="text-danger">*</small></th>
                                                         <th>Select Origin <small class="text-danger">*</small></th>
@@ -154,14 +175,34 @@
                                                 <tbody id="itembody">
                                                     <tr id="itemrow" class="itemrow perfect-scrollbar-example">
 
-                                                         <td></td>
-                                                          <td></td>
-                                                           <td></td>
-
                                                         <td>
                                                             <input id="consignment_no1" class="form-control consignment_no"
                                                                 name="product_details[consignment_no][]" type="text" placeholder="consignment_no">
                                                         </td>
+
+
+                                                         <td>
+                                                                <select class="w-100 type provider_id"
+                                                                name="product_details[provider_id][]" required="" id="provider_id1" >
+                                                                <option value="" selected="selected">--Select Provider --
+                                                                </option>
+
+                                                                <option value="1">TNT</option>
+                                                                <option value="2">Fedex</option>
+
+                                                            </select>
+                                                         </td>
+                                                          <td>
+                                                               <select class="w-100 type class_id"
+                                                                name="product_details[class_id][]" required="" id="class_id1" >
+                                                                <option value="" selected="selected">--Select Class --
+                                                                </option>
+
+                                                                <option value="0">Economy</option>
+                                                                <option value="1">Express</option>
+
+                                                            </select>
+                                                          </td>
 
                                                         <td>
                                                             <input id="referance_no1" class="form-control referance_no"
@@ -179,7 +220,7 @@
                                                        
 
                                                                 @php
-                                                                if($tntimport['type_id'] == 0)
+                                                                if($data['type_id'] == 0)
                                                                 {
                                                                 
                                                                   echo  '<option value="India" selected="selected" class="origin">India
@@ -204,7 +245,7 @@
                                                             <select class="basic-single w-100 destination"
                                                                 name="product_details[destination][]" required="" id="destination1" >
                                                                 @php
-                                                                if($tntimport['type_id'] == 1)
+                                                                if($data['type_id'] == 1)
                                                                 {
                                                                 
                                                                   echo  '<option value="India" selected="selected" class="origin">India
@@ -283,16 +324,25 @@
                                                                 placeholder="Chargable Wt" readonly />
                                                         </td>
 
-                                                        <td>
+                                                       <td>
                                                             <select class="basic-single w-100 zone" name="product_details[zone][]"
                                                                 required="" id="zone1" >
                                                                 <option value="" selected="selected">--Select Zone --
                                                                 </option>
-                                                                @foreach($zones as $zone)
+                                                                @foreach($tntZones as $zone)
                                                                 <option value="{{$zone->zone}}">{{$zone->zone}}</option>
                                                                 @endforeach
+
+                                                                  <option value="">-- Fedex Zones --</option>
+
+                                                                   @foreach($fedexZones as $zone)
+                                                                <option value="{{$zone->zone}}">{{$zone->zone}}</option>
+                                                                @endforeach
+
+                                                              
                                                             </select>
                                                         </td>
+
 
 
                                                         <td>
@@ -316,20 +366,8 @@
                         </div>
 
                         {{-- Product End --}}
+                      
 
-
-
-
-
-
-
-
-
-
-
-
-
-                       
                     </br>
                     </fieldset>
 
@@ -618,12 +656,51 @@
 
 <script>
 
+    //  1 TNT
+    //  2 FEDEX
+
 var scrollbarExample = new PerfectScrollbar('.perfect-scrollbar-example');
-var is_import = "{{$tntimport['type_id']}}";
+var is_import = "{{$data['type_id']}}";
     var calculated = 0;
     var totalcount = 1;
+     var provider_id = "";
+    var class_id = "";
+    var fetchurl = "";
+
+    console.log("provider_id_init"+provider_id);
+    console.log("provider_id_init"+class_id);
+
+    $(document).on("change", ".provider_id", function(){
+        var providersuffix = this.id.match(/\d+/)[0];
+        provider_id = $("#provider_id"+providersuffix).val();
+        console.log("provider_id "+provider_id);
+
+      
+    });
+
+    $(document).on("change", ".class_id", function(){
+        var classsuffix = this.id.match(/\d+/)[0];
+        class_id = $("#class_id"+classsuffix).val();
+        console.log("class_id "+class_id);
+
+       
+    });
+
+
+    // Condition for set fetch url
+
+ 
+
+                  
+               
+                   
+             
+
+    // End Condition
 
     $(document).ready(function () {
+        $(".class_id").val("");
+        $(".provider_id").val("");
          
         $('#checkbox').prop('checked', false); // Unchecks it
       
@@ -652,21 +729,7 @@ var is_import = "{{$tntimport['type_id']}}";
 
         
     });
-
-</script>
-
-  @php 
-                if($tntimport['provider_id'] == 1)
-                {
-                    $fetchurl = url('/getCalculateAmount');
-                }
-                else{
-                    $fetchurl = route('fedex.calculte');
-                }
-                @endphp
-
-
-<script>
+   
    
    $("#addrow").click(function(){
 
@@ -695,6 +758,9 @@ var is_import = "{{$tntimport['type_id']}}";
     itemrow.find(".amontError:last").attr("id","amontError"+num);
     itemrow.find(".amontLoading:last").attr("id","amontLoading"+num);
     itemrow.find(".amount:last").val("0");
+    itemrow.find(".provider_id:last").attr("id","provider_id"+num);
+    itemrow.find(".class_id:last").attr("id","class_id"+num);
+    itemrow.find(".type_id:last").attr("id","type_id"+num);
     $("#itembody").append(itemrow);
     totalcount++;
       console.log(totalcount);
@@ -822,18 +888,26 @@ $(document).on("change", ".zone", function(){
 
         // Check All Fields
 
-        if($("#chargable_weight"+suffix).val() != "" && $("#type"+suffix).val() != "" && $("#mode"+suffix).val())
+        if($("#provider_id"+suffix).val() != "" && $("#class_id"+suffix).val() != "" && $("#chargable_weight"+suffix).val() != "" && $("#type"+suffix).val() != "" && $("#mode"+suffix).val())
         {
             // Start Ajax Call
+            if(provider_id != "" && provider_id == 1)
+    {
+        fetchurl = "{{url('/getCalculateAmount')}}";
+        console.log("Fetch :" + fetchurl);
+    }
+    if(provider_id != "" && provider_id == 2){
+
+         fetchurl = "{{route('fedex.calculte')}}";    
+         console.log("Fetch :" + fetchurl);
+    }
+
             $.ajax({
-
-
-
-                url: "{{ $fetchurl}}",
+                url: fetchurl,
                     data: {
-                        "provider_id" : "{{$tntimport['provider_id']}}",
-                        "is_import": "{{$tntimport['type_id']}}",
-                        "class_id": "{{$tntimport['class_id']}}",
+                        "provider_id" : provider_id,
+                        "is_import": "{{$data['type_id']}}",
+                        "class_id": class_id,
                         "is_doc" :  $("#type"+suffix).val(),
                         "chargable_weight": $("#chargable_weight"+suffix).val(),
                         "zone": $("#zone"+suffix).val(),

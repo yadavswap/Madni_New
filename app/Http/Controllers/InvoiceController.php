@@ -20,7 +20,7 @@ use Khsing\World\World;
 use App\Exceptions\Handler;
 use App\InvoiceProduct;
 use PDF;
-
+use App\FedexPrice;
 
 
 
@@ -64,6 +64,7 @@ class InvoiceController extends Controller
         {
             $data = [
                 'customer_id' => $request->customer_id,
+                'type_id' => $request->type,
             ];
 
             return $this->allInvoice($data);
@@ -202,13 +203,13 @@ class InvoiceController extends Controller
 
                         ];
 
-                          $pricelists = \App\FedexPrice::where('price_categories_id',$customerdetails->price_categories_id)
+                          $pricelists = FedexPrice::where('price_categories_id',$customerdetails->price_categories_id)
                 ->where('is_import',$is_import)
                 ->where('is_express',$is_express)
                 ->get();
 
                 
-                $zones = \App\FedexPrice::where('is_import',$is_import)
+                $zones = FedexPrice::where('is_import',$is_import)
                 ->where('is_express',$is_express)
                 ->orderBy('zone', 'ASC')
                 ->get()
@@ -243,12 +244,12 @@ class InvoiceController extends Controller
                         ];
 
 
-                        $pricelists = \App\FedexPrice::where('price_categories_id',$customerdetails->price_categories_id)
+                        $pricelists = FedexPrice::where('price_categories_id',$customerdetails->price_categories_id)
                 ->where('is_import',$is_import)
                 ->where('is_express',$is_express)
                 ->get();
 
-                  $zones = \App\FedexPrice::where('is_import',$is_import)
+                  $zones = FedexPrice::where('is_import',$is_import)
                 ->where('is_express',$is_express)
                 ->orderBy('zone', 'ASC')
                 ->get()
@@ -429,9 +430,111 @@ class InvoiceController extends Controller
 
 
     public function allInvoice($data){
-           $customerdetails = Customer::findOrFail($request->customer_id);
-            $countries = World::Countries();
-        return $data;
+
+        $customerdetails = Customer::findOrFail($data['customer_id']);
+        $countries = World::Countries();
+        $tntZones = TntPrice::orderBy('zone', 'ASC')
+                ->get()
+                ->unique('zone');
+        $fedexZones = FedexPrice::orderBy('zone', 'ASC')
+                ->get()
+                ->unique('zone');        
+                
+        return view('pages.invoice.allinvoice',compact('customerdetails','countries','tntZones','fedexZones','data'));
+    }
+
+
+    public function storeAll(Request $request){
+      //  dd($request);
+
+        $i = 0;
+        $volumetricwt = 0;
+ 
+         $invoice = CustomerInvoice::create([
+             'customer_id' => $request->customer_id,
+             'price_categories_id' => $request->price_categories_id,
+             'state_code' => $request->statecode,
+             'invoice_date'=> $request->invoice_date,
+             'gross_amount'=> $request->gross_amount,
+             'fuel_surcharge' => $request->fuel_surcharge,
+             'enhance_security_charge' => $request->enhance_security_charge,
+             'custom_clearance' => $request->custom_clearance,
+             'oda_charge' => $request->oda_charge,
+             'adc_noc_charge' => $request->adc_noc_charge,
+             'do_charge'=> $request->do_charges,
+             'non_conveyar_charge' => $request->non_conveyar_charge,
+             'address_correction_charge' => $request->address_correction_charge,
+             'war_surcharge' => $request->war_surcharge,
+             'warehousing_charge' => $request->warehousing_charge,
+             'ad_code_registration_charge' => $request->ad_code_registration_charge,
+             'air_cargo_registration_charge' => $request->air_cargo_registration_charge,
+             'gst_percentage' => 18,
+             'cgst_amount' =>  round((float)$request->cgst,2),
+             'sgst_amount'=> $request->sgst,
+             'igst_amount'=> $request->igst,
+             'is_express' => NULL,
+             'is_import' => $request->type_id,
+             'provider' => "3", // For ALL
+             'net_amount' => round((float)$request->net_amount,2),
+ 
+         ]);
+ 
+         if($invoice)
+         {
+           
+             //dd($request->product_details);
+ 
+            for($i = 0; $i < count($request->product_details["consignment_no"]); $i++){
+               // dd($request->product_details['provider_id'][$i]);
+                $productlists = new InvoiceProduct();
+             $productlists->customer_invoice_id = $invoice->id;
+             $productlists->consignment_no = $request->product_details["consignment_no"][$i];
+             $productlists->provider_id = $request->product_details["provider_id"][$i];
+             $productlists->class_id = $request->product_details["class_id"][$i];
+             $productlists->referance_no = $request->product_details["referance_no"][$i];
+             $productlists->booking_date = $request->product_details["booking_date"][$i];
+             $productlists->origin = $request->product_details["origin"][$i];
+             $productlists->destination = $request->product_details["destination"][$i];
+             $productlists->actual_weight = $request->product_details["actual_weight"][$i];
+             $productlists->l = $request->product_details["l"][$i];
+             $productlists->w = $request->product_details["w"][$i];
+             $productlists->h = $request->product_details["h"][$i];
+             $productlists->mode = $request->product_details["mode"][$i];
+             $productlists->chargable_weight = $request->product_details["chargable_weight"][$i];
+             if($request->product_details["mode"][$i] == 0){
+                 $volumetricwt = ($request->product_details["l"][$i] +  $request->product_details["w"][$i] + $request->product_details["h"][$i])/5000;
+             }
+             if($request->product_details["mode"][$i] == 1){
+                 $volumetricwt = ($request->product_details["l"][$i] +  $request->product_details["w"][$i] + $request->product_details["h"][$i])/6000;
+ 
+             }
+           
+             $productlists->volumetric_weight = $volumetricwt;
+             $productlists->product_type = $request->product_details["product_type"][$i];
+             $productlists->zone = $request->product_details["zone"][$i];
+             $productlists->amount = $request->product_details["amount"][$i];
+           //  dd($request->product_details["class_id"][$i]);
+             
+             $saved = $productlists->save();
+            }
+             
+            if($saved)
+            {
+             return back()->with('success','Invoice Created Successfully.');   
+            }
+            else{
+                $invoice = CustomerInvoice::find($invoice->id);
+                $invoice->delete();
+                return back()->with('errors','Unable To Save Invoice At That Movement');
+ 
+              }
+         }
+         else{
+             return back()->with('errors','Unable To Create Invoice At That Movement');
+         }
+         
+        
+
     }
     
 }
