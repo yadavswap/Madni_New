@@ -152,7 +152,14 @@
                 {{$invoice->state_code}}
             </font></td>
             <td align="left" valign=bottom><font face="Arial" size=1><br>
-              
+            <b>Invoice Type: 
+               @if($invoice->is_import)
+               IMPORT
+               @endif
+               @if(!$invoice->is_import)
+              Export
+               @endif
+            </b>
             </font></td>
             <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
             <td align="center" valign=bottom><font face="Arial" size=1><br></font></td>
@@ -196,13 +203,23 @@
                {{$product->destination}}
             </font></td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="1" sdnum="1033;"><font face="Tahoma" size=1>
-                 {{$product->zone}}
+                 {{$product->zone}} 
+                 @if($product->provider_id == 1)
+                 {
+                    {{'TNT'}}
+                 }
+                 @endif
+                 @if($product->provider_id == 2)
+                 {
+                    {{'FEDEX'}}
+                 }
+
+                 @endif
             </font></td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom><font face="Tahoma" size=1>
                @if($product->product_type)
                DOC
                @else
-
                NON-DOX
                @endif
             </font></td>

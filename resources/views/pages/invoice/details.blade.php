@@ -67,7 +67,7 @@
                     <div class="form-group">
                         <label for="type">Select Type</label>
           
-                        <select class="js-example-basic-single w-100" name="type" >
+                        <select class="js-example-basic-single w-100" name="type"  required="">
                           <option value="">--Select Type --</option>
                        
                     <option value="0">Export</option>
@@ -155,16 +155,7 @@
 
 
     $("#provider").on('change',function(){
-    var value = $("#provider").val();
-    if(value == 2)
-      {
-
-        $("#selectclass").prop('readonly');
-
-      }
-      else{
-         $("#selectclass").prop('readonly');
-      }
+   
     });
   </script>
 @endpush
