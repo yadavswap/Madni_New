@@ -66,7 +66,111 @@ class ApiMadniController extends Controller
                 if($amount->count() > 0)
                 {
                   
+                    
+                //   FOR TNT 0 
 
+                // TNT WEIGHT SLAB
+
+                //  TNT ECONOMY NDOX EXPORT
+                if( $request->class_id == 0 && $request->is_import == 0){
+
+                    if($chargablewt > 10 && $chargablewt <= 20){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 20 && $chargablewt <= 50){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 50 && $chargablewt <= 100){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 100 && $chargablewt <= 300){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 300 && $chargablewt <= 500){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+
+                }
+
+                  //  TNT EXPRESS NDOX EXPORT TAX SLAb
+                  if( $request->class_id == 1 && $request->is_import == 0){
+
+                    if($chargablewt > 20 && $chargablewt <= 30){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 30 && $chargablewt <= 50){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 50 && $chargablewt <= 75){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 75 && $chargablewt <= 100){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 100 && $chargablewt <= 300){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 300 && $chargablewt <= 500){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+
+
+                        //  TNT EXPRESS NDOX IMPORT TAX SLAb
+                  if( $request->class_id == 1 && $request->is_import == 1){
+
+                    if($chargablewt > 20 && $chargablewt <= 30){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 30 && $chargablewt <= 50){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 50 && $chargablewt <= 75){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 75 && $chargablewt <= 100){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 100 && $chargablewt <= 300){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 300 && $chargablewt <= 500){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+
+                         //  TNT ECONOMY  NDOX IMPORT TAX SLAb
+                  if( $request->class_id == 0 && $request->is_import == 1){
+
+                    if($chargablewt > 10 && $chargablewt <= 20){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 20 && $chargablewt <= 50){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 50 && $chargablewt <= 100){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                   
+                    if($chargablewt > 100 && $chargablewt <= 300){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 300 && $chargablewt <= 500){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+
+                    
+
+                }
+                
+
+                  // END TNT ECONOMY NDOX EXPORT
+
+               
+
+                // END TNT TAX SLAB
+
+               
+
+                // END FOR TNT
                     return response()->json($amount,200);
                 }
 
@@ -132,6 +236,51 @@ class ApiMadniController extends Controller
                     if($chargablewt > 300 && $chargablewt <= 500){
                         $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
+
+
+                        //  TNT EXPRESS NDOX IMPORT TAX SLAb
+                  if( $request->class_id == 1 && $request->is_import == 1){
+
+                    if($chargablewt > 20 && $chargablewt <= 30){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 30 && $chargablewt <= 50){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 50 && $chargablewt <= 75){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 75 && $chargablewt <= 100){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 100 && $chargablewt <= 300){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 300 && $chargablewt <= 500){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+
+                         //  TNT ECONOMY  NDOX IMPORT TAX SLAb
+                  if( $request->class_id == 0 && $request->is_import == 1){
+
+                    if($chargablewt > 10 && $chargablewt <= 20){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 20 && $chargablewt <= 50){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 50 && $chargablewt <= 100){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                   
+                    if($chargablewt > 100 && $chargablewt <= 300){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+                    if($chargablewt > 300 && $chargablewt <= 500){
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                    }
+
+                    
 
                 }
                 
