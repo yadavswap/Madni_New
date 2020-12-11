@@ -100,19 +100,19 @@ class ApiMadniController extends Controller
             if( $request->class_id == 0 && $request->is_import == 0){
 
                 if($chargablewt > 10 && $chargablewt <= 20){
-                    $amount['0']->price = $chargablewt * $amount['0']->price;
+                    $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                 }
                 if($chargablewt > 20 && $chargablewt <= 50){
-                    $amount['0']->price = $chargablewt * $amount['0']->price;
+                    $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                 }
                 if($chargablewt > 50 && $chargablewt <= 100){
-                    $amount['0']->price = $chargablewt * $amount['0']->price;
+                    $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                 }
                 if($chargablewt > 100 && $chargablewt <= 300){
-                    $amount['0']->price = $chargablewt * $amount['0']->price;
+                    $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                 }
                 if($chargablewt > 300 && $chargablewt <= 500){
-                    $amount['0']->price = $chargablewt * $amount['0']->price;
+                    $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                 }
             }
 
@@ -120,22 +120,22 @@ class ApiMadniController extends Controller
                 if( $request->class_id == 1 && $request->is_import == 0){
 
                     if($chargablewt > 20 && $chargablewt <= 30){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 30 && $chargablewt <= 50){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 50 && $chargablewt <= 75){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 75 && $chargablewt <= 100){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 100 && $chargablewt <= 300){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 300 && $chargablewt <= 500){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
 
                 }
@@ -146,22 +146,22 @@ class ApiMadniController extends Controller
                 if( $request->class_id == 1 && $request->is_import == 1){
 
                     if($chargablewt > 20 && $chargablewt <= 30){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 30 && $chargablewt <= 50){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 50 && $chargablewt <= 75){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price =ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 75 && $chargablewt <= 100){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 100 && $chargablewt <= 300){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 300 && $chargablewt <= 500){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
 
                 }
@@ -172,22 +172,22 @@ class ApiMadniController extends Controller
                   if( $request->class_id == 0 && $request->is_import == 1){
 
                     if($chargablewt > 10 && $chargablewt <= 20){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 20 && $chargablewt <= 50){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 50 && $chargablewt <= 100){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 75 && $chargablewt <= 100){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price =ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 100 && $chargablewt <= 300){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                     if($chargablewt > 300 && $chargablewt <= 500){
-                        $amount['0']->price = $chargablewt * $amount['0']->price;
+                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
                     }
                 }
                 
