@@ -921,7 +921,7 @@ $(document).on("change", ".zone", function(){
                         if(response[0] != null){
 
                             console.log(Math.round(response[0].price));
-                            $("#amount"+suffix).val(Math.round(response[0].price));
+                            $("#amount"+suffix).val(response[0].price).toFixed(2);
                             // $("#amount"+suffix).prop('disabled', true);
 
                         }
