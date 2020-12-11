@@ -218,16 +218,16 @@
             </font></td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom><font face="Tahoma" size=1>
                @if($product->product_type)
-               DOC
+               DOC  <?= ($product->class_id != NULL && $product->class_id == 1) ? "- Express" : "- Economy"; ?>
                @else
-               NON-DOX
+               NON-DOX <?= ($product->class_id != NULL && $product->class_id == 1) ? "- Express" : "- Economy"; ?>
                @endif
             </font></td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="5.5" sdnum="1033;0;0.000"><font face="Tahoma" size=1 color="#000000">
                  {{$product->actual_weight}} KG
             </font></td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="6" sdnum="1033;0;0.000"><font face="Tahoma" size=1>
-                {{round($product->chargable_weight)}} KG -( {{$product->l}} X {{$product->w}} X {{$product->h}} )
+                {{round($product->chargable_weight)}} KG -  [<b>{{$product->l}} L</b> X <b>{{$product->w}} W</b> X <b>{{$product->h}} H</b>]
             </font></td>
             <center><td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="4488" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
                Rs. {{$product->amount}}
@@ -391,6 +391,20 @@
             <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>FREIGHT AMOUNT:</font></td>
             <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="11785.84" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
                 Rs. {{$invoice->freight_amount}}
+            </font></td>
+         </tr>
+         <tr>
+            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
+            <td align="right" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
+            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
+            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
+            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
+            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
+            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
+            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
+            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>Security Enhance Charge:</font></td>
+            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="11785.84" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
+                Rs. {{$invoice->enhance_security_charge}}
             </font></td>
          </tr>
          <tr>
