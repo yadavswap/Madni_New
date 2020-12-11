@@ -154,7 +154,7 @@
             <td align="left" valign=bottom><font face="Arial" size=1><br>
             <b>Invoice Type: 
                @if($invoice->is_import)
-               IMPORT
+               Import
                @endif
                @if(!$invoice->is_import)
               Export
