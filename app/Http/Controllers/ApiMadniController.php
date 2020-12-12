@@ -250,7 +250,8 @@ class ApiMadniController extends Controller
                 $chargablewt = ceil($chargablewt);
 
                 if(isset($amount)){
-
+                    $amount['0']->tgsc = $this->calTGSC($chargablewt);
+                   $amount['0']->esc = $this->calSEC($chargablewt);
                 }
 
                 return response()->json($amount,200);
