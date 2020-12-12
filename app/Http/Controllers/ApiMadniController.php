@@ -83,6 +83,7 @@ class ApiMadniController extends Controller
                 }
 
                 if(isset($amount)){
+                    $chargablewt = ceil($chargablewt);
 
                     /*
                         TNT WEIGHT SLAB  
@@ -100,19 +101,19 @@ class ApiMadniController extends Controller
             if( $request->class_id == 0 && $request->is_import == 0){
 
                 if($chargablewt > 10 && $chargablewt <= 20){
-                    $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                    $amount['0']->price = $chargablewt * $amount['0']->price;
                 }
                 if($chargablewt > 20 && $chargablewt <= 50){
-                    $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                    $amount['0']->price = $chargablewt * $amount['0']->price;
                 }
                 if($chargablewt > 50 && $chargablewt <= 100){
-                    $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                    $amount['0']->price = $chargablewt * $amount['0']->price;
                 }
                 if($chargablewt > 100 && $chargablewt <= 300){
-                    $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                    $amount['0']->price = $chargablewt * $amount['0']->price;
                 }
                 if($chargablewt > 300 && $chargablewt <= 500){
-                    $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                    $amount['0']->price = $chargablewt * $amount['0']->price;
                 }
             }
 
@@ -120,22 +121,22 @@ class ApiMadniController extends Controller
                 if( $request->class_id == 1 && $request->is_import == 0){
 
                     if($chargablewt > 20 && $chargablewt <= 30){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 30 && $chargablewt <= 50){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 50 && $chargablewt <= 75){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 75 && $chargablewt <= 100){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 100 && $chargablewt <= 300){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 300 && $chargablewt <= 500){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
 
                 }
@@ -146,22 +147,22 @@ class ApiMadniController extends Controller
                 if( $request->class_id == 1 && $request->is_import == 1){
 
                     if($chargablewt > 20 && $chargablewt <= 30){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 30 && $chargablewt <= 50){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 50 && $chargablewt <= 75){
-                        $amount['0']->price =ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price =$chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 75 && $chargablewt <= 100){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 100 && $chargablewt <= 300){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 300 && $chargablewt <= 500){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
 
                 }
@@ -172,22 +173,22 @@ class ApiMadniController extends Controller
                   if( $request->class_id == 0 && $request->is_import == 1){
 
                     if($chargablewt > 10 && $chargablewt <= 20){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 20 && $chargablewt <= 50){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 50 && $chargablewt <= 100){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 75 && $chargablewt <= 100){
-                        $amount['0']->price =ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price =$chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 100 && $chargablewt <= 300){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                     if($chargablewt > 300 && $chargablewt <= 500){
-                        $amount['0']->price = ceil($chargablewt) * $amount['0']->price;
+                        $amount['0']->price = $chargablewt * $amount['0']->price;
                     }
                 }
                 
@@ -196,9 +197,13 @@ class ApiMadniController extends Controller
 
                     // END TNT SLAB
 
-
+                      
+                   $amount['0']->tgsc = $this->calTGSC($chargablewt);
+                   $amount['0']->esc = $this->calSEC($chargablewt);
                   
                 }
+
+               
 
                 return response()->json($amount,200);
                 
@@ -223,12 +228,9 @@ class ApiMadniController extends Controller
                 ->limit(1)
                 ->get();
                // dd($amount->count() > 0);
-                if($amount->count() > 0)
+                if($amount->count() < 1)
                 {
-                    return response()->json($amount,200);
-                }
-
-                else{    
+               
                     
                  /*
                 SELECT * FROM `tnt_prices` WHERE `is_doc` = 0 AND`is_express` = 1 AND `is_import` = 0 AND`price_categories_id` = 3
@@ -242,8 +244,17 @@ class ApiMadniController extends Controller
                     'weightval' => $chargablewt,
                     'zonevar' => $request->zone
                   ));
-                return response()->json($amount,200);
+               
                 }
+
+                $chargablewt = ceil($chargablewt);
+
+                if(isset($amount)){
+
+                }
+
+                return response()->json($amount,200);
+
 
     }
 
@@ -295,6 +306,44 @@ class ApiMadniController extends Controller
                 
    
    
+        }
+
+
+        private function calSEC($chargablewt){
+
+            if($chargablewt < 10)
+            {
+                $se_charge = 40;
+                return number_format($se_charge,2);
+            }
+            else
+            {
+                $se_charge = 4 * $chargablewt;
+                return number_format($se_charge,2);
+            }
+
+        }
+
+        private function calTGSC($chargablewt){
+
+              // Calculate CGST
+              if($chargablewt < 4)
+              {
+                  $tgs_charge = number_format(73,2);
+                  return $tgs_charge;
+              }
+              if($chargablewt > 4){
+                  
+                  $tgs_charge = 17 * $chargablewt;
+                  $tgs_charge = number_format($tgs_charge,2);
+                  return $tgs_charge;
+              }
+
+
+        }
+
+        private function calPriceSlabFedex($class_id,$is_import,$chargablewt,$price){
+
         }
 
 }

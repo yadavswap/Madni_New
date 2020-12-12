@@ -170,6 +170,8 @@
                                                         <th>Chargable Wt (In Kg) <small class="text-danger">*</small></th>
                                                         <th>Select Zone <small class="text-danger">*</small></th>
                                                         <th>Amount (INR) <small class="text-danger">*</small></th>
+                                                        <th>TGSC (INR) <small class="text-danger">*</small></th>
+                                                        <th>Enhance Security Charge (INR) <small class="text-danger">*</small></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="itembody">
@@ -351,6 +353,18 @@
 
                                                         </td>
 
+                                                        <td>
+                                                            <input id="tgsc1" class="form-control tgsc" name="product_details[tgsc][]"
+                                                                type="text" required  readonly placeholder="73">
+
+                                                        </td>
+
+                                                        <td>
+                                                            <input id="esc1" class="form-control esc" name="product_details[esc][]"
+                                                                type="text" required  readonly placeholder="40">
+
+                                                        </td>
+
 
                                                     </tr>
 
@@ -451,17 +465,17 @@
                             <label for="enhance_security_charge">Enhanced Security Charge: * <small class="text-success" id="enhancesecuritychargetext"></small></label>
 
                             <input id="enhance_security_charge" class="form-control enhance_security_charge"
-                                        name="enhance_security_charge" type="text" placeholder="" value="40">
+                                        name="enhance_security_charge" type="text" placeholder="0">
 
                         </div>
                     </div>
 
                      <div class="col-md-3">
                         <div class="form-group">
-                            <label for="tgsc">TGSC: * <small class="text-success" id="tgsc"></small></label>
+                            <label for="tgsc_total">TGSC: * <small class="text-success" id="tgsc_total"></small></label>
 
-                            <input id="tgsc" class="form-control tgsc"
-                                        name="tgsc" type="text" placeholder="ENTER tgsc" value="0" required="">
+                            <input id="tgsc_total" class="form-control tgsc_total"
+                                        name="tgsc_total" type="text" placeholder="ENTER Amount"  required="">
 
                         </div>
                     </div>
@@ -761,6 +775,8 @@ var is_import = "{{$data['type_id']}}";
     itemrow.find(".provider_id:last").attr("id","provider_id"+num);
     itemrow.find(".class_id:last").attr("id","class_id"+num);
     itemrow.find(".type_id:last").attr("id","type_id"+num);
+    itemrow.find(".tgsc:last").attr("id","tgsc"+num);
+    itemrow.find(".esc:last").attr("id","esc"+num);
     $("#itembody").append(itemrow);
     totalcount++;
       console.log(totalcount);
@@ -793,7 +809,7 @@ $(document).on("focus",".actual_weight",function(){
     var currentid = "#"+ $(this).attr('id');
     $("#mode"+suffix).val("");
     $("#zone"+suffix).val("");
-    $("#amount"+sufffix).val("0");
+    $("#amount"+suffix).val("0");
 
 });
 
@@ -920,14 +936,26 @@ $(document).on("change", ".zone", function(){
 
                         if(response[0] != null){
 
-                            console.log(Math.round(response[0].price));
-                            $("#amount"+suffix).val(response[0].price).toFixed(2);
+                            console.log(response[0].tgsc);
+                            $("#amount"+suffix).val(response[0].price);
+                            $("#tgsc"+suffix).val(response[0].tgsc);
+                            $("#esc"+suffix).val(response[0].esc);
                             // $("#amount"+suffix).prop('disabled', true);
+                            
+                            // Calculate TGCS
+                            
+
+                            
+                            // End TGSC
 
                         }
                         else{
                             $("#amount"+suffix).val("");
                              $("#amount"+suffix).attr("readonly", false);
+                             $("#tgsc"+suffix).val("");
+                             $("#tgsc"+suffix).attr("readonly", false);
+                             $("#esc"+suffix).val("");
+                             $("#esc"+suffix).attr("readonly", false);
                             alert("No Price Available! Please Enter Price Manually");
                         }
 
@@ -985,7 +1013,7 @@ $("#submit").click(function (e) {
 
     $("#calculationbody").toggle();
 
-      var enhancedcharge = parseFloat($('#enhance_security_charge').val()) * totalcount;
+      var enhancedcharge = 0;
       $('#enhance_security_charge').val(enhancedcharge);
     
 
@@ -995,6 +1023,25 @@ $("#submit").click(function (e) {
     }, 500);
 
     var gross = 0;
+
+    var totaltgsc = 0;   
+
+$(".tgsc").each( function(){
+    totaltgsc += $(this).val() * 1;
+    totaltgsc = parseFloat(totaltgsc);
+
+});
+
+console.log("TGSC "+ totaltgsc);
+
+$(".esc").each( function(){
+    enhancedcharge += $(this).val() * 1;
+    enhancedcharge = parseFloat(enhancedcharge);
+
+});
+
+console.log("ESC : "+ enhancedcharge);
+
 
 
 
@@ -1015,9 +1062,14 @@ $('.amount').each(function(index,element){
     
     console.log(gross);
     $("#gross_amount").val(gross);
-    var surcharge = (gross/100)*25;
+    var surcharge = (totaltgsc + gross)/100;
+    surcharge = surcharge * 25;
     console.log(surcharge);
     $('.fuel_surcharge').val(surcharge.toFixed(2));
+    $('.tgsc_total').val(totaltgsc.toFixed(2));
+    $('.enhance_security_charge').val(enhancedcharge.toFixed(2));
+
+
      
 
 
@@ -1034,7 +1086,11 @@ $('.amount').each(function(index,element){
 
 
 
+// $("#tgsc_total").val(totaltgsc);
+
+
 });
+
 
 
 $('#calculate').click(function(e){
@@ -1067,8 +1123,8 @@ $('#calculate').click(function(e){
         var cgst = (totalamount * 9) / 100;
     var sgst = (totalamount * 9) / 100;
     finalgst = parseFloat(cgst) + parseFloat(sgst);
-    $("#cgst").val(cgst);
-    $("#sgst").val(sgst);
+    $("#cgst").val(cgst.toFixed(2));
+    $("#sgst").val(sgst.toFixed(2));
         console.log("Import GST Calculation");
       
     }
@@ -1076,7 +1132,7 @@ $('#calculate').click(function(e){
     {
     var igst = (totalamount * 18) / 100;
     finalgst = parseFloat(igst);
-    $("#igst").val(igst);
+    $("#igst").val(igst.toFixed(2));
     console.log("Export GST Calculation");
     }
     totalamount = totalamount + finalgst;
