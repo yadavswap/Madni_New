@@ -465,7 +465,7 @@
                             <label for="enhance_security_charge">Enhanced Security Charge: * <small class="text-success" id="enhancesecuritychargetext"></small></label>
 
                             <input id="enhance_security_charge" class="form-control enhance_security_charge"
-                                        name="enhance_security_charge" type="text" placeholder="" value="40">
+                                        name="enhance_security_charge" type="text" placeholder="0">
 
                         </div>
                     </div>
@@ -1034,6 +1034,15 @@ $(".tgsc").each( function(){
 
 console.log("TGSC "+ totaltgsc);
 
+$(".esc").each( function(){
+    enhancedcharge += $(this).val() * 1;
+    enhancedcharge = parseFloat(enhancedcharge);
+
+});
+
+console.log("ESC : "+ enhancedcharge);
+
+
 
 
 $('.amount').each(function(index,element){
@@ -1058,6 +1067,7 @@ $('.amount').each(function(index,element){
     console.log(surcharge);
     $('.fuel_surcharge').val(surcharge.toFixed(2));
     $('.tgsc_total').val(totaltgsc.toFixed(2));
+    $('.enhance_security_charge').val(enhancedcharge.toFixed(2));
 
 
      
