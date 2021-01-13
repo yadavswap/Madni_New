@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
       <style type="text/css">
-         body,div,table,thead,tbody,tfoot,tr,th,td,p { font-family:"Calibri"; font-size:x-small }
+         body,div,table,thead,tbody,tfoot,tr,th,td,p { font-family:"Calibri"; font-size:14px; }
          a.comment-indicator:hover + comment { background:#ffd; position:absolute; display:block; border:1px solid black; padding:0.5em;  } 
          a.comment-indicator { background:red; display:inline-block; border:1px solid black; width:0.5em; height:0.5em;  } 
          comment { display:none;  } 
@@ -18,6 +18,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+
+
    </head>
    <div>
    
@@ -152,15 +154,19 @@
                 {{$invoice->state_code}}
             </font></td>
             <td align="left" valign=bottom><font face="Arial" size=1><br>
-            <b>Invoice Type: 
+            <b style="font-size: 11px;">Invoice Type:  </b> </font> </td>
+
+            <td align="left" valign=bottom><font face="Arial" size=1>
                @if($invoice->is_import)
-               Import
+              IMPORT
                @endif
                @if(!$invoice->is_import)
-              Export
+          EXPORT
                @endif
-            </b>
             </font></td>
+           
+           
+           
             <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
             <td align="center" valign=bottom><font face="Arial" size=1><br></font></td>
             <td align="center" valign=bottom><font face="Arial" size=1><br></font></td>
@@ -177,10 +183,10 @@
             </td>
             <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Origin</font></b></td>
             <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Destination</font></b></td>
-            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Zone</font></b></td>
-            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Product</font></b></td>
-            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Actual Weight          Kgs</font></b></td>
-            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Chargable Weight          Kgs</font></b></td>
+            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Zone (s)</font></b></td>
+            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Product (s)</font></b></td>
+            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Actual Weight </br>Kg(s)</font></b></td>
+            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Chargable Weight </br>Kg(s)</font></b></td>
             <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Amount                      Rs.</font></b></td>
          </tr>
          <!-- HEre is product -->
@@ -205,29 +211,29 @@
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="1" sdnum="1033;"><font face="Tahoma" size=1>
                  {{$product->zone}} 
                  @if($product->provider_id == 1)
-                 {
-                    {{'TNT'}}
-                 }
+                 
+                    <b> -TNT</b>
+                 
                  @endif
                  @if($product->provider_id == 2)
-                 {
-                    {{'FEDEX'}}
-                 }
+                 
+                   <b> -FEDEX</b>
+                 
 
                  @endif
             </font></td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom><font face="Tahoma" size=1>
                @if($product->product_type)
-               DOC  <?= ($product->class_id != NULL && $product->class_id == 1) ? "- Express" : "- Economy"; ?>
+               DOC  <b><?= ($product->class_id != NULL && $product->class_id == 1) ? "- Express" : "- Economy"; ?> </b>
                @else
-               NON-DOX <?= ($product->class_id != NULL && $product->class_id == 1) ? "- Express" : "- Economy"; ?>
+               NON-DOX <b><?= ($product->class_id != NULL && $product->class_id == 1) ? "- Express" : "- Economy"; ?> </b>
                @endif
             </font></td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="5.5" sdnum="1033;0;0.000"><font face="Tahoma" size=1 color="#000000">
                  {{$product->actual_weight}} KG
             </font></td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="6" sdnum="1033;0;0.000"><font face="Tahoma" size=1>
-                {{round($product->chargable_weight)}} KG -  [<b>{{$product->l}} L</b> X <b>{{$product->w}} W</b> X <b>{{$product->h}} H</b>]
+                {{roundwt($product->chargable_weight)}} KG -  [<b>{{$product->l}} L</b> X <b>{{$product->w}} W</b> X <b>{{$product->h}} H</b>]
             </font></td>
             <center><td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="4488" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
                Rs. {{$product->amount}}
@@ -409,8 +415,8 @@
          </tr>
          <tr>
             <td style="border-bottom: 2px solid #000000; border-left: 2px solid #000000" height="21" align="left" valign=bottom><b><font face="Tahoma" size=1>In Words:</font></b></td>
-            <td style="border-bottom: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font>
-                   {{ucfirst($amountinword)}}
+            <td style="border-bottom: 2px solid #000000; width:210px;" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font>
+                   {{ucwords($amountinword)}}
             </b></td>
             <td></td>
             <td style="border-bottom: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
@@ -488,12 +494,54 @@
    </body>
 </div>
 
+@php
+
+function roundwt($price){
+    /*
+
+            This COnver Values according to sheet values
+            Example If Value is 1 it return 1
+            If value is 1.2 it return 1.5
+            If value is 1.5 it return 1.5
+            If Value is 1.51 it return 2.0
+
+            */
+            $intVal = intval($price);
+            $difference = $price-$intVal;
+           // dd($difference);
+
+   
+                if($difference < 0.50 && $difference != 0){
+                
+                    $requiredval = 0.50 - $difference;
+                    $price = $price + $requiredval;
+                   $finalvalue = number_format($price,2);
+                    // dd($finalvalue);
+                    return $finalvalue;
+                    
+                }
+
+                if($difference >= 0.51  && $difference != 0)
+                {
+                    $finalvalue = ceil($price);
+                   return $finalvalue;
+                }
+                if($difference == 0 || $difference = 0.00)
+                {
+                    $finalvalue = $price;
+                   return $finalvalue;
+                }
+   
+}
+
+@endphp
+
    <script type="text/javascript">
 
       let savedoc = new jsPDF('#pdf','pt','a4');
 
 savedoc.addHTML(document.body,function() {
-    savedoc.save('madniinvoice.pdf');
+   // savedoc.save('madniinvoice.pdf');
 });
 
       var doc = new jsPDF();
