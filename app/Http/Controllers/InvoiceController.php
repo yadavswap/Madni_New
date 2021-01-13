@@ -322,6 +322,7 @@ class InvoiceController extends Controller
             'is_import' => $request->type_id,
             'provider' => $request->provider_id,
             'net_amount' => round((float)$request->net_amount,2),
+            'tgsc' => $request->tgsc_total,
 
         ]);
 
@@ -476,6 +477,8 @@ class InvoiceController extends Controller
              'is_import' => $request->type_id,
              'provider' => "3", // For ALL
              'net_amount' => round((float)$request->net_amount,2),
+             'tgsc' => $request->tgsc_total,
+
  
          ]);
  
