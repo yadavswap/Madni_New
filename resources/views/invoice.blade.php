@@ -266,8 +266,8 @@
             <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
             <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
             <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>Temp Global Surcharge:</font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="0" sdnum="1033;0;0.00"><font face="Tahoma" size=1>0.00</font></td>
+            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>Temp Global Surcharge: </font></td>
+            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="0" sdnum="1033;0;0.00"><font face="Tahoma" size=1>Rs.{{$invoice->tgsc}}</font></td>
          </tr>
          <tr>
             <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
@@ -292,7 +292,7 @@
             <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
             <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
             <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>*Custom Clearance:</font></td>
+            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>Custom Clearance:</font></td>
             <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="2000" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
                  Rs. {{$invoice->custom_clearance}}
             </font></td>
@@ -306,7 +306,7 @@
             <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
             <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
             <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>**ODA Charges:</font></td>
+            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>ODA Charges:</font></td>
             <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="0" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
                 Rs. {{$invoice->oda_charge}}
             </font></td>
@@ -408,11 +408,11 @@
             </font></td>
          </tr>
          <tr>
-            <td style="border-bottom: 2px solid #000000; border-left: 2px solid #000000" height="21" align="left" valign=bottom><b><font face="Tahoma" size=1>Rupees In Words:- </font></b></td>
+            <td style="border-bottom: 2px solid #000000; border-left: 2px solid #000000" height="21" align="left" valign=bottom><b><font face="Tahoma" size=1>In Words:</font></b></td>
             <td style="border-bottom: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font>
-                   {{$amountinword}}
+                   {{ucfirst($amountinword)}}
             </b></td>
-            <td style="border-bottom: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
+            <td></td>
             <td style="border-bottom: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
             <td style="border-bottom: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
             <td style="border-bottom: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
