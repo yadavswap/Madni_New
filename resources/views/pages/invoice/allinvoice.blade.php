@@ -17,6 +17,18 @@
 @endpush
 
 @section('content')
+<div class="row">
+    <div class="col-md-12">
+        @if(session()->has('success'))
+    <div class="alert alert-warning"> 
+        @php
+            $Rinvoice = App\CustomerInvoice::orderBy('id','DESC')->limit(1)->get();
+        @endphp
+      <a href="{{route('invoice.view',$Rinvoice['0']->id)}}" target="_blank"> Click Here To RECENT View Invoice </a>
+    </div>
+@endif
+    </div>
+</div>
 <nav class="page-breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('pricecategory.index')}}">Invoice</a></li>
