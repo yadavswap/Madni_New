@@ -323,7 +323,7 @@
                                                         <td>
                                                             <input id="chargable_weight1" class="form-control chargable_weight"
                                                                 name="product_details[chargable_weight][]" type="text"
-                                                                placeholder="Chargable Wt" readonly />
+                                                                placeholder="Chargable Wt" required />
                                                         </td>
 
                                                        <td>
@@ -349,19 +349,19 @@
 
                                                         <td>
                                                             <input id="amount1" class="form-control amount" name="product_details[amount][]"
-                                                                type="text" placeholder="0" required  readonly>
+                                                                type="text" placeholder="0" required  >
 
                                                         </td>
 
                                                         <td>
                                                             <input id="tgsc1" class="form-control tgsc" name="product_details[tgsc][]"
-                                                                type="text" required  readonly placeholder="73">
+                                                                type="text" required   placeholder="73">
 
                                                         </td>
 
                                                         <td>
                                                             <input id="esc1" class="form-control esc" name="product_details[esc][]"
-                                                                type="text" required  readonly placeholder="40">
+                                                                type="text" required   placeholder="40">
 
                                                         </td>
 
@@ -405,7 +405,7 @@
                             <label for="cgst">CGST Amount: * <small class="text-success" id="cgsttext"></small></label>
 
                             <input id="cgst" class="form-control cgst"
-                                                                name="cgst" type="text" placeholder="" readonly>
+                                                                name="cgst" type="text" placeholder="" >
 
                         </div>
 
@@ -416,7 +416,7 @@
                             <label for="sgst">SGST Amount: * <small class="text-success" id="sgsttext"></small></label>
 
                             <input id="sgst" class="form-control sgst"
-                                                                name="sgst" type="text" placeholder="" readonly>
+                                                                name="sgst" type="text" placeholder="" >
 
                         </div>
 
@@ -427,7 +427,7 @@
                             <label for="igst">IGST Amount: * <small class="text-success" id="igsttext"></small></label>
 
                             <input id="igst" class="form-control igst"
-                                                                name="igst" type="text" placeholder="" readonly>
+                                                                name="igst" type="text" placeholder="" >
 
                         </div>
 
@@ -445,7 +445,7 @@
                             <label for="gross_amount">Gross Amount: * <small class="text-success" id="grossamounttext"></small></label>
 
                             <input id="gross_amount" class="form-control grossamount"
-                                        name="gross_amount" type="text" placeholder="" readonly>
+                                        name="gross_amount" type="text" placeholder="" >
 
                         </div>
                     </div>
@@ -455,7 +455,7 @@
                             <label for="fuel_surcharge">Total Fuel Charge: * <small class="text-success" id="fuelsurchargetext">25%</small></label>
 
                             <input id="fuel_surcharge " class="form-control fuel_surcharge"
-                                        name="fuel_surcharge" type="text" placeholder="" required value="0" readonly>
+                                        name="fuel_surcharge" type="text" placeholder="" required value="0" >
 
                         </div>
                     </div>
@@ -591,7 +591,7 @@
                             <label for="net_amount">Final Amount: *
 
                             <input id="net_amount" class="form-control net_amount"
-                                        name="net_amount" type="text" placeholder="" readonly>
+                                        name="net_amount" type="text" placeholder="" >
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <small class="text-primary"><a href="javascript:void(0)" id="manually">Enter Manually?</a></small>
