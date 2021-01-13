@@ -1042,6 +1042,8 @@ $(".esc").each( function(){
 
 console.log("ESC : "+ enhancedcharge);
 
+var ecsandtgsc = parseFloat(enhancedcharge) + parseFloat(totaltgsc);
+console.log("total of esc and tgsc"+ecsandtgsc);
 
 
 
@@ -1061,7 +1063,9 @@ $('.amount').each(function(index,element){
     }
     
     console.log(gross);
-    $("#gross_amount").val(gross);
+    var finalgrossamt =  parseFloat(enhancedcharge) + parseFloat(totaltgsc) + parseFloat(gross);
+    console.log("finalgrossamt :"+finalgrossamt);
+    $("#gross_amount").val(gross.toFixed(2));
     var surcharge = (totaltgsc + gross)/100;
     surcharge = surcharge * 25;
     console.log(surcharge);
@@ -1111,12 +1115,10 @@ $('#calculate').click(function(e){
     var warehousing_charge = parseFloat($('.warehousing_charge').val());
     var ad_code_registration_charge = parseFloat($('.ad_code_registration_charge').val());
     var air_cargo_registration_charge = parseFloat($('.air_cargo_registration_charge').val());
-    
+    var tgscamt =  parseFloat($('.tgsc_total').val());
 
-    var totalamount = gross_amount + fuel_surcharge + enhance_security_charge + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge;
+    var totalamount = gross_amount + fuel_surcharge + enhance_security_charge + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge + tgscamt;
    
-
-  
 
     if(is_import == "1")
     {
