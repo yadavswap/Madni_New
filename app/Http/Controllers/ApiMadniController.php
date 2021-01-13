@@ -82,7 +82,7 @@ class ApiMadniController extends Controller
 
                 }
 
-                if(isset($amount)){
+                if(count($amount) > 0){
                     $chargablewt = ceil($chargablewt);
 
                     /*
@@ -249,7 +249,7 @@ class ApiMadniController extends Controller
 
                 $chargablewt = ceil($chargablewt);
 
-                if(isset($amount)){
+                if(count($amount) > 0){
                     $amount['0']->tgsc = $this->calTGSC($chargablewt);
                    $amount['0']->esc = $this->calSEC($chargablewt);
                 }
