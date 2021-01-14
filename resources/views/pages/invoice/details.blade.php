@@ -55,8 +55,8 @@
                         <select class="js-example-basic-single w-100" name="provider" required="" id="provider">
                           <option value="">--Select Provider --</option>
                             <option value="0" selected="">All</option>
-                          <option value="1">TNT</option>
-                          <option value="2">Fedex</option>
+                          <option value="1" disabled>TNT - Depreciate </option>
+                          <option value="2" disabled>Fedex -  Depreciate</option>
                         </select>
                       
                       </div>
@@ -81,7 +81,9 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="class">Select Class</label>
+                        <label for="class">Select Class
+                          <small class="text-danger">Not Required For All Type Of Invoice</small>
+                        </label>
           
                         <select class="js-example-basic-single w-100" name="class" id="selectclass">
                           <option value="">--Select Class --</option>
