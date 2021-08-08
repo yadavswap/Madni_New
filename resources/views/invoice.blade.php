@@ -37,7 +37,9 @@
          <colgroup width="80"></colgroup>
          <colgroup width="104"></colgroup>
          <tr>
-            <td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" colspan=10 rowspan=5 height="110" align="center" valign=bottom><font face="Arial Black" size=4><br><img src="{{url('result_htm_8bf8c0bc2d3a7f46.png')}}" width=715 height=88 hspace=12 vspace=13>
+            <td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" colspan=10 rowspan=5 height="110" align="center" valign=bottom><font face="Arial Black" size=4><br><img src="http://127.0.0.1:8000/result_htm_8bf8c0bc2d3a7f46.png" width="850px" height="88" hspace="12" vspace="13" style="
+    height: 150px;
+">
                </font>
             </td>
          </tr>
@@ -77,7 +79,7 @@
             <td align="center" valign=bottom><font face="Arial" size=1><br></font></td>
             <td align="center" valign=bottom><font face="Arial" size=1><br></font></td>
             <td style="border-right: 2px solid #000000" colspan=4 align="left" valign=bottom><b><font face="Tahoma" size=1>                     Invoice No. : 
-               MDN - {{$invoice->id}}
+               MI786922122 - {{$invoice->id}}
             </font></b></td>
          </tr>
          <tr>
@@ -479,7 +481,7 @@
          </tr>
         
          <tr>
-            <td colspan=10 rowspan=3 height="60" align="left" valign=bottom><font face="Tahoma" size=1><br><img src="{{url('result_htm_1235191968a09bb9.png')}}" width=718 height=56 hspace=11 vspace=3>
+            <td colspan=10 rowspan=3 height="60" align="left" valign=bottom><font face="Tahoma" size=1><br><img src="{{url('result_htm_1235191968a09bb9.png')}}"  width="850PX" height="56" hspace=11 vspace=3>
                </font>
             </td>
          </tr>

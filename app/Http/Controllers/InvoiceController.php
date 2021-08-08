@@ -59,7 +59,6 @@ class InvoiceController extends Controller
 
     public function newInvoice(Request $request){
 
-
         if($request->provider == 0)
         {
             $data = [
@@ -356,6 +355,7 @@ class InvoiceController extends Controller
             $productlists->product_type = $request->product_details["product_type"][$i];
             $productlists->zone = $request->product_details["zone"][$i];
             $productlists->amount = $request->product_details["amount"][$i];
+            $productlists->star = $request->product_details["star"][$i];
             $saved = $productlists->save();
            }
             
@@ -517,6 +517,7 @@ class InvoiceController extends Controller
              $productlists->zone = $request->product_details["zone"][$i];
              $productlists->amount = $request->product_details["amount"][$i];
            //  dd($request->product_details["class_id"][$i]);
+              $productlists->star = $request->product_details["star"][$i];
              
              $saved = $productlists->save();
             }
