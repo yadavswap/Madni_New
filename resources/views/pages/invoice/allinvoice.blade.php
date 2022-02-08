@@ -135,18 +135,7 @@
                                                           
                                                         </th>
 
-                                                        <th>
-                                                            <button class="btn btn-md btn-success" type="button"
-                                                                id="addrow"> Add New <i class="fa fa-plus"></i></button>
 
-                                                        </th>
-                                                        <th>
-                                                            <button class="btn btn-md btn-danger" type="button"
-                                                                id="deleterow">
-                                                                Delete <i class="fa fa-trash-o"></i></button>
-                                                        </th>
-
-                                                       
                                                         <th>
                                                            
                                                                 <button class="btn btn-md btn-info" type="button"
@@ -162,6 +151,24 @@
                                                         </th>
                                                         <th></th>
                                                         <th></th>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <th>
+                                                            <button class="btn btn-md btn-success" type="button"
+                                                                id="addrow"> Add New <i class="fa fa-plus"></i></button>
+                                                                <button class="btn btn-md btn-danger" type="button"
+                                                                id="deleterow">
+                                                                Delete <i class="fa fa-trash-o"></i></button>
+
+                                                        </th>
+                                                       
                                                     </tr>
 
                                                     <tr>
@@ -184,6 +191,7 @@
                                                         <th>Amount (INR) <small class="text-danger">*</small></th>
                                                         <th>TGSC (INR) <small class="text-danger">*</small></th>
                                                         <th>Enhance Security Charge (INR) <small class="text-danger">*</small></th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="itembody">
@@ -376,7 +384,7 @@
                                                                 type="text" required   placeholder="40">
 
                                                         </td>
-
+                                                      
 
                                                     </tr>
 
@@ -789,6 +797,8 @@ var is_import = "{{$data['type_id']}}";
     itemrow.find(".type_id:last").attr("id","type_id"+num);
     itemrow.find(".tgsc:last").attr("id","tgsc"+num);
     itemrow.find(".esc:last").attr("id","esc"+num);
+    itemrow.find(".deleterow:last").attr("id","deleterow"+num);
+    itemrow.find(".addrow:last").attr("id","addrow"+num);
     $("#itembody").append(itemrow);
     totalcount++;
       console.log(totalcount);

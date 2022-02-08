@@ -35,7 +35,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Create New Invoice</h4>
+                <h4 class="card-title">Create New Invoice {{"HIii"}}</h4>
 
                 <form class="cmxform" id="invoiceform" method="post" action="{{route('invoice.store')}}"
                     enctype="multipart/form-data">
@@ -159,6 +159,7 @@
                                                         <th>Chargable Wt (In Kg) <small class="text-danger">*</small></th>
                                                         <th>Select Zone <small class="text-danger">*</small></th>
                                                         <th>Amount (INR) <small class="text-danger">*</small></th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="itembody">
@@ -305,6 +306,18 @@
                                                             <input id="amount1" class="form-control amount" name="product_details[amount][]"
                                                                 type="text" placeholder="0" required  readonly>
 
+                                                        </td>
+                                                        
+                                                        <td>
+                                                       <div class="form-group">
+                                                            <button class="btn btn-md btn-success" type="button"
+                                                                id="addrow"> Add New <i class="fa fa-plus"></i></button>
+
+                                                      
+                                                            <button class="btn btn-md btn-danger" type="button"
+                                                                id="deleterow">
+                                                                Delete <i class="fa fa-trash-o"></i></button>
+                                                       </div>
                                                         </td>
 
 
