@@ -5,17 +5,122 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
       <style type="text/css">
-         body,div,table,thead,tbody,tfoot,tr,th,td,p { font-family:"Calibri"; font-size:14px; }
-         a.comment-indicator:hover + comment { background:#ffd; position:absolute; display:block; border:1px solid black; padding:0.5em;  } 
-         a.comment-indicator { background:red; display:inline-block; border:1px solid black; width:0.5em; height:0.5em;  } 
-         comment { display:none;  } 
-         .page-break {
-    page-break-after: always;
+       body{
+  font-family: 'Open Sans', sans-serif;
+}
+table.GeneratedTable {
+  width: 820px;
+  background-color: #ffffff;
+  border-collapse: collapse;
+  border-width: 1px;
+  border-color: #000000;
+  border-style: solid;
+  color: #000000;
+}
+
+table.GeneratedTable td, table.GeneratedTable th {
+  border-width: 1px;
+  border-color: #000000;
+  border-style: solid;
+  padding: 3px;
+}
+
+table.GeneratedTable thead {
+  background-color: #ffffff;
+}
+.right-div{
+  text-align: right;
+   float: right;
+}
+.left-div{
+  text-align: left;
+    margin-left: -20px;
+    float: left;
+    max-width: 295px;
+
+}
+.fake-table{
+  width: 819px;
+  border: 1px solid black;
+  height: 475px;
+}
+li{
+  font-size: 13px;
+  font-weight: 600;
+}
+ul{
+    list-style-type: none;
+}
+.right-ul > li{
+  letter-spacing: 0.8px;
+ margin: 2px 3px 3px 0px;
+}
+.tax-title{
+  font-weight: bold;
+  margin: 3px;
+  text-align:center;
+}
+.amount-div{
+  float: left;
+  border: 1px solid black;
+  height: 25px;
+  width: 819px;
+  font-size: 13px;
+  margin-top: -8px;
+  padding: 2px;
+}
+.signature-div{
+  float: left;
+  border: 1px solid black;
+  height: 55px;
+  width: 819px;
+  font-size: 13px;
+}
+.amount-div > b {
+  margin-left: 10px;
+   margin-top: 5px;
+}
+.signature{
+  text-align: right;
+  width: 819px;
+   border: 1px solid black;
+   height: 40px;
+}
+.tnc{
+  width: 819px;
+  border-bottom: 1px solid black;
+}
+.tnc > ul{
+  margin-top: 5px;
+}
+.todiv{
+  width:819px;
+  border: 1px solid black; 
+  height: 115px;
+  font-size: 10px;
+}
+.toleft{
+    text-align: left;
+    float: left;
+    max-width: 295px;
+    margin: 5px 0px 0px 20px;
+}
+.toaddress{
+  max-width: 450px;
+    overflow-wrap: break-word;
+    max-height: 65px;
+    font-size: 15px;
+}
+.invoice-section{
+  font-size: 14px;
+  font-weight: bold;
+  margin: 15px;
 }
       </style>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
 
@@ -25,193 +130,72 @@
    
    <body>
       <div id="pdf">
-      <table align="left" cellspacing="0" border="0">
-         <colgroup width="34"></colgroup>
-         <colgroup width="106"></colgroup>
-         <colgroup width="74"></colgroup>
-         <colgroup width="62"></colgroup>
-         <colgroup width="70"></colgroup>
-         <colgroup width="47"></colgroup>
-         <colgroup width="89"></colgroup>
-         <colgroup width="66"></colgroup>
-         <colgroup width="80"></colgroup>
-         <colgroup width="104"></colgroup>
-         <tr>
-            <td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" colspan=10 rowspan=5 height="110" align="center" valign=bottom><font face="Arial Black" size=4><br><img src="http://127.0.0.1:8000/result_htm_8bf8c0bc2d3a7f46.png" width="850px" height="88" hspace="12" vspace="13" style="
-    height: 150px;
-">
-               </font>
-            </td>
-         </tr>
-         <tr>
-         </tr>
-         <tr>
-         </tr>
-         <tr>
-         </tr>
-         <tr>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000; border-right: 2px solid #000000" colspan=10 height="20" align="right" valign=bottom><font face="Arial" size=1><br></font></td>
-         </tr>
-         <tr>
-            <td style="border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" colspan=10 height="31" align="center" valign=bottom><b><font face="Tahoma" size=5>TAX INVOICE</font></b></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="left" valign=bottom><b><font face="Tahoma" size=1>TO,</font></b></td>
-            <td align="center" valign=bottom><b><font face="Arial" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Arial" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Arial" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Arial" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Arial" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Arial" size=1><br></font></b></td>
-            <td align="right" valign=bottom><b><font face="Arial" size=1><br></font></b></td>
-            <td style="border-right: 2px solid #000000" align="center" valign=bottom><b><font face="Arial" size=1><br></font></b></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="left" valign=bottom><b><font face="Tahoma" size=1>
-               {{$customer->fullname}},
-            </font></b></td>
-            <td align="left" valign=bottom><b><font face="Arial" size=1><br></font></b></td>
-            <td align="left" valign=bottom><b><font face="Arial" size=1><br></font></b></td>
-            <td align="center" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="center" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td style="border-right: 2px solid #000000" colspan=4 align="left" valign=bottom><b><font face="Tahoma" size=1>                     Invoice No. : 
-               MI786922122 - {{$invoice->id}}
-            </font></b></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1>
-               <b>Address : </b> {{$customer->address}}
-            </font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="center" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td style="border-right: 2px solid #000000" colspan=4 align="left" valign=bottom><b><font face="Tahoma" size=1>                     Invoice Date : 
-               {{$invoice->invoice_date}}
-            </font></b></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1>{{$customer->state}}, {{$customer->pincode}}</font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="center" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="center" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td style="border-right: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-         </tr>
-     
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><b>Phone : </b>{{$customer->mobile}}</font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Arial"><br></font></td>
-            <td align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td style="border-right: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><b>Kind Attn- </b>
-               {{$customer->kind_attn}}
-            </font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><u><font color="#0563C1"><br></font></u></td>
-            <td align="center" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td style="border-right: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="left" valign=bottom><font face="Arial" size=1>
-               <b>GST NO- </b>
-             {{$customer->gstin}}
-            </font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><font size=1 color="#000000"><br></font></td>
-            <td align="center" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td style="border-right: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="21" align="left" valign=bottom><b><font face="Arial" size=1><br></font></b></td>
-            <td align="left" valign=bottom><font face="Arial" size=1>
-               <b>STATE CODE :</b>
-                {{$invoice->state_code}}
-            </font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br>
-            <b style="font-size: 11px;">Invoice Type:  </b> </font> </td>
+     <!-- invoice body start -->
+     <table class="GeneratedTable">
+  <thead>
+    <div style="width:819px; border: 1px solid black; height: 140px;">
+      <center><img src="http://127.0.0.1:8000/result_htm_8bf8c0bc2d3a7f46.png" style="width:819px;"></center>
+      <h2 class="tax-title">TAX INVOICE</h2>
+    </div>
+    <div class="todiv">
+      <div class="toleft">
+        <b style="font-size: 16px;">To</b><br/>
+        <div class="toaddress">
+          {{$customer->fullname}},<br/>
+          {{$customer->address}},{{$customer->state}}, {{$customer->pincode}}
 
-            <td align="left" valign=bottom><font face="Arial" size=1>
-               @if($invoice->is_import)
-              IMPORT
-               @endif
-               @if(!$invoice->is_import)
-          EXPORT
-               @endif
-            </font></td>
-           
-           
-           
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="center" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="center" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td align="right" valign=bottom><font face="Arial" size=1><br></font></td>
-            <td style="border-right: 2px solid #000000" align="left" valign=bottom><font face="Arial" size=1><br></font></td>
-         </tr>
-         <tr>
-            <td style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" height="42" align="center" valign=middle><b><font face="Tahoma" size=1>Sr. No.</font></b></td>
-            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Consignment  No</font></b></td>
-            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Booking Dt.<img src="" width=8 height=23 hspace=33 vspace=9>
-               </font></b>
-            </td>
-            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Origin</font></b></td>
-            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Destination</font></b></td>
-            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Zone (s)</font></b></td>
-            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Product (s)</font></b></td>
-            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Actual Weight </br>Kg(s)</font></b></td>
-            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Chargable Weight </br>Kg(s)</font></b></td>
-            <td style="border-top: 2px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" align="center" valign=middle><b><font face="Tahoma" size=1>Amount                      Rs.</font></b></td>
-         </tr>
-         <!-- HEre is product -->
-         @php
+        </div>
+        <b style="margin-top:2px; font-size: 16px;">GST :              {{$customer->gstin}}</b> <br/>
+      </div>
+      <div class="right-div">
+        <ul class="invoice-section">
+          <li>Invoice Number : MI786922122- {{$invoice->id}}</li>
+          <li>Invoice Date :   {{$invoice->invoice_date}}</li>
+        </ul>
+      </div>
+    </div>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Sr no</th>
+      <th>Consignment  No</th>
+      <th>Booking Dt.</th>
+      <th>Origin</th>
+      <th>Destination</th>
+      <th>Zone</th>
+      <th>Product</th>
+      <th>Actual <br/>Wt.Kgs</th>
+      <th>Chargable <br/>Wt.Kgs</th>
+      <th>Amount <br/>
+        (INR)
+      </th>
+    </tr>
+    <!-- Blank rows start -->
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <!-- blank rows end -->
+    <!-- Start loop from here -->
+      @php
          $i= 1;
          @endphp
          @foreach($products as $product)
-           <tr>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" height="20" align="center" valign=middle sdval="1" sdnum="1033;"><font face="Tahoma" size=1>{{$i}}</font></td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom bgcolor="#FFFFFF" sdval="650902211" sdnum="1033;0;0"><font face="Tahoma" size=1>
-               {{$product->consignment_no}}
-               <img src="result_htm_f6dcee4dfa07852d.png" width=8 height=1 hspace=49 vspace=9>
-               </font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="44117" sdnum="1033;1033;M/D/YYYY"><font face="Tahoma" size=1 color="#000000">
-                 {{$product->booking_date}}
-            </font></td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom><font face="Tahoma" size=1 color="#000000">{{$product->origin}}*</font></td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom><font face="Tahoma" size=1>
-               {{$product->destination}}
-            </font></td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="1" sdnum="1033;"><font face="Tahoma" size=1>
-                 {{$product->zone}} 
+         <tr>
+      <td>{{$i}}</td>
+      <td>{{$product->consignment_no}}</td>
+      <td>{{$product->booking_date}}</td>
+      <td>{{$product->origin}}</td>
+      <td>{{$product->destination}}</td>
+      <td> {{$product->zone}} 
                  @if($product->provider_id == 1)
                  
                     <b> -TNT</b>
@@ -222,278 +206,160 @@
                    <b> -FEDEX</b>
                  
 
-                 @endif
-            </font></td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom><font face="Tahoma" size=1>
-               @if($product->product_type)
+                 @endif</td>
+      <td>@if($product->product_type)
                DOC  <b><?= ($product->class_id != NULL && $product->class_id == 1) ? "- Express" : "- Economy"; ?> </b>
                @else
                NON-DOX <b><?= ($product->class_id != NULL && $product->class_id == 1) ? "- Express" : "- Economy"; ?> </b>
-               @endif
-            </font></td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="5.5" sdnum="1033;0;0.000"><font face="Tahoma" size=1 color="#000000">
-                 {{$product->actual_weight}} KG
-            </font></td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="6" sdnum="1033;0;0.000"><font face="Tahoma" size=1>
-                {{roundwt($product->chargable_weight)}} KG -  [<b>{{$product->l}} L</b> X <b>{{$product->w}} W</b> X <b>{{$product->h}} H</b>]
-            </font></td>
-            <center><td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=bottom sdval="4488" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
-               Rs. {{$product->amount}}
-            </font></td>
-         </center>
-         </tr>
-         @php
-         $i++;
-         @endphp
+               @endif</td>
+      <td>{{$product->actual_weight}} KG</td>
+      <td>{{roundwt($product->chargable_weight)}} KG -  [<b>{{$product->l}} L</b> X <b>{{$product->w}} W</b> X <b>{{$product->h}} H</b>]</td>
+      <td>     &#8377;. {{$product->amount}}</td>
+    </tr>
+    @php
+    $i++;
+    @endphp
          @endforeach
-       
-             <!-- HEre is product -->
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" size=1 color="#000000"><br><img src="result_htm_f6dcee4dfa07852d.png" width=8 height=14 hspace=49 vspace=3>
-               </font>
-            </td>
-            <td rowspan=2 align="left" valign=bottom><font face="Tahoma" size=1><br><img src="result_htm_f6dcee4dfa07852d.png" width=8 height=23 hspace=33 vspace=9>
-               </font>
-            </td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>Gross Amount:</font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="4488" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
-               Rs. {{$invoice->gross_amount}}
-            </font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom bgcolor="#FFFFFF"><font face="Tahoma" size=1 color="#000000"><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>Temp Global Surcharge: </font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="0" sdnum="1033;0;0.00"><font face="Tahoma" size=1>Rs.{{$invoice->tgsc}}</font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>Fuel Surcharge Index:</font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="0" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
-               Rs. {{$invoice->fuel_surcharge}}
-            </font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>Custom Clearance:</font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="2000" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
-                 Rs. {{$invoice->custom_clearance}}
-            </font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>ODA Charges:</font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="0" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
-                Rs. {{$invoice->oda_charge}}
-            </font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>AD Code Registration:</font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="2250" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
-               {{$invoice->ad_code_registration_charge}}
-            </font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>DBK/ IFSC Charges:</font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="1250" sdnum="1033;0;0.00"><font face="Tahoma" size=1>0</font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="right" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>C GST (9%):</font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="0" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
-               Rs. {{$invoice->cgst_amount}}
-            </font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="right" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>S GST (9%):</font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="0" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
-                  Rs. {{$invoice->sgst_amount}}
-            </font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="right" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>I GST (18%):</font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="1797.84" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
-                  Rs. {{$invoice->igst_amount}}
-            </font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="right" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>FREIGHT AMOUNT:</font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="11785.84" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
-                Rs. {{$invoice->freight_amount}}
-            </font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="right" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1>Security Enhance Charge:</font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="11785.84" sdnum="1033;0;0.00"><font face="Tahoma" size=1>
-                Rs. {{$invoice->enhance_security_charge}}
-            </font></td>
-         </tr>
-         <tr>
-            <td style="border-bottom: 2px solid #000000; border-left: 2px solid #000000" height="21" align="left" valign=bottom><b><font face="Tahoma" size=1>In Words:</font></b></td>
-            <td style="border-bottom: 2px solid #000000; width:210px;" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font>
-                   {{ucwords($amountinword)}}
-            </b></td>
-            <td></td>
-            <td style="border-bottom: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td style="border-bottom: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td style="border-bottom: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td style="border-bottom: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="center" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><b><font face="Tahoma" size=1>NET AMOUNT:</font></b></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdval="11785.84" sdnum="1033;0;0.00"><b><font face="Tahoma" size=1>
-               Rs. {{$invoice->net_amount}}
-            </font></b></td>
-         </tr>
-         <tr>
-            <td style="border-top: 2px solid #000000; border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td style="border-top: 2px solid #000000" align="right" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td style="border-top: 2px solid #000000" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td style="border-top: 2px solid #000000" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td style="border-top: 2px solid #000000" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td style="border-top: 2px solid #000000" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td style="border-top: 2px solid #000000" align="center" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td style="border-top: 2px solid #000000" align="center" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td style="border-top: 2px solid #000000" align="left" valign=bottom><b><font face="Tahoma" size=1>For Madni International</font></b></td>
-            <td style="border-top: 2px solid #000000; border-right: 2px solid #000000" align="right" valign=bottom sdnum="1033;0;0.00"><font face="Tahoma" size=1><br></font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="right" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1><br></font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdnum="1033;0;0.00"><font face="Tahoma" size=1><br></font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><b><font face="Tahoma" size=1><br></font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom sdnum="1033;0;0.000"><b><font face="Tahoma" size=1>   Authorized Signatory</font></b></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdnum="1033;0;0.00"><font face="Tahoma" size=1><br></font></td>
-         </tr>
-         <tr>
-            <td style="border-left: 2px solid #000000" height="20" align="left" valign=bottom><b><font face="Tahoma" size=1>Terms &amp; Conditions :</font></b></td>
-            <td align="right" valign=bottom sdnum="1033;0;MM/DD/YYYY"><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="left" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="center" valign=bottom><font face="Tahoma" size=1><br></font></td>
-            <td align="right" valign=bottom sdnum="1033;0;0.000"><font face="Tahoma" size=1><br></font></td>
-            <td style="border-right: 2px solid #000000" align="right" valign=bottom sdnum="1033;0;0.00"><font face="Tahoma" size=1><br></font></td>
-         </tr>
-        
-         <tr>
-            <td colspan=10 rowspan=3 height="60" align="left" valign=bottom><font face="Tahoma" size=1><br><img src="{{url('result_htm_1235191968a09bb9.png')}}"  width="850PX" height="56" hspace=11 vspace=3>
-               </font>
-            </td>
-         </tr>
-         <tr>
-         </tr>
-         <tr>
-         </tr>
-      </table>
     
-      <br clear=left>
-      <!-- ************************************************************************** -->
+    <!-- end loop here -->
+    <!-- Blank rows start -->
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <!-- blank rows end -->
+  </tbody>
+  <!-- table footer starts -->
+  <!-- table footer ends -->
+</table>
+<!-- fake table starts -->
+<div class="fake-table">
+  <!-- left table starts -->
+  <div class="left-div">
+    <ul>
+      <li>
+        Temp Global  Surcharge- Minimum Rs. 73/- ++ upto 4 Kgs Then 17/- ++per kgs onwards <br/>
+        <small>(for courier mode)</small>
+      </li>
+      <li>
+        Temp Global  Surcharge- Minimum Rs. 73/- ++ upto 4 Kgs Then 58/- ++per kgs onwards 
+        <br/>
+        <small>(for Canada/Maxico/USA)</small>     
+      </li>
+      <li>
+        Temp Global  Surcharge- Minimum Rs. 75/- ++ upto 4 Kgs Then 150/- ++per kgs onwards.
+        <br/>
+        <small>(for Australia & New Zealand )</small>      
+      </li>
+    </ul>
+  </div>
+  <!-- left table ends -->
+  <!-- right table starts -->
+  <div class="right-div">
+    <ul class="right-ul">
+      <li>Gross Amount:  &#x20b9; {{$invoice->gross_amount}}</li>
+      <li>Temp Global Surcharge: &#x20b9; {{$invoice->tgsc}}</li>
+      <li>Fuel Surcharge Index: &#x20b9; {{$invoice->fuel_surcharge}}</li>
+      @if($invoice->custom_clearance != 0)
+         <li style="">Custom Clearance: &#x20b9; {{$invoice->custom_clearance}}</li>
+      @endif
+      @if($invoice->oda_charge != 0)
+         <li style="">ODA Charges: &#x20b9; {{$invoice->oda_charge}}</li>
+      @endif
+      <li style="display:none;">Packing Charges: &#x20b9; 0</li>
+      @if($invoice->ad_code_registration_charge != 0)
+         <li>AD Code Registration Charges: &#x20b9; {{$invoice->ad_code_registration_charge}}</li>
+      @endif
+      <li style="display: none;">IFSC/DBK Registration Charges: &#x20b9; 0</li>
+      @if($invoice->enhance_security_charge !=0)
+      <li>Enhanced Security Surcharge: &#x20b9; {{$invoice->enhance_security_charge}}</li>
+      @endif
+      @if($invoice->adc_noc_charge !=0)
+      <li>ADC NOC Charge: &#x20b9; {{$invoice->adc_noc_charge}}</li>
+      @endif
+      @if($invoice->do_charge !=0)
+      <li>DO Charge: &#x20b9; {{$invoice->do_charge}}</li>
+      @endif
+      @if($invoice->non_conveyar_charge !=0)
+      <li>NON Conveyar Charge: &#x20b9; {{$invoice->non_conveyar_charge}}</li>
+      @endif
+      @if($invoice->address_correction_charge !=0)
+      <li>Address Correction Charge: &#x20b9; {{$invoice->address_correction_charge}}</li>
+      @endif
+      @if($invoice->war_surcharge !=0)
+      <li>WAR Surcharges Charges: &#x20b9; {$invoice->war_surcharge}}</li>
+      @endif
+      @if($invoice->air_cargo_registration_charge !=0)
+      <li>Air Cargo Registration Charges: &#x20b9; {{$invoice->air_cargo_registration_charge}}</li>
+      @endif
+      @if($invoice->warehousing_charge != 0)
+      <li>Warehouse Charges: &#x20b9; {{$invoice->warehousing_charge}}</li>
+      @endif
+      @if($invoice->cgst_amount != 0)
+      <li>C GST (9%): &#x20b9; {{$invoice->cgst_amount}}</li>
+      @endif
+      @if($invoice->sgst_amount != 0)
+      <li>S GST (9%): &#x20b9;  {{$invoice->sgst_amount}}</li>
+      @endif
+      @if($invoice->igst_amount != 0)
+      <li>I GST (18%): &#x20b9; {{$invoice->igst_amount}}</li>
+      @endif
+      @if($invoice->freight_amount != 0)
+      <li>FREIGHT AMOUNT: &#x20b9; {{$invoice->freight_amount}}</li>
+      @endif
+      @if($invoice->duty_payment != 0)
+      <li>Duty Payment: &#x20b9; {{$invoice->duty_payment}}</li>
+      @endif
+      <li><b>NET AMOUNT: </b> &#x20b9; {{$invoice->net_amount}} </li>
+    </ul>
+  </div>
+  <!-- right table ends -->
+</div>
+<!-- fake table ends -->
+<!-- amount in words -->
+<div class="amount-div">
+  <b> Amount In Words :   {{ucwords($amountinword)}}</b>
+</div>
+<!-- amounts in words -->
+<!-- signiture section -->
+<div class="signature-div" style="text-align: right;">
+  <b>For Madni International</b><br/>
+  <p><b style="text-align:right;">
+    Authorized Signatory
+    </b>
+  </p>
+</div>
+<!-- signature section ens -->
+<!-- T&C -->
+<div class="tnc">
+  <ul>
+    <li> 1 Payment of bills should be made only by an Account Payee Cheque / Demand Draft in favour of  “MADNI INTERNATIONAL”  </li>
+    <li>              
+      2 Any payment received after the due date may  attract late payment charges of 2% per month.
+    </li>
+    <li> 3 PAN No-AJFPB7353M  and Goods & Service Tax No-27AJFPB7353M1ZZ, HSN CODE-9968, STATE-27</li>
+    <li>4 WE ARE NOT COMMON CARRIERS. ALL TRANSACTIONS ARE SUBJECT TO THE CONDITIONS ENDORSED ON THE REVERSE OF OUR CONSIGNMENT NOTE.</li>
+    <li>5 ANY DISCREPANCIES SHOULD BE NOTIFIED WITHIN SEVEN DAYS OF RECEIPT OF THIS INVOICE </li>
+    <li>6 Any kind of disputes subject to Nagpur Jurisdiction</li>
+    <li>7 This is the system generated INVOICE and dose not require any signature.</li>
+  </ul>
+</div>
+<!-- T&C ends -->
+     <!-- invoice body end -->
    </body>
+<footer>
+
+  <img src="http://127.0.0.1:8000/result_htm_1235191968a09bb9.png" style="width:819px";>
+
+</footer>
 </div>
 
 @php

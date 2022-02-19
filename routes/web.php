@@ -11,7 +11,7 @@
 |
 */
 
-Auth::routes(['register'=>false]);
+Auth::routes(['register'=>true]);
 
 
 

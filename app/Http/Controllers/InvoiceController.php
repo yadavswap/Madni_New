@@ -517,7 +517,7 @@ class InvoiceController extends Controller
              $productlists->zone = $request->product_details["zone"][$i];
              $productlists->amount = $request->product_details["amount"][$i];
            //  dd($request->product_details["class_id"][$i]);
-              $productlists->star = $request->product_details["star"][$i];
+             // $productlists->star = $request->product_details["star"][$i];
              
              $saved = $productlists->save();
             }
