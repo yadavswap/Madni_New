@@ -110,7 +110,7 @@ ul{
     overflow-wrap: break-word;
     max-height: 65px;
     font-size: 15px;
-    margin-bottom: 1rem;
+    margin-bottom: 12px;
 }
 .invoice-section{
   font-size: 14px;
