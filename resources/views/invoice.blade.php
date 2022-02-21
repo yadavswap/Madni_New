@@ -296,7 +296,7 @@ ul{
       <li>Address Correction Charge: &#x20b9; {{$invoice->address_correction_charge}}</li>
       @endif
       @if($invoice->war_surcharge !=0)
-      <li>WAR Surcharges Charges: &#x20b9; {$invoice->war_surcharge}}</li>
+      <li>WAR Surcharges Charges: &#x20b9; {{$invoice->war_surcharge}}</li>
       @endif
       @if($invoice->air_cargo_registration_charge !=0)
       <li>Air Cargo Registration Charges: &#x20b9; {{$invoice->air_cargo_registration_charge}}</li>
