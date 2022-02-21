@@ -96,7 +96,7 @@ ul{
 .todiv{
   width:819px;
   border: 1px solid black; 
-  height: 125px;
+  height: 145px;
   font-size: 10px;
 }
 .toleft{
@@ -110,7 +110,7 @@ ul{
     overflow-wrap: break-word;
     max-height: 65px;
     font-size: 15px;
-    margin-bottom: 12px;
+    margin-bottom: 14.5px;
 }
 .invoice-section{
   font-size: 14px;
