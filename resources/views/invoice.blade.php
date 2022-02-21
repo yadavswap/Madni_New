@@ -110,6 +110,7 @@ ul{
     overflow-wrap: break-word;
     max-height: 65px;
     font-size: 15px;
+    margin-bottom: 1.4rem;
 }
 .invoice-section{
   font-size: 14px;
@@ -134,7 +135,7 @@ ul{
      <table class="GeneratedTable">
   <thead>
     <div style="width:819px; border: 1px solid black; height: 140px;">
-      <center><img src="http://127.0.0.1:8000/result_htm_8bf8c0bc2d3a7f46.png" style="width:819px;"></center>
+      <center><img src="http://143.110.183.100/result_htm_8bf8c0bc2d3a7f46.png" style="width:819px;"></center>
       <h2 class="tax-title">TAX INVOICE</h2>
     </div>
     <div class="todiv">
@@ -357,7 +358,7 @@ ul{
    </body>
 <footer>
 
-  <img src="http://127.0.0.1:8000/result_htm_1235191968a09bb9.png" style="width:819px";>
+  <img src="http://143.110.183.100/result_htm_1235191968a09bb9.png" style="width:819px";>
 
 </footer>
 </div>
