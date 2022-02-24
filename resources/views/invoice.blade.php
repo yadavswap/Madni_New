@@ -32,6 +32,11 @@ table.GeneratedTable thead {
   text-align: right;
    float: right;
 }
+.right-div-two{
+  text-align: right;
+   float: right;
+   margin-top:18rem;
+}
 .left-div{
   text-align: left;
     margin-left: -20px;
@@ -214,8 +219,8 @@ ul{
                NON-DOX <b><?= ($product->class_id != NULL && $product->class_id == 1) ? "- Express" : "- Economy"; ?> </b>
                @endif</td>
       <td>{{$product->actual_weight}} KG</td>
-      <td>{{roundwt($product->chargable_weight)}} KG -  [<b>{{$product->l}} L</b> X <b>{{$product->w}} W</b> X <b>{{$product->h}} H</b>]</td>
-      <td>     &#8377;. {{$product->amount}}</td>
+      <td>{{roundwt($product->chargable_weight)}} KG - <br/> [<b>{{$product->l}} L</b> X <b>{{$product->w}} W</b> X <b>{{$product->h}} H</b>]</td>
+      <td> {{$product->amount}}</td>
     </tr>
     @php
     $i++;
@@ -327,7 +332,7 @@ ul{
 <!-- fake table ends -->
 <!-- amount in words -->
 <div class="amount-div">
-  <b> Amount In Words :   {{ucwords($amountinword)}}</b>
+  <b> Amount In Words :  Rupees {{ucwords($amountinword)}}</b>
 </div>
 <!-- amounts in words -->
 <!-- signiture section -->

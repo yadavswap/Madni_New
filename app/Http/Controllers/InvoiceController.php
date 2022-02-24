@@ -426,7 +426,7 @@ class InvoiceController extends Controller
     }
     $Rupees = implode('', array_reverse($str));
     $paise = ($decimal > 0) ? "." . ($words[$decimal / 10] . " " . $words[$decimal % 10]) . ' Paise' : '';
-    return ($Rupees ? $Rupees . 'Rupees ' : '') . $paise;
+    return ($Rupees ? $Rupees . '' : '') . $paise;
 }
 
 
