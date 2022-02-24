@@ -93,7 +93,7 @@ ul{
 }
 .tnc{
   width: 819px;
-  border-bottom: 1px solid black;
+  border: 1px solid black;
 }
 .tnc > ul{
   margin-top: 5px;
