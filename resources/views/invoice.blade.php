@@ -269,7 +269,7 @@ ul{
   </div>
   <!-- left table ends -->
   <!-- right table starts -->
-  <div class="right-div">
+  <div class="right-div-two">
     <ul class="right-ul">
       <li>Gross Amount:  &#x20b9; {{$invoice->gross_amount}}</li>
       <li>Temp Global Surcharge: &#x20b9; {{$invoice->tgsc}}</li>
