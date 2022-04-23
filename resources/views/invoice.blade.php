@@ -172,10 +172,16 @@
         }
 
     </style>
+         <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
 </head>
 
-<body>
-    <table style="border-collapse:collapse;margin-left:7.045pt" cellspacing="0">
+<body id="pdf">
+    <table style="border-collapse:collapse;margin-left:7.045pt" cellspacing="0" >
         <tr style="height:98pt">
             <td style="width:508pt;border-top-style:solid;border-top-width:2pt;border-left-style:solid;border-left-width:2pt;border-bottom-style:solid;border-bottom-width:2pt;border-right-style:solid;border-right-width:2pt"
                 colspan="10">
@@ -432,7 +438,7 @@
                 </td>
                 <td
                     style="width:66pt;border-top-style:solid;border-top-width:1pt;border-left-style:solid;border-left-width:1pt;border-bottom-style:solid;border-bottom-width:1pt;border-right-style:solid;border-right-width:2pt">
-                    <p class="s3" style="text-indent: 0pt;line-height: 9pt;text-align: right;">2345.00</p>
+                    <p class="s3" style="text-indent: 0pt;line-height: 9pt;text-align: right;">{{$product->amount}}</p>
                 </td>
             </tr>
         @endforeach
@@ -1091,3 +1097,38 @@ function roundwt($price)
 }
 
 @endphp
+<script type="text/javascript">
+
+      let savedoc = new jsPDF('#pdf','pt','a4');
+
+savedoc.addHTML(document.body,function() {
+   // savedoc.save('madniinvoice.pdf');
+});
+
+      var doc = new jsPDF();
+
+ function saveDiv(divId, title) {
+ doc.fromHTML(`<html><head><title>${title}</title></head><body>` + document.getElementById(divId).innerHTML + `</body></html>`);
+ doc.save('div.pdf');
+}
+
+function printDiv(divId,
+  title) {
+
+  let mywindow = window.open('', 'PRINT', 'height=650,width=900,top=100,left=150');
+
+  mywindow.document.write(`<html><head><title>${title}</title>`);
+  mywindow.document.write('</head><body >');
+  mywindow.document.write(document.getElementById(divId).innerHTML);
+  mywindow.document.write('</body></html>');
+
+  mywindow.document.close(); // necessary for IE >= 10
+  mywindow.focus(); // necessary for IE >= 10*/
+
+  mywindow.print();
+  mywindow.close();
+
+  return true;
+}
+
+   </script>

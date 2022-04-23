@@ -188,7 +188,7 @@ ul{
       <td></td>
       <td></td>
       <td></td>
-      <td width="20%"></td>
+      <td width="30%"></td>
       <td></td>
     </tr>
     <!-- blank rows end -->
