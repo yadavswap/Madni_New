@@ -155,6 +155,11 @@ ul{
       </div>
       <div class="right-div">
         <ul class="invoice-section">
+<<<<<<< HEAD
+=======
+          <li>Customer  Code : CUS{{$customer->id}}</li>
+
+>>>>>>> 5a97932491da5b860fdbb5c903b0ecd7bd1177d3
           <li>Invoice Number : MI786922122- {{$invoice->id}}</li>
           <li>Invoice Date :   {{$invoice->invoice_date}}</li>
         </ul>
@@ -178,15 +183,25 @@ ul{
     </tr>
     <!-- Blank rows start -->
     <tr>
+<<<<<<< HEAD
+=======
+      <td ></td>
+      <td width="16%"></td>
+      <td width="12%" ></td>
+>>>>>>> 5a97932491da5b860fdbb5c903b0ecd7bd1177d3
       <td></td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
+<<<<<<< HEAD
       <td></td>
       <td></td>
       <td></td>
       <td></td>
+=======
+      <td width="30%"></td>
+>>>>>>> 5a97932491da5b860fdbb5c903b0ecd7bd1177d3
       <td></td>
     </tr>
     <!-- blank rows end -->

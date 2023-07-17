@@ -115,7 +115,7 @@
                                                           
                                                         </th>
 
-                                                        <th>
+                                                        {{--  <th>
                                                             <button class="btn btn-md btn-success" type="button"
                                                                 id="addrow"> Add New <i class="fa fa-plus"></i></button>
 
@@ -124,7 +124,7 @@
                                                             <button class="btn btn-md btn-danger" type="button"
                                                                 id="deleterow">
                                                                 Delete <i class="fa fa-trash-o"></i></button>
-                                                        </th>
+                                                        </th>  --}}
 
                                                        
                                                         <th>
@@ -152,8 +152,8 @@
                                                         <th>Select Destination <small class="text-danger">*</small></th>
                                                         <th>Product Type <small class="text-danger">*</small></th>
                                                         <th>Actual Wt.( In Kg) <small class="text-danger">*</small></th>
-                                                        <th>L(Volumetric)<small class="text-danger">*</small></th>
-                                                        <th>W(Volumetric)<small class="text-danger">*</small></th>
+                                                        <th>L(Volumetric)<small class="text-danger"></small></th>
+                                                        <th>W(Volumetric)<small class="text-danger"></small></th>
                                                         <th>H (Volumetric)<small class="text-danger">*</small></th>
                                                         <th>Select Mode<small class="text-danger">*</small></th>
                                                         <th>Chargable Wt (In Kg) <small class="text-danger">*</small></th>
@@ -245,7 +245,7 @@
                                                             </select>
                                                         </td>
 
-                                                     
+                                                      
 
 
                                                         <td>
@@ -309,15 +309,7 @@
                                                         </td>
                                                         
                                                         <td>
-                                                       <div class="form-group">
-                                                            <button class="btn btn-md btn-success" type="button"
-                                                                id="addrow"> Add New <i class="fa fa-plus"></i></button>
-
-                                                      
-                                                            <button class="btn btn-md btn-danger" type="button"
-                                                                id="deleterow">
-                                                                Delete <i class="fa fa-trash-o"></i></button>
-                                                       </div>
+                         
                                                         </td>
 
 

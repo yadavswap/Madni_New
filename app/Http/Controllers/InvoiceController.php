@@ -338,9 +338,9 @@ class InvoiceController extends Controller
             $productlists->origin = $request->product_details["origin"][$i];
             $productlists->destination = $request->product_details["destination"][$i];
             $productlists->actual_weight = $request->product_details["actual_weight"][$i];
-            $productlists->l = $request->product_details["l"][$i];
-            $productlists->w = $request->product_details["w"][$i];
-            $productlists->h = $request->product_details["h"][$i];
+            $productlists->l = $request->product_details["l"][$i] ?? 0;
+            $productlists->w = $request->product_details["w"][$i] ?? 0;
+            $productlists->h = $request->product_details["h"][$i] ?? 0;
             $productlists->mode = $request->product_details["mode"][$i];
             $productlists->chargable_weight = $request->product_details["chargable_weight"][$i];
             if($request->product_details["mode"][$i] == 0){
