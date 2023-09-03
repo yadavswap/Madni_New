@@ -919,7 +919,7 @@
                 <p class="s5" style="padding-left: 1pt;text-indent: 0pt;text-align: left;">Temp Global
                     Surcharge-
                     Minimum Rs. 73/- ++ upto 4 Kgs Then 58/- ++per kgs onwards
-                    @if ($invoice->enhance_security_charge != 0)
+                    {{--@if ($invoice->enhance_security_charge != 0)
                         <span style="padding-left: 365pt;text-indent: 0pt;line-height: 9pt;text-align: left;"
                             class="s6">Enhanced
                             Security
@@ -927,7 +927,7 @@
 
                         <span class="s7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x20b9;
                             {{ $invoice->enhance_security_charge ?? 0 }}</span>
-                    @endif
+                    @endif--}}
                 </p>
                  <p class="s3"
                     style="padding-left: 408pt;text-indent: 0pt;line-height: 9pt;text-align: left;">ADC NOC Charge&nbsp;&nbsp;:

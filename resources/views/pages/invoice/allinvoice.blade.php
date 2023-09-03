@@ -159,7 +159,7 @@
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
-                                                        <td></td>
+                                                        <!--<td></td>-->
                                                         <th>
                                                             <button class="btn btn-md btn-success" type="button"
                                                                 id="addrow"> Add New <i class="fa fa-plus"></i></button>
@@ -190,7 +190,7 @@
                                                         <th>Select Zone <small class="text-danger">*</small></th>
                                                         <th>Amount (INR) <small class="text-danger">*</small></th>
                                                         <th>TGSC (INR) <small class="text-danger">*</small></th>
-                                                        <th>Enhance Security Charge (INR) <small class="text-danger">*</small></th>
+                                                        <!--<th>Enhance Security Charge (INR) <small class="text-danger">*</small></th>-->
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -379,11 +379,11 @@
 
                                                         </td>
 
-                                                        <td>
+                                                        <!--<td>
                                                             <input id="esc1" class="form-control esc" name="product_details[esc][]"
                                                                 type="text" required   placeholder="40">
 
-                                                        </td>
+                                                        </td>-->
                                                       
 
                                                     </tr>
@@ -480,7 +480,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <!--<div class="col-md-3">
                         <div class="form-group">
                             <label for="enhance_security_charge">Enhanced Security Charge: * <small class="text-success" id="enhancesecuritychargetext"></small></label>
 
@@ -488,7 +488,7 @@
                                         name="enhance_security_charge" type="text" placeholder="0">
 
                         </div>
-                    </div>
+                    </div>-->
 
                      <div class="col-md-3">
                         <div class="form-group">
@@ -796,7 +796,7 @@ var is_import = "{{$data['type_id']}}";
     itemrow.find(".class_id:last").attr("id","class_id"+num);
     itemrow.find(".type_id:last").attr("id","type_id"+num);
     itemrow.find(".tgsc:last").attr("id","tgsc"+num);
-    itemrow.find(".esc:last").attr("id","esc"+num);
+    //itemrow.find(".esc:last").attr("id","esc"+num);
     itemrow.find(".deleterow:last").attr("id","deleterow"+num);
     itemrow.find(".addrow:last").attr("id","addrow"+num);
     $("#itembody").append(itemrow);
@@ -1036,7 +1036,7 @@ $("#submit").click(function (e) {
     $("#calculationbody").toggle();
 
       var enhancedcharge = 0;
-      $('#enhance_security_charge').val(enhancedcharge);
+      //$('#enhance_security_charge').val(enhancedcharge);
     
 
 
@@ -1085,7 +1085,8 @@ $('.amount').each(function(index,element){
     }
     
     console.log(gross);
-    var finalgrossamt =  parseFloat(enhancedcharge) + parseFloat(totaltgsc) + parseFloat(gross);
+    //var finalgrossamt =  parseFloat(enhancedcharge) + parseFloat(totaltgsc) + parseFloat(gross);
+    var finalgrossamt =  parseFloat(totaltgsc) + parseFloat(gross);
     console.log("finalgrossamt :"+finalgrossamt);
     $("#gross_amount").val(gross.toFixed(2));
     var surcharge = (totaltgsc + gross)/100;
@@ -1093,7 +1094,7 @@ $('.amount').each(function(index,element){
     console.log(surcharge);
     $('.fuel_surcharge').val(surcharge.toFixed(2));
     $('.tgsc_total').val(totaltgsc.toFixed(2));
-    $('.enhance_security_charge').val(enhancedcharge.toFixed(2));
+    //$('.enhance_security_charge').val(enhancedcharge.toFixed(2));
 
 
      
@@ -1125,7 +1126,7 @@ $('#calculate').click(function(e){
 
     var gross_amount = parseFloat($('#gross_amount').val());
     var fuel_surcharge = parseFloat($('.fuel_surcharge').val());
-    var enhance_security_charge = parseFloat($('#enhance_security_charge').val());
+    //var enhance_security_charge = parseFloat($('#enhance_security_charge').val());
     var custom_clearance = parseFloat($('.custom_clearance').val());
 
     var oda_charge = parseFloat($('#oda_charge').val());
@@ -1139,7 +1140,8 @@ $('#calculate').click(function(e){
     var air_cargo_registration_charge = parseFloat($('.air_cargo_registration_charge').val());
     var tgscamt =  parseFloat($('.tgsc_total').val());
 
-    var totalamount = gross_amount + fuel_surcharge + enhance_security_charge + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge + tgscamt;
+    //var totalamount = gross_amount + fuel_surcharge + enhance_security_charge + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge + tgscamt;
+    var totalamount = gross_amount + fuel_surcharge + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge + tgscamt;
    
 
     if(is_import == "1")
