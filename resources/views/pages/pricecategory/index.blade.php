@@ -42,9 +42,9 @@
                     
                     
                     <div class="row">
-                      <div class="col-md-4">
+                      <!--<div class="col-md-4">
                         TNT SHEET
-                      </div>
+                      </div>-->
                       <div class="col-md-4">
                         FEDEX SHEEt
                       </div>
@@ -69,9 +69,9 @@
 
                 <td>
                   <div class="row">
-                    <div class="col-md-4">
+                    <!--<div class="col-md-4">
                       <a href="{{url('uploads/'.$category->tnt_file_path)}}" target="_blank"> <button class="btn btn-sm btn-success"><i class="fa fa-download"></i></button></a>
-                    </div>
+                    </div>-->
                     <div class="col-md-4">
                       <a href="{{url('uploads/'.$category->fedex_file_path)}}" target="_blank"> <button class="btn btn-sm btn-success"><i class="fa fa-download"></i></button></a>
                     </div>

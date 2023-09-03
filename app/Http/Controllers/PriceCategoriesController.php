@@ -30,7 +30,7 @@ class PriceCategoriesController extends Controller
        
             $request->validate([
 
-                'tnt_file_path' => 'required|mimes:xlx,xlsx,xlsm,xlsb,xls|max:10020',
+                //'tnt_file_path' => 'required|mimes:xlx,xlsx,xlsm,xlsb,xls|max:10020',
                 'price_category_name'=>'required|string',
                 'fedex_file_path' => 'required|mimes:xlx,xlsx,xlsm,xlsb,xls|max:10020',
     
@@ -47,9 +47,9 @@ class PriceCategoriesController extends Controller
 
              // TNT Import
 
-             $originalNameTNT = $request->tnt_file_path; 
+             /*$originalNameTNT = $request->tnt_file_path; 
              $fileNameTNT = "MADNI-TNT".rand(11111,99999).time().'.'.$request->tnt_file_path->extension();
-             $request->tnt_file_path->move(public_path('uploads'), $fileNameTNT); 
+             $request->tnt_file_path->move(public_path('uploads'), $fileNameTNT);*/ 
              
              
             
@@ -60,15 +60,15 @@ class PriceCategoriesController extends Controller
                 'price_category_name' => $request->price_category_name,
                 'fedex_file_path' =>  $fileNameFDX,
                 'fedex_file_name' => $fileNameFDX,
-                'tnt_file_path' =>     $fileNameTNT,
-                'filename' =>  $originalNameTNT
+                //'tnt_file_path' =>     $fileNameTNT,
+                //'filename' =>  $originalNameTNT
 
 
             ]);
 
             if($pricecategory){
                 $pricecategoryid = $pricecategory->id;
-                $tntpath = "uploads/".$fileNameTNT;
+                //$tntpath = "uploads/".$fileNameTNT;
                 $fedexpath = "uploads/".$fileNameFDX;
 
                 // Import TNT From Sheet
@@ -82,7 +82,7 @@ class PriceCategoriesController extends Controller
 
                 */
 
-            Excel::import(new TntImport($pricecategoryid),$tntpath);
+            //Excel::import(new TntImport($pricecategoryid),$tntpath);
             Excel::import(new FedexImport($pricecategoryid),$fedexpath);
             return back()->with('success','You have successfully created category and upload file.');
             }

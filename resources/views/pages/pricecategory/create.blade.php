@@ -36,11 +36,11 @@
               <input id="price_category_name" class="form-control" name="price_category_name" type="text" required="">
             </div>
 
-            <div class="form-group">
+            <!--<div class="form-group">
             <label>Upload TNT Sheet : <small> <a href="{{url('uploads/madniTNTImportsSample.xlsx')}}"> Download Sample Sheet</a></small></label>
               
               <input id="tnt_file_path" class="form-control" name="tnt_file_path" type="file" required="">
-            </div>
+            </div>-->
 
 
             <div class="form-group">
