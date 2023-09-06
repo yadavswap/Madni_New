@@ -182,8 +182,7 @@
                            <td class="text-center">₹ {{ $invoice->ad_code_registration_charge ?? 0 }}</td>
                         </tr>
                         <tr class="line">
-                           <td colspan="7">Temp Global Surcharge- Minimum Rs. 73/- ++ upto 4 Kgs Then 58/- ++per kgs onwards</td>
-                           <td colspan="2" class="text-right">IFSC/DBK Registration Charges</td>
+                           <td colspan="9" class="text-right">IFSC/DBK Registration Charges</td>
                            <td class="text-center">₹ {{ 0 }}</td>
                         </tr>
                         @if($invoice->adc_noc_charge != 0)
@@ -229,19 +228,17 @@
                         </tr>
                         @endif
                         <tr class="line">
-                           <td colspan="7">(for Canada/Maxico/USA)</td>
-                           <td colspan="2" class="text-right">CGST (9%)</td>
+                           <td colspan="9" class="text-right">CGST (9%)</td>
                            <td class="text-center">₹ {{ $invoice->cgst_amount ?? 0 }}</td>
                         </tr>
                         <tr class="line">
-                           <td colspan="7">Temp Global Surcharge- Minimum Rs. 75/- ++ upto 4 Kgs Then 150/- ++per kgs onwards</td>
+                           <td colspan="7">Temp Global Surcharge- 150/- ++per kgs onwards</td>
                            <td colspan="2" class="text-right">SGST (9%)</td>
                            <td class="text-center">₹ {{ $invoice->sgst_amount ?? 0 }}</td>
                         </tr>
                         
                         <tr class="line">
-                           <td colspan="7">(for Australia &amp; NewZealand)</td>
-                           <td colspan="2" class="text-right">IGST (18%)</td>
+                           <td colspan="9" class="text-right">IGST (18%)</td>
                            <td class="text-center">₹ {{ $invoice->igst_amount ?? 0 }}</td>
                         </tr>
                         <tr class="line">
@@ -253,7 +250,7 @@
                            <td class="text-center">₹ {{ $invoice->duty_payment ?? 0 }}</td>
                         </tr>
                         <tr class="line">
-                           <td colspan="7">Rupees In Words : {{ ucwords($amountinword) }}</td>
+                           <td colspan="7"><strong>Rupees In Words <strong> : {{ ucwords($amountinword) }}</td>
                            <td colspan="2" class="text-right"><strong>Net Amount</strong></td>
                            <td class="text-center"><strong>₹ {{ $invoice->net_amount ?? 0 }}</strong></td>
                         </tr>   
