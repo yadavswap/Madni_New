@@ -388,7 +388,8 @@ class InvoiceController extends Controller
         $products = InvoiceProduct::where('customer_invoice_id',$invoice->id)->get();
         $amountinword = $this->getIndianCurrency($invoice->net_amount);
 
-        return view('invoice',compact('invoice','customer','products','amountinword'));
+        //return view('invoice',compact('invoice','customer','products','amountinword'));
+        return view('invoice_new',compact('invoice','customer','products','amountinword'));
 
         // $pdf = PDF::loadView('invoice');
         // return $pdf->download('customers.pdf');

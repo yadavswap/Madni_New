@@ -246,11 +246,11 @@ class ApiMadniController extends Controller
                   ));
                
                 }
-
                 $chargablewt = ceil($chargablewt);
 
                 if(count($amount) > 0){
-                    $amount['0']->tgsc = $this->calTGSC($chargablewt);
+                    //$amount['0']->tgsc = $this->calTGSC($chargablewt);
+                   $amount['0']->tgsc = $this->calTGSCNew($chargablewt,$request->zone); 
                    $amount['0']->esc = $this->calSEC($chargablewt);
                 }
 
@@ -326,21 +326,41 @@ class ApiMadniController extends Controller
         }
 
         private function calTGSC($chargablewt){
-
-              // Calculate CGST
-              if($chargablewt < 4)
-              {
-                  $tgs_charge = number_format(73,2);
-                  return $tgs_charge;
-              }
-              if($chargablewt > 4){
-                  
-                  $tgs_charge = 17 * $chargablewt;
-                  $tgs_charge = number_format($tgs_charge,2);
-                  return $tgs_charge;
-              }
-
-
+            // Calculate CGST
+            if($chargablewt < 4)
+            {
+                $tgs_charge = number_format(73,2);
+                return $tgs_charge;
+            }
+            if($chargablewt > 4){
+                
+                $tgs_charge = 17 * $chargablewt;
+                $tgs_charge = number_format($tgs_charge,2);
+                return $tgs_charge;
+            }
+        }
+        private function calTGSCNew($chargablewt,$zone){
+            //echo 'hhvv = ',$chargablewt;
+            //echo 'zone  = ',$zone;
+            $tgs_charge = 0;
+            if($zone == 'E') {
+                if($chargablewt <= 1) {
+                    $tgs_charge = number_format(150,2, '.', '');
+                    return $tgs_charge;
+                } else if($chargablewt > 1) {
+                    $tgs_charge =  150 * $chargablewt;
+                    $tgs_charge = number_format($tgs_charge,2, '.', '');
+                }
+            } else {
+                if($chargablewt <= 1) {
+                    $tgs_charge = number_format(73,2, '.', '');
+                    return $tgs_charge;
+                } else if($chargablewt > 1) {
+                    $tgs_charge =  57 * $chargablewt;
+                    $tgs_charge = number_format($tgs_charge,2, '.', '');
+                }
+            }
+            return $tgs_charge;
         }
 
         private function calPriceSlabFedex($class_id,$is_import,$chargablewt,$price){
