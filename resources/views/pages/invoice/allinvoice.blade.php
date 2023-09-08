@@ -209,7 +209,7 @@
                                                                 <option value="" selected="selected">--Select Provider --
                                                                 </option>
 
-                                                                <option value="1">TNT</option>
+                                                                {{--<option value="1">TNT</option>--}}
                                                                 <option value="2">Fedex</option>
 
                                                             </select>
@@ -351,11 +351,9 @@
                                                                 required="" id="zone1" >
                                                                 <option value="" selected="selected">--Select Zone --
                                                                 </option>
-                                                                @foreach($tntZones as $zone)
+                                                                {{--@foreach($tntZones as $zone)
                                                                 <option value="{{$zone->zone}}">{{$zone->zone}}</option>
-                                                                @endforeach
-
-                                                                  <option value="">-- Fedex Zones --</option>
+                                                                @endforeach--}}
 
                                                                    @foreach($fedexZones as $zone)
                                                                 <option value="{{$zone->zone}}">{{$zone->zone}}</option>

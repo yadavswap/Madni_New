@@ -54,9 +54,10 @@
           
                         <select class="js-example-basic-single w-100" name="provider" required="" id="provider">
                           <option value="">--Select Provider --</option>
-                            <option value="0" selected="">All</option>
+                          <option value="0" selected="">Fedex -  Depreciate</option>
+                          {{--<option value="0" selected="">All</option>
                           <option value="1" disabled>TNT - Depreciate </option>
-                          <option value="2" disabled>Fedex -  Depreciate</option>
+                          <option value="2" disabled>Fedex -  Depreciate</option>--}}
                         </select>
                       
                       </div>
