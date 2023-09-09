@@ -59,17 +59,17 @@
   <td>{{$customer->fullname}}</td>
   <td>{{$customer->email}}</td>
   <td>{{$customer->mobile}}</td>
-  <td>{{$customer->category->price_category_name}}</td>
+  <td>{{@$customer->category->price_category_name}}</td>
   <td>
     
     <div class="row">
       <div class="col-md-6">    
-        <!--<a href="{{url('uploads/'.$customer->category->tnt_file_path)}}" title="tnt sheet"> 
+        <!--<a href="{{url('uploads/'.@$customer->category->tnt_file_path)}}" title="tnt sheet"> 
            <button class="btn btn-sm btn-info"><i class="fa fa-files-o"></i></button>
           </a>
         </div>-->
         <div class="col-md-6">    
-          <a href="{{url('uploads/'.$customer->category->fedex_file_path)}}"> 
+          <a href="{{url('uploads/'.@$customer->category->fedex_file_path)}}"> 
              <button class="btn btn-sm btn-info"><i class="fa fa-files-o" title="fedex sheet"></i></button>
             </a>
           </div>

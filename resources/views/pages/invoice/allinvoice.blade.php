@@ -480,7 +480,7 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="fuel_surcharge">Total Fuel Charge: * <small class="text-success" id="fuelsurchargetext">25%</small></label>
+                            <label for="fuel_surcharge">Total Fuel Charge:</label>
 
                             <input id="fuel_surcharge " class="form-control fuel_surcharge"
                                         name="fuel_surcharge" type="text" placeholder="" required value="0" >

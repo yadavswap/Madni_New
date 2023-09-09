@@ -24,8 +24,8 @@
          margin-bottom:10px;
          border-color: #ddd;
          }
-         .invoice .table tr.line {
-
+         .invoice .table {
+         font-size:12px;
          }
          .invoice .table td {
          border: none;
@@ -52,7 +52,10 @@
          padding:5px; 
          }
          .invoice .table tr.line td {
-           padding:6px; 
+           padding:3px; 
+         }
+         .invoice .table tr.line :last-child {
+             text-align:right;
          }
          .tax-invoice {
             margin-top:10px;
@@ -153,8 +156,8 @@
                            <td class="text-center">₹ {{ $invoice->gross_amount }}</td>
                         </tr>
                         <tr class="line">
-                           <td colspan="7">Temp Global Surcharge- Minimum Rs. 73/- ++ , Then 57/- ++per kgs onwards <span</td>
-                           <td colspan="2" class="text-right">Temp Global Surcharge</td>
+                           <td colspan="6">Temp Global Surcharge- Minimum Rs. 73/- ++ , Then 57/- ++per kgs onwards <span</td>
+                           <td colspan="3" class="text-right">Temp Global Surcharge</td>
                            <td class="text-center">₹ {{ $invoice->tgsc }}</td>
                         </tr>
                         <tr class="line">
