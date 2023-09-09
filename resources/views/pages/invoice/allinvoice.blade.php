@@ -470,6 +470,16 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label for="fuel_surcharge">Fuel Charge Percent: * <small class="text-success" id="fuelsurchargepercent">25%</small></label>
+
+                            <input id="fuel_surcharge_percent" class="form-control fuel_surcharge_percent"
+                                        name="fuel_surcharge_percent" type="number" placeholder="" required value="0" >
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
                             <label for="fuel_surcharge">Total Fuel Charge: * <small class="text-success" id="fuelsurchargetext">25%</small></label>
 
                             <input id="fuel_surcharge " class="form-control fuel_surcharge"
@@ -1137,11 +1147,20 @@ $('#calculate').click(function(e){
     var ad_code_registration_charge = parseFloat($('.ad_code_registration_charge').val());
     var air_cargo_registration_charge = parseFloat($('.air_cargo_registration_charge').val());
     var tgscamt =  parseFloat($('.tgsc_total').val());
+    var fuel_surcharge_percent =  parseFloat($('.fuel_surcharge_percent').val());
+
 
     //var totalamount = gross_amount + fuel_surcharge + enhance_security_charge + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge + tgscamt;
-    var totalamount = gross_amount + fuel_surcharge + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge + tgscamt;
-   
+    //var totalamount = gross_amount + fuel_surcharge + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge + tgscamt;
+    console.log('old fuel_surcharge',fuel_surcharge)
+    var totalamount_without_fuel_surcharge = gross_amount + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge + tgscamt;
+    console.log('totalamount_without_fuel_surcharge',totalamount_without_fuel_surcharge)
+    let fuel_surcharge_new = (totalamount_without_fuel_surcharge)/100 * fuel_surcharge_percent;
+    console.log('fuel_surcharge_new without fix',fuel_surcharge_new);
+    $('.fuel_surcharge').val(fuel_surcharge_new.toFixed(2));
 
+    var totalamount = totalamount_without_fuel_surcharge + fuel_surcharge_new;
+    console.log('total amount',totalamount)
     if(is_import == "1")
     {
         var cgst = (totalamount * 9) / 100;
@@ -1160,6 +1179,7 @@ $('#calculate').click(function(e){
     console.log("Export GST Calculation");
     }
     totalamount = totalamount + finalgst;
+    console.log('net amount',totalamount)
     
     $('.net_amount').val(totalamount.toFixed(2));
     calculated++;
