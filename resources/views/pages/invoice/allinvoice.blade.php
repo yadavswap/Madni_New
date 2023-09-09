@@ -1097,10 +1097,12 @@ $('.amount').each(function(index,element){
     var finalgrossamt =  parseFloat(totaltgsc) + parseFloat(gross);
     console.log("finalgrossamt :"+finalgrossamt);
     $("#gross_amount").val(gross.toFixed(2));
-    var surcharge = (totaltgsc + gross)/100;
+    // comment fuel_charge calcuation bcz its calculate with all charge under #calculate functions
+    /* var surcharge = (totaltgsc + gross)/100;
     surcharge = surcharge * 25;
     console.log(surcharge);
-    $('.fuel_surcharge').val(surcharge.toFixed(2));
+    $('.fuel_surcharge').val(surcharge.toFixed(2)); */
+
     $('.tgsc_total').val(totaltgsc.toFixed(2));
     //$('.enhance_security_charge').val(enhancedcharge.toFixed(2));
 
