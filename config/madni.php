@@ -1,0 +1,86 @@
+<?php 
+    return [
+        'import_tgsc'=>[
+            'parcel'=> [
+                "A"=>17,
+                "B"=>90,
+                "C"=>17,
+                "D"=>90,
+                "E"=>90,
+                "F"=>28,
+                "G"=>17,
+                "H"=>90,
+                "I"=>28,
+                "J"=>17,
+                "K"=>17,
+                "L"=>17
+            ],
+            'freight'=> [
+                "A"=>17,
+                "B"=>90,
+                "C"=>17,
+                "D"=>90,
+                "E"=>90,
+                "F"=>28,
+                "G"=>58,
+                "H"=>90,
+                "I"=>28,
+                "J"=>17,
+                "K"=>17,
+                "L"=>58
+            ]    
+        ],
+        'export_tgsc'=>[
+            'parcel'=> [
+                "A"=>57,
+                "B"=>57,
+                "C"=>57,
+                "D"=>57,
+                "E"=>150,
+                "F"=>57,
+                "G"=>57,
+                "H"=>57,
+                "I"=>57,
+                "J"=>57,
+                "K"=>57,
+                "L"=>57,
+                "M"=>57,
+                "N"=>57,
+                "O"=>57,
+                "P"=>57,
+                "Q"=>57
+            ],
+            'freight'=> [
+                "A"=>57,
+                "B"=>57,
+                "C"=>57,
+                "D"=>177,
+                "E"=>150,
+                "F"=>57,
+                "G"=>147,
+                "H"=>57,
+                "I"=>57,
+                "J"=>147,
+                "K"=>57,
+                "L"=>147,
+                "M"=>57,
+                "N"=>57,
+                "O"=>57,
+                "P"=>57,
+                "Q"=>57
+            ]
+        ],
+        'custom_charge_field'=>[
+            'custom_clearance',
+            'oda_charge',
+            'adc_noc_charge',
+            'do_charge',
+            'non_conveyar_charge',
+            'address_correction_charge',
+            'war_surcharge',
+            'warehousing_charge',
+            'ad_code_registration_charge',
+            'air_cargo_registration_charge'
+        ]
+    ]
+?>  

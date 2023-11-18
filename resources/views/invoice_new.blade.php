@@ -96,6 +96,7 @@
 						   	      <strong>Customer No: </strong>{{ $invoice->id }}<br>
 							         <strong>Invoice No: </strong>MI786922122-{{ $invoice->id }}<br>
 							         <strong>Invoice Date: </strong>{{ $invoice->invoice_date }}<br>
+                              <strong>Invoice Branch: </strong>{{ ucwords($invoice->branch) }}<br>
                            </address>
                         </div>
                      </div>
@@ -126,27 +127,30 @@
 									<td class="text-center">{{ $product->origin }}</td>
 									<td class="text-center">{{ $product->destination }}</td>
 									<td class="text-center">
-										{{ $product->zone }} - <br/>
-										@if ($product->provider_id == 1)
+										{{ $product->zone }}
+										{{--@if ($product->provider_id == 1)
 											<strong> TNT</strong>
 										@endif
 										@if ($product->provider_id == 2)
 										    <strong> FEDEX<strong>
-										@endif
+										@endif--}}
 									</td>
 									<td class="text-center">
 									@if ($product->product_type)
 										DOC <br/>
-										<strong><?= $product->class_id != null && $product->class_id == 1 ? '- Express' : '- Economy' ?></strong>
+										<!--<strong><?= $product->class_id != null && $product->class_id == 1 ? '- Express' : '- Economy' ?></strong>-->
 									@else
 										NON-DOX <br/>
-										<strong><?= $product->class_id != null && $product->class_id == 1 ? '- Express' : '- Economy' ?></strong>
+										<!--<strong><?= $product->class_id != null && $product->class_id == 1 ? '- Express' : '- Economy' ?></strong>-->
 									@endif
 									</td>
 									<td class="text-center">{{ $product->actual_weight }}</td>
 									<td class="text-center">
-										{{ roundwt($product->chargable_weight) }} KG - <br /> [<strong>{{ $product->l }} L</strong> X
-                        				<strong>{{ $product->w }} W</strong> X <strong>{{ $product->h }} H</strong>]
+										{{ roundwt($product->chargable_weight) }} 
+										@if($product->weight_size_show)
+											<br /> [<strong>{{ $product->l }} L</strong> X
+											<strong>{{ $product->w }} W</strong> X <strong>{{ $product->h }} H</strong>]
+										@endif
 									</td>
                            <td class="text-center">{{$product->amount}}</td>
                         </tr>
@@ -160,10 +164,6 @@
                            <td colspan="3" class="text-right">Temp Global Surcharge</td>
                            <td class="text-center">₹ {{ $invoice->tgsc }}</td>
                         </tr>
-                        <tr class="line">
-                           <td colspan="9" class="text-right">Fuel Surcharge Index</td>
-                           <td class="text-center">₹ {{ $invoice->fuel_surcharge }}</td>
-                        </tr>
                         @if ($invoice->custom_clearance != 0)
                         <tr class="line">
                            <td colspan="9" class="text-right">Custom Clerance</td>
@@ -176,18 +176,20 @@
                            <td class="text-center">₹ {{ $invoice->oda_charge }}</td>
                         </tr>
                         @endif
-                        <tr class="line">
+                        {{--<tr class="line">
                            <td colspan="9" class="text-right">Packing Charges</td>
                            <td class="text-center">₹ 0</td>
-                        </tr>
+                        </tr>--}}
+                        @if($invoice->ad_code_registration_charge != 0)
                         <tr class="line">
                            <td colspan="9" class="text-right">AD Code Registration Charges</td>
-                           <td class="text-center">₹ {{ $invoice->ad_code_registration_charge ?? 0 }}</td>
+                           <td class="text-center">₹ {{ $invoice->ad_code_registration_charge }}</td>
                         </tr>
-                        <tr class="line">
+                        @endif
+                        {{--<tr class="line">
                            <td colspan="9" class="text-right">IFSC/DBK Registration Charges</td>
                            <td class="text-center">₹ {{ 0 }}</td>
-                        </tr>
+                        </tr>--}}
                         @if($invoice->adc_noc_charge != 0)
                         <tr class="line">
                            <td colspan="9" class="text-right">ADC NOC Charge</td>
@@ -224,12 +226,16 @@
                            <td class="text-center">₹ {{ $invoice->air_cargo_registration_charge }}</td>
                         </tr>
                         @endif
-                        @if($invoice->warehousing_charge != 0)
+                        @if($invoice->warehousing_charge != 0 )
                         <tr class="line">
                            <td colspan="9" class="text-right">Warehouse Charges</td>
                            <td class="text-center">₹ {{ $invoice->warehousing_charge }}</td>
                         </tr>
                         @endif
+                        <tr class="line">
+                           <td colspan="9" class="text-right">Fuel Surcharge Index</td>
+                           <td class="text-center">₹ {{ $invoice->fuel_surcharge }}</td>
+                        </tr>
                         <tr class="line">
                            <td colspan="9" class="text-right">CGST (9%)</td>
                            <td class="text-center">₹ {{ $invoice->cgst_amount ?? 0 }}</td>
@@ -244,14 +250,18 @@
                            <td colspan="9" class="text-right">IGST (18%)</td>
                            <td class="text-center">₹ {{ $invoice->igst_amount ?? 0 }}</td>
                         </tr>
+                        @if($invoice->freight_amount != null || $invoice->freight_amount != 0)
                         <tr class="line">
                            <td colspan="9" class="text-right">Freight Amount</td>
                            <td class="text-center">₹ {{ $invoice->freight_amount ?? 0 }}</td>
                         </tr>
+                        @endif
+                        @if($invoice->duty_payment != null || $invoice->duty_payment != 0)
                         <tr class="line">
                            <td colspan="9" class="text-right">Duty Payment</td>
                            <td class="text-center">₹ {{ $invoice->duty_payment ?? 0 }}</td>
                         </tr>
+                        @endif
                         <tr class="line">
                            <td colspan="7"><strong>Rupees In Words <strong> : {{ ucwords($amountinword) }}</td>
                            <td colspan="2" class="text-right"><strong>Net Amount</strong></td>
@@ -261,7 +271,8 @@
                   </table>
                </div>
             </div>
-            <div class="row">
+			<hr style='margin-top:0px !important;margin-bottom:2px !important;'/>
+            <div class="row"> 
                <div class="col-md-12 text-right identity">
                   <p>For Madni International<br/><br/><strong>Authorized Signatory</strong></p>
                </div>

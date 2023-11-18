@@ -44,7 +44,8 @@
 
 
             <div class="form-group">
-              <label>Upload Fedex Sheet :  <small> <a href="{{url('uploads/fedexsample.xlsx')}}"> Download Sample Sheet</a></small></label>
+              <!--<label>Upload Fedex Sheet :  <small> <a href="{{url('uploads/fedexsample.xlsx')}}"> Download Sample Sheet</a></small></label>-->
+              <label>Upload Fedex Sheet :  <small> <a href="{{url('uploads/fedexsample.xls')}}"> Download Sample Sheet</a></small></label>
               
               <input id="fedex_file_path" class="form-control" name="fedex_file_path" type="file" required="">
             </div>

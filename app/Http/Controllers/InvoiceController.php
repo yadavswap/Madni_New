@@ -290,8 +290,6 @@ class InvoiceController extends Controller
     }
 
     public function store(Request $request){
-       // dd($request->product_details['consignment_no']);
-
        $i = 0;
        $volumetricwt = 0;
 
@@ -341,6 +339,7 @@ class InvoiceController extends Controller
             $productlists->l = $request->product_details["l"][$i] ?? 0;
             $productlists->w = $request->product_details["w"][$i] ?? 0;
             $productlists->h = $request->product_details["h"][$i] ?? 0;
+            $productlists->weight_size_show = $request->product_details["weight_size_show"][$i] ?? 0;
             $productlists->mode = $request->product_details["mode"][$i];
             $productlists->chargable_weight = $request->product_details["chargable_weight"][$i];
             if($request->product_details["mode"][$i] == 0){
@@ -447,14 +446,13 @@ class InvoiceController extends Controller
 
 
     public function storeAll(Request $request){
-      //  dd($request);
-
         $i = 0;
         $volumetricwt = 0;
  
          $invoice = CustomerInvoice::create([
              'customer_id' => $request->customer_id,
              'price_categories_id' => $request->price_categories_id,
+             'branch'=> $request->branch,
              'state_code' => $request->statecode,
              'invoice_date'=> $request->invoice_date,
              'gross_amount'=> $request->gross_amount,
@@ -464,7 +462,7 @@ class InvoiceController extends Controller
              'custom_clearance' => $request->custom_clearance,
              'oda_charge' => $request->oda_charge,
              'adc_noc_charge' => $request->adc_noc_charge,
-             'do_charge'=> $request->do_charges,
+             'do_charge'=> $request->do_charge,
              'non_conveyar_charge' => $request->non_conveyar_charge,
              'address_correction_charge' => $request->address_correction_charge,
              'war_surcharge' => $request->war_surcharge,
@@ -480,6 +478,7 @@ class InvoiceController extends Controller
              'provider' => "3", // For ALL
              'net_amount' => round((float)$request->net_amount,2),
              'tgsc' => $request->tgsc_total,
+             'tgsc_show' => $request->tgsc_show ?? 1,
 
  
          ]);
@@ -504,6 +503,7 @@ class InvoiceController extends Controller
              $productlists->l = $request->product_details["l"][$i];
              $productlists->w = $request->product_details["w"][$i];
              $productlists->h = $request->product_details["h"][$i];
+             $productlists->weight_size_show = $request->product_details["weight_size_show"][$i] ?? 0;
              $productlists->mode = $request->product_details["mode"][$i];
              $productlists->chargable_weight = $request->product_details["chargable_weight"][$i];
              if($request->product_details["mode"][$i] == 0){
@@ -520,8 +520,14 @@ class InvoiceController extends Controller
              $productlists->amount = $request->product_details["amount"][$i];
            //  dd($request->product_details["class_id"][$i]);
              // $productlists->star = $request->product_details["star"][$i];
+
+             // custom charges
+            $custom_charge_field = config('madni.custom_charge_field');
+            foreach($custom_charge_field as $field) {
+                $productlists->$field = $request->product_details["charge"][$field][$i] ?? 0;
+            }
              
-             $saved = $productlists->save();
+            $saved = $productlists->save();
             }
              
             if($saved)
@@ -541,6 +547,17 @@ class InvoiceController extends Controller
          
         
 
+    }
+    public function getCountryZone(Request $request) {
+        $zone_type = $request->zone_type;
+        $country = $request->destination;
+        if(zone_type == 'import') {
+            $country_zone = config('countryzone.import_zone');
+        } else {
+            $country_zone = config('countryzone.export_zone');
+        }
+        $zone = (array_key_exists($country,$country_zone)) ? $country_zone[$country] : null;
+        return $zone;
     }
     
 }

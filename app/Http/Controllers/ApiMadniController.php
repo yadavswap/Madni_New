@@ -250,7 +250,7 @@ class ApiMadniController extends Controller
 
                 if(count($amount) > 0){
                     //$amount['0']->tgsc = $this->calTGSC($chargablewt);
-                   $amount['0']->tgsc = $this->calTGSCNew($chargablewt,$request->zone); 
+                   $amount['0']->tgsc = $this->calTGSCNew($request->is_import,$chargablewt,$request->zone,$request->class_id); 
                    $amount['0']->esc = $this->calSEC($chargablewt);
                 }
 
@@ -339,27 +339,50 @@ class ApiMadniController extends Controller
                 return $tgs_charge;
             }
         }
-        private function calTGSCNew($chargablewt,$zone){
-            //echo 'hhvv = ',$chargablewt;
-            //echo 'zone  = ',$zone;
+        private function calTGSCNew($is_import,$chargablewt,$zone,$class_id){
+            $class = (in_array($class_id,[0,1])) ? 'parcel' : 'freight';
             $tgs_charge = 0;
-            if($zone == 'E') {
+            if($is_import == 1) {
+                $config_tgsc = config('madni.import_tgsc');
+                $config_tgsc_charge = $config_tgsc[$class][$zone];
                 if($chargablewt <= 1) {
-                    $tgs_charge = number_format(150,2, '.', '');
+                    $tgs_charge = number_format($config_tgsc_charge,2, '.', '');
                     return $tgs_charge;
                 } else if($chargablewt > 1) {
-                    $tgs_charge =  150 * $chargablewt;
+                    $tgs_charge =  $config_tgsc_charge * $chargablewt;
                     $tgs_charge = number_format($tgs_charge,2, '.', '');
                 }
             } else {
-                if($chargablewt <= 1) {
-                    $tgs_charge = number_format(73,2, '.', '');
-                    return $tgs_charge;
-                } else if($chargablewt > 1) {
-                    $tgs_charge =  57 * $chargablewt;
-                    $tgs_charge = number_format($tgs_charge,2, '.', '');
-                }
-            }
+                if($class == 'parcel') {
+                    if($zone == 'E') {
+                        if($chargablewt <= 1) {
+                            $tgs_charge = number_format(150,2, '.', '');
+                            return $tgs_charge;
+                        } else if($chargablewt > 1) {
+                            $tgs_charge =  150 * $chargablewt;
+                            $tgs_charge = number_format($tgs_charge,2, '.', '');
+                        }
+                    } else {
+                        if($chargablewt <= 1) {
+                            $tgs_charge = number_format(73,2, '.', '');
+                            return $tgs_charge;
+                        } else if($chargablewt > 1) {
+                            $tgs_charge =  57 * $chargablewt;
+                            $tgs_charge = number_format($tgs_charge,2, '.', '');
+                        }
+                    }
+                } else {
+                    $config_tgsc = config('madni.export_tgsc');
+                    $config_tgsc_charge = $config_tgsc[$class][$zone];
+                    if($chargablewt <= 1) {
+                        $tgs_charge = number_format($config_tgsc_charge,2, '.', '');
+                        return $tgs_charge;
+                    } else if($chargablewt > 1) {
+                        $tgs_charge =  $config_tgsc_charge * $chargablewt;
+                        $tgs_charge = number_format($tgs_charge,2, '.', '');
+                    }   
+                }    
+            }    
             return $tgs_charge;
         }
 
