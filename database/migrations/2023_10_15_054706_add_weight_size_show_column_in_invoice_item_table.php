@@ -15,11 +15,11 @@ class AddWeightSizeShowColumnInInvoiceItemTable extends Migration
     {
         Schema::table('invoice_products', function (Blueprint $table) {
             $table->boolean('weight_size_show')->after('chargable_weight')->default(0);
-            $table->boolean('tgsc_show')->after('tgsc')->default(1);
         });
 
         Schema::table('customer_invoices', function (Blueprint $table) {
-            $table->varchar('branch')->after('price_categories_id')->default(null);
+            $table->string('branch')->after('price_categories_id')->nullable();
+            $table->boolean('tgsc_show')->after('tgsc')->default(1);
         });
     }
 

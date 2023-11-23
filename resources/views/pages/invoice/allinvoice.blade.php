@@ -159,6 +159,8 @@
                                           <th>Select Zone <small class="text-danger">*</small></th>
                                           <th>Amount (INR) <small class="text-danger">*</small></th>
                                           <th>TGSC (INR) <small class="text-danger">*</small></th>
+                                          <th>Fuel Charge Per (25%) <small class="text-danger">*</small></th>
+                                          <th>Fuel Charge (INR) <small class="text-danger">*</small></th>
                                           <!--<th>Enhance Security Charge (INR) <small class="text-danger">*</small></th>-->
                                           <th>Action</th>
                                        </tr>
@@ -474,7 +476,7 @@
                               name="gross_amount" type="text" placeholder="" >
                         </div>
                      </div>
-                     <div class="col-md-2">
+                     <div class="col-md-3">
                         <div class="form-group">
                            <label for="fuel_surcharge">Fuel Charge Percent: * <small class="text-success" id="fuelsurchargepercent">25%</small></label>
                            <input id="fuel_surcharge_percent" class="form-control fuel_surcharge_percent"
@@ -897,22 +899,22 @@
    
    // Select Zone
    $('body').on('change', '.destination', function(){
-   var currentid = "#"+ $(this).attr('id');
-   var suffix = this.id.match(/\d+/)[0];
-   var import_zone = $(this).find(':selected').data("import_zone");
-   console.log('import_zone',import_zone)
-   var export_zone = $(this).find(':selected').data("export_zone");
-   console.log('export_zone',import_zone)
-   var zone_type = $("#type_id").val();
-   console.log('zone_type',zone_type);
-   console.log('suffix',suffix)
-   $("#zone"+suffix+" option:selected").removeAttr("selected");
-   if(zone_type) {
-       $("#zone"+suffix+" option[value='"+import_zone+"']").attr("selected", "selected");
-   } else {
-       $("#zone"+suffix+" option[value='"+export_zone+"']").attr("selected", "selected");
-   }
-   $(".zone").trigger('change');
+      var currentid = "#"+ $(this).attr('id');
+      var suffix = this.id.match(/\d+/)[0];
+      var import_zone = $(this).find(':selected').data("import_zone");
+      console.log('import_zone',import_zone)
+      var export_zone = $(this).find(':selected').data("export_zone");
+      console.log('export_zone',import_zone)
+      var zone_type = $("#type_id").val();
+      console.log('zone_type',zone_type);
+      console.log('suffix',suffix)
+      $("#zone"+suffix+" option:selected").removeAttr("selected");
+      if(zone_type) {
+         $("#zone"+suffix+" option[value='"+import_zone+"']").attr("selected", "selected");
+      } else {
+         $("#zone"+suffix+" option[value='"+export_zone+"']").attr("selected", "selected");
+      }
+      $(".zone").trigger('change');
    })
    
    $(document).on("change", ".zone", function(){

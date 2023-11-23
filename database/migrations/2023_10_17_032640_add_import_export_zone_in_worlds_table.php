@@ -15,8 +15,8 @@ class AddImportExportZoneInWorldsTable extends Migration
     public function up()
     {
         Schema::table('world_countries', function (Blueprint $table) {
-            $table->string('import_zone')->after('name')->default(null);
-            $table->string('export_zone')->after('import_zone')->default(null);
+            $table->string('import_zone')->after('name')->nullable();
+            $table->string('export_zone')->after('import_zone')->nullable();
         });
 
         $import_zone = config('countryzone.import_zone');
