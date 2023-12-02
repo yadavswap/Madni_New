@@ -68,6 +68,8 @@ Route::group(['prefix' => 'invoice'], function()
    Route::get('/view-lists/{customerid}','InvoiceController@viewlists')->name('invoice.view');
   Route::get('/view/{id}','InvoiceController@viewInvoice')->name('invoice.view');
    Route::get('/download/{id}','InvoiceController@downloadInvoice')->name('invoice.download');
+   Route::get('/docket/create','InvoiceController@docketCreate')->name('invoice.docket.create');
+   Route::post('/docket/save','InvoiceController@docketSave')->name('invoice.docket.save');
 
 });  
 

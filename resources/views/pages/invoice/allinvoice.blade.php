@@ -41,6 +41,8 @@
                enctype="multipart/form-data">
                <input type="hidden" id="type_id" name="type_id" value="{{$data['type_id']}}">
                <input type="hidden" name="price_categories_id" value="{{$customerdetails->price_categories_id}}">
+               <input type="hidden" id="company_state" name="company_state" value="{{$data['company_state']}}">
+               <input type="hidden" id="customer_state" name="customer_state" value="{{$data['customer_state']}}">
                <fieldset>
                   @csrf
                   {{-- Customer Name --}}
@@ -154,11 +156,14 @@
                                           <th>Size Show<small class="text-danger">*</small></th>
                                           <th>Select Mode<small class="text-danger">*</small></th>
                                           <th>Chargable Wt (In Kg) <small class="text-danger">*</small></th>
+                                          <th>Select Package<small class="text-danger">*</small></th>
+                                          <th>Weight Calc<small class="text-danger">*</small></th>
                                           <th>Select Origin <small class="text-danger">*</small></th>
                                           <th>Select Destination <small class="text-danger">*</small></th>
                                           <th>Select Zone <small class="text-danger">*</small></th>
                                           <th>Amount (INR) <small class="text-danger">*</small></th>
                                           <th>TGSC (INR) <small class="text-danger">*</small></th>
+                                          <th>Custom Charges <small class="text-danger">*</small></th>
                                           <th>Fuel Charge Per (25%) <small class="text-danger">*</small></th>
                                           <th>Fuel Charge (INR) <small class="text-danger">*</small></th>
                                           <!--<th>Enhance Security Charge (INR) <small class="text-danger">*</small></th>-->
@@ -180,6 +185,7 @@
                                                 <option value="1">TNT</option>
                                                 --}}
                                                 <option value="2">Fedex</option>
+                                                <option value="3">Other</option>
                                              </select>
                                           </td>
                                           <td>
@@ -245,6 +251,20 @@
                                              <input id="chargable_weight1" class="form-control chargable_weight"
                                                 name="product_details[chargable_weight][]" type="text"
                                                 placeholder="Chargable Wt" required />
+                                          </td>
+                                          <td>
+                                             <select class="w-100 package"
+                                                name="product_details[package][]" required="" id="package1">
+                                                <option value="" selected="selected">--Select Package --
+                                                </option>
+                                                @for($i=1;$i<=20;$i++)
+                                                   <option value="{{ $i }}">{{ $i }}</option>
+                                                @endfor
+                                             </select>
+                                          </td>
+                                          <td>
+                                             <button class="btn btn-info addweightcalc" type="button" data-toggle="modal" 
+                                                id="addweightcalc1" data-target="#addweightcalcmodal1" data-whatever="@getbootstrap">Weight Calc</button>
                                           </td>
                                           <td>
                                              <select class="basic-single w-100 origin"
@@ -315,20 +335,33 @@
                                              <input id="tgsc1" class="form-control tgsc" name="product_details[tgsc][]"
                                                 type="text" required   placeholder="73">
                                           </td>
+                                          <td>
+                                             <button class="btn btn-info addcustomcharge" type="button" data-toggle="modal" 
+                                                id="addcustomcharge1" data-target="#addcustomchargemodal1" data-whatever="@getbootstrap">Custom charge</button>
+                                          </td>
+                                          <td class="input-group">
+                                             <input id="fuel_charge_percent1" data-num="1" class="form-control fuel_charge_percent" name="product_details[fuel_charge_percent][]"
+                                                type="text" required   value="0">
+                                                <div class="input-group-append">
+                                                   <button class="input-group-text fuel_charge_calculate" id="fuel_charge_calculate1" type="button" data-num="1">Calculate</button>
+                                                </div>
+                                          </td>
+                                          <td>
+                                             <input id="fuel_charge1" data-num="1" class="form-control fuel_charge" name="product_details[fuel_charge][]"
+                                                type="text" required   value="0">
+                                          </td>
                                           <!--<td>
                                              <input id="esc1" class="form-control esc" name="product_details[esc][]"
                                                  type="text" required   placeholder="40">
                                              
                                              </td>-->
                                           <td>
-                                             <button class="btn btn-info addcustomcharge" type="button" data-toggle="modal" 
-                                                id="addcustomcharge1" data-target="#addcustomchargemodal1" data-whatever="@getbootstrap">Custom charge</button>
                                              <button class="btn btn-md btn-success addrow" type="button"
                                                 id="addrow1"> Add New <i class="fa fa-plus"></i></button>
                                              <button class="btn btn-md btn-danger deleterow" type="button"
                                                 id="deleterow1">
                                              Delete <i class="fa fa-trash-o"></i></button>
-                                             <!--- modal pop up -->
+                                             <!--- modal pop up for charges-->
                                              <div class="modal fade addcustomchargemodal" id="addcustomchargemodal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg" role="document">
                                                    <div class="modal-content">
@@ -411,6 +444,13 @@
                                                                      name="product_details[charge][air_cargo_registration_charge][] " type="number" placeholder=""  value="0">
                                                             </div>
                                                             </div>
+                                                            <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                  <label for="other_charge">Other Charge: *
+                                                                  <input id="charge_other_charge1" class="form-control charge_other_charge"
+                                                                     name="product_details[charge][other_charge][] " type="number" placeholder=""  value="0">
+                                                            </div>
+                                                            </div>
                                                          </div>
                                                          </form>
                                                        </div>
@@ -421,6 +461,63 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                          <!-- weight charge model -->
+                                          <div class="modal fade addweightcalcmodal" id="addweightcalcmodal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                   <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Weight Calculates</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                   </div>
+                                                   <div class="modal-body">
+                                                   <form>
+                                                      <div class="row">
+                                                         <div class="col-md-2">
+                                                            <div class="form-group">
+                                                               <label for="custom_clearance">Actual Weight: *
+                                                               <input id="weightcalc_actual_weight1" class="form-control weightcalc_actual_weight"
+                                                                  name="product_details[weightcalc][actual_weight][]" type="text" placeholder="Actual Weight">
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <div class="form-group">
+                                                               <label for="custom_clearance">L(VOLUMETRIC)*
+                                                               <input id="weightcalc_l1" class="form-control weightcalc_l"
+                                                                  name="product_details[weightcalc][l][]" type="text" placeholder="W">
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <div class="form-group">
+                                                               <label for="custom_clearance">W(VOLUMETRIC)*	
+                                                               <input id="weightcalc_w1" class="form-control weightcalc_w"
+                                                                  name="product_details[weightcalc][w][]" type="text" placeholder="L">
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <div class="form-group">
+                                                               <label for="custom_clearance">H(VOLUMETRIC)*	
+                                                               <input id="weightcalc_h1" class="form-control weightcalc_h"
+                                                                  name="product_details[weightcalc][h][]" type="text" placeholder="H">
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-md-2">
+                                                            <div class="form-group">
+                                                               <label for="custom_clearance">CHARGABLE WT (IN KG)*	
+                                                               <input id="weightcalc_chargable_weight1" class="form-control weightcalc_chargable_weight"
+                                                                  name="product_details[weightcalc][chargable_weight][]" type="text" placeholder="chargable WT">
+                                                            </div>
+                                                         </div>   
+                                                      </div>
+                                                   </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                                                </div>
+                                             </div>
+                                          </div>               
                                         </td>
                                     </tr>
                                 </tbody>
@@ -476,14 +573,14 @@
                               name="gross_amount" type="text" placeholder="" >
                         </div>
                      </div>
-                     <div class="col-md-3">
+                     <!--<div class="col-md-3">
                         <div class="form-group">
                            <label for="fuel_surcharge">Fuel Charge Percent: * <small class="text-success" id="fuelsurchargepercent">25%</small></label>
                            <input id="fuel_surcharge_percent" class="form-control fuel_surcharge_percent"
                               name="fuel_surcharge_percent" type="number" placeholder="" required value="0" >
                         </div>
-                     </div>
-                     <div class="col-md-2">
+                     </div>-->
+                     <div class="col-md-3">
                         <div class="form-group">
                            <label for="fuel_surcharge">Total Fuel Charge:</label>
                            <input id="fuel_surcharge " class="form-control fuel_surcharge"
@@ -499,7 +596,7 @@
                         
                         </div>
                         </div>-->
-                     <div class="col-md-2">
+                     <div class="col-md-3">
                         <div class="form-group">
                            <label for="tgsc_show">TGSC Show: * <small class="text-success" id="tgsc_show"></small></label>
                            <select class="tgsc_show form-control " name="tgsc_show" required="" id="tgsc_show">
@@ -508,7 +605,7 @@
                            </select>
                         </div>
                      </div>
-                     <div class="col-md-2">
+                     <div class="col-md-3">
                         <div class="form-group">
                            <label for="tgsc_total">TGSC: * <small class="text-success" id="tgsc_total"></small></label>
                            <input id="tgsc_total" class="form-control tgsc_total"
@@ -587,6 +684,13 @@
                            <label for="air_cargo_registration_charge">Air Cargo Registration Charges: *
                            <input id="air_cargo_registration_charge" class="form-control air_cargo_registration_charge"
                               name="air_cargo_registration_charge" type="text" placeholder=""  value="0">
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="form-group">
+                           <label for="other_charge">Other Charge: *
+                           <input id="other_charge" class="form-control other_charge"
+                              name="other_charge" type="text" placeholder=""  value="0">
                         </div>
                      </div>
                      <div class="col-md-4">
@@ -697,7 +801,33 @@
          alert("click on prcoess next btn for recaculate sum of tgsc and then caculate final price")
       }
    })
-   
+   // caulcate each fuel chage by perent
+   $('body').on('click', '.fuel_charge_calculate', function(){
+      var num = $(this).attr('data-num');
+      var fuel_charge_percent = $('#fuel_charge_percent'+num).val()
+      console.log('fuel_charge_calculate num',num)
+      console.log('fuel_charge_percent',fuel_charge_percent)
+      if(fuel_charge_percent != 0) {
+         var amount = parseFloat($("#amount"+num).val());
+         var tgsc = parseFloat($("#tgsc"+num).val());
+         var custom_charges = 0;
+         let custom_charge_field = <?php echo json_encode(config('madni.custom_charge_field')) ?>;
+         if(custom_charge_field) {
+            custom_charge_field.forEach(val => {
+               let sum_charge = 0;
+               // get sum of each paricular custom charge filed
+               $('#addcustomchargemodal'+num+' .charge_'+val).each(function(index,element){
+                  custom_charges = custom_charges + parseFloat($(element).val());
+               })
+            });
+         }
+         console.log('amount',amount,'tgsc',tgsc,'custom_charges',custom_charges,'fuel_charge_percent',fuel_charge_percent)
+         var fuel_charge = ((amount + tgsc + custom_charges) * fuel_charge_percent / 100)
+         console.log('fuel_charge of num',fuel_charge)
+         $('#fuel_charge'+num).val(parseFloat(fuel_charge).toFixed())
+      }
+   })
+
    $(document).ready(function () {
        $(".class_id").val("");
        $(".provider_id").val("");
@@ -729,6 +859,15 @@
    
        
    });
+
+   // package select single constiment
+   $('body').on('change', '.package', function(){
+      var num = parseInt($(this).prop("id").match(/\d+/g), 10);
+      var package = $(this).val();
+      console.log('package customiment no',num)
+      console.log('package ',package)
+      //$('#addweightcalcmodal'+num).modal('show');
+   })  
    
    
    //$("#addrow").click(function(){
@@ -766,6 +905,9 @@
    itemrow.find(".deleterow:last").attr("id","deleterow"+num);
    itemrow.find(".addrow:last").attr("id","addrow"+num);
    itemrow.find(".weight_size_show:last").attr("id","weight_size_show"+num);
+   itemrow.find(".fuel_charge_percent:last").attr({"id":"fuel_charge_percent"+num,"data-num":num}).val("0");
+   itemrow.find(".fuel_charge_calculate:last").attr({"id":"fuel_charge_calculate"+num,"data-num":num});
+   itemrow.find(".fuel_charge:last").attr({"id":"fuel_charge"+num,"data-num":num}).val("0");
    $("#itembody").append(itemrow);
    totalcount++;
      console.log(totalcount);
@@ -783,7 +925,18 @@
          itemrow.find(".addcustomchargemodal .charge_"+val+":last").attr("id","charge_"+val+num).val("0")
       });
    }
-   console.log(itemrow.find(".addcustomchargemodal:last").html());
+   // for wight chagre calculate
+   itemrow.find(".package:last").attr("id","mode"+num);
+   itemrow.find(".addweightcalc:last").attr("id","addweightcalc"+num);
+   itemrow.find(".addweightcalc:last").attr("data-target","#addweightcalcmodal"+num)
+   itemrow.find(".addweightcalcmodal:last").attr("id","addweightcalcmodal"+num);
+   let weight_cacl_field = <?php echo json_encode(config('madni.weight_cacl_field')) ?>;
+   if(weight_cacl_field) {
+      weight_cacl_field.forEach(val => {
+         itemrow.find(".addweightcalcmodal .weightcalc_"+val+":last").attr("id","weightcalc_"+val+num).val("0")
+      });
+   }
+   console.log(itemrow.find(".addweightcalcmodal:last").html());
    });
    
    
@@ -817,107 +970,94 @@
    });
    
    $(document).on("change", ".mode", function(){
-   var currentid = "#"+ $(this).attr('id');
-       var suffix = this.id.match(/\d+/)[0];
-       var currentvalue = $(this).val();
-       var actualwtid = "#actual_weight"+suffix;
-       var currentLid = "#l"+suffix;
-       var currentWid = "#w"+suffix;
-       var currentHid = "#h"+suffix;
-       var chargablewtid = "#chargable_weight"+suffix;
-   
-   
-       console.log(currentid);
-   
-     
-       if(currentvalue != "" && $(actualwtid).val() != "")
-       {
-           // Courier Normal Mode Calculation
-               if(currentvalue == 0 && $(currentLid).val() != "" && $(currentWid).val() != "" && $(currentHid).val() != "" )
-               {
-                   var total = ( parseFloat($("#l"+suffix).val()) * parseFloat($("#w"+suffix).val()) * parseFloat($("#h"+suffix).val()) ) / 5000;
-                   console.log(total);
-                   // var final = Math.max((total * 1000));
-                   // console.log("Final Weight "+final);
-                   if($(actualwtid).val() > total )
-                   {
-                       var total = $(actualwtid).val();
-                       $(chargablewtid).val(total);
-                   }
-                   if(total > $(actualwtid).val())
-                   {
-                       $(chargablewtid).val(total);
-                   }
-                  
-   
-   
-               }
-   
-   
-   
-               // End Courier Mode Calculation 
-   
-   
-               // Courier Cargo Mode
-   
-               if(currentvalue == 1 && $(currentLid).val() != "" && $(currentWid).val() != "" && $(currentHid).val() != "" )
-               {
-                  
-                   var total = ( parseFloat($("#l"+suffix).val()) * parseFloat($("#w"+suffix).val()) * parseFloat($("#h"+suffix).val()) ) / 6000;
-                  var total = total.toFixed(3);
-   
-                   console.log(total);
-                   // var final = Math.max((total * 1000));
-                   // console.log("Final Weight "+final);
-   
-                   if(total > $(actualwtid).val())
-                   {
-                       $(chargablewtid).val(total);
-   
-                   }
-                  if($(actualwtid).val() > total ){
-                      console.log(total);
-                      console.log($(actualwtid).val());
-                      $(chargablewtid).val($(actualwtid).val());
-                  }
-   
-   
-               }
-   
-               // End Courier Cargo Mode
-       }
-   
-       else{
-           $(currentid).val("");
-           alert ("Enter Actual Value First!");
-       }
-   
+      var currentid = "#"+ $(this).attr('id');
+      var suffix = this.id.match(/\d+/)[0];
+      var currentvalue = $(this).val();
+      var actualwtid = "#actual_weight"+suffix;
+      var currentLid = "#l"+suffix;
+      var currentWid = "#w"+suffix;
+      var currentHid = "#h"+suffix;
+      var chargablewtid = "#chargable_weight"+suffix;
+      console.log(currentid);
+      if(currentvalue != "" && $(actualwtid).val() != "")
+      {
+         // Courier Normal Mode Calculation
+         if(currentvalue == 0 && $(currentLid).val() != "" && $(currentWid).val() != "" && $(currentHid).val() != "" )
+         {
+            var total = ( parseFloat($("#l"+suffix).val()) * parseFloat($("#w"+suffix).val()) * parseFloat($("#h"+suffix).val()) ) / 5000;
+            console.log('normal mode total charge',total);
+            var actual_weight = $(actualwtid).val()
+            console.log('normal mode actual_weight',actual_weight);
+            if(Number(actual_weight) > Number(total)) {
+               $(chargablewtid).val(actual_weight)
+            } else {
+               $(chargablewtid).val(total)
+            }
+            /*if($(actualwtid).val() > total )
+            {
+            var total = $(actualwtid).val();
+            $(chargablewtid).val(total);
+            }
+            if(total > $(actualwtid).val())
+            {
+            $(chargablewtid).val(total);
+            }*/
+         }
+         // End Courier Mode Calculation 
+         // Courier Cargo Mode
+         if(currentvalue == 1 && $(currentLid).val() != "" && $(currentWid).val() != "" && $(currentHid).val() != "" )
+         {
+            var total = ( parseFloat($("#l"+suffix).val()) * parseFloat($("#w"+suffix).val()) * parseFloat($("#h"+suffix).val()) ) / 6000;
+            var total = total.toFixed(3);
+            var actual_weight = $(actualwtid).val()
+            if(Number(actual_weight) > Number(total)) {
+               $(chargablewtid).val(actual_weight)
+            } else {
+               $(chargablewtid).val(total)
+            }
+            /*if(total > $(actualwtid).val())
+            {
+            $(chargablewtid).val(total);
+            }
+            if($(actualwtid).val() > total ){
+            console.log(total);
+            console.log($(actualwtid).val());
+            $(chargablewtid).val($(actualwtid).val());
+            }*/
+         }
+         // End Courier Cargo Mode
+      } else{
+         $(currentid).val("");
+         alert ("Enter Actual Value First!");
+      }
    });
-   
-   
-   
    
    // Select Zone
    $('body').on('change', '.destination', function(){
       var currentid = "#"+ $(this).attr('id');
       var suffix = this.id.match(/\d+/)[0];
-      var import_zone = $(this).find(':selected').data("import_zone");
-      console.log('import_zone',import_zone)
-      var export_zone = $(this).find(':selected').data("export_zone");
-      console.log('export_zone',import_zone)
-      var zone_type = $("#type_id").val();
-      console.log('zone_type',zone_type);
-      console.log('suffix',suffix)
-      $("#zone"+suffix+" option:selected").removeAttr("selected");
-      if(zone_type) {
-         $("#zone"+suffix+" option[value='"+import_zone+"']").attr("selected", "selected");
-      } else {
-         $("#zone"+suffix+" option[value='"+export_zone+"']").attr("selected", "selected");
-      }
-      $(".zone").trigger('change');
+      var provider_id = $("#provider_id"+suffix).find(':selected').val()
+      console.log('destination change provider id',provider_id)
+      if(provider_id == 2) {
+         var import_zone = $(this).find(':selected').data("import_zone");
+         console.log('import_zone',import_zone)
+         var export_zone = $(this).find(':selected').data("export_zone");
+         console.log('export_zone',import_zone)
+         var zone_type = $("#type_id").val();
+         console.log('zone_type',zone_type);
+         console.log('suffix',suffix)
+         $("#zone"+suffix+" option:selected").removeAttr("selected");
+         if(zone_type) {
+            $("#zone"+suffix+" option[value='"+import_zone+"']").attr("selected", "selected");
+         } else {
+            $("#zone"+suffix+" option[value='"+export_zone+"']").attr("selected", "selected");
+         }
+         $(".zone").trigger('change');
+      }   
    })
    
    $(document).on("change", ".zone", function(){
+      console.log('zone change');
    var currentid = "#"+ $(this).attr('id');
        var suffix = this.id.match(/\d+/)[0];
        console.log($(currentid).val());
@@ -953,7 +1093,7 @@
                    dataType: "json",
                    method: "GET",
                    success: function(response){
-                       console.log(response);
+                       console.log('zone charge response',response);
    
                        if(response[0] != null){
    
@@ -1110,7 +1250,14 @@
       });
       
    }
-
+   // for show each fuel charge charge sum at last
+   let total_fuel_surcharge = 0
+   $(".fuel_charge").each( function(){
+      total_fuel_surcharge += parseFloat($(this).val());
+   });
+   console.log('total_fuel_surcharge',total_fuel_surcharge,'type of',typeof total_fuel_surcharge)
+   $(".fuel_surcharge").val(total_fuel_surcharge)
+   // for each weight size shwo
    $('.weight_size_show').each(function(index,element){
       console.log('constimenent index = ',$(element).val());
    })
@@ -1155,6 +1302,7 @@
    var warehousing_charge = parseFloat($('.warehousing_charge').val());
    var ad_code_registration_charge = parseFloat($('.ad_code_registration_charge').val());
    var air_cargo_registration_charge = parseFloat($('.air_cargo_registration_charge').val());
+   var other_charge = parseFloat($('.other_charge').val());
    var tgscamt =  parseFloat($('.tgsc_total').val());
    var fuel_surcharge_percent =  parseFloat($('.fuel_surcharge_percent').val());
    
@@ -1162,31 +1310,47 @@
    //var totalamount = gross_amount + fuel_surcharge + enhance_security_charge + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge + tgscamt;
    //var totalamount = gross_amount + fuel_surcharge + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge + tgscamt;
    console.log('old fuel_surcharge',fuel_surcharge)
-   var totalamount_without_fuel_surcharge = gross_amount + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge + tgscamt;
+   var totalamount_without_fuel_surcharge = gross_amount + custom_clearance + oda_charge +adc_noc_charge + do_charge + non_conveyar_charge+address_correction_charge + war_surcharge + warehousing_charge + ad_code_registration_charge + air_cargo_registration_charge + other_charge + tgscamt;
+   console.log(gross_amount,'+',custom_clearance,'+',oda_charge +adc_noc_charge,'+',do_charge,'+',non_conveyar_charge+address_correction_charge,'+',war_surcharge,'+',warehousing_charge,'+',ad_code_registration_charge,'+',air_cargo_registration_charge,'+',other_charge,'+',tgscamt)
    console.log('totalamount_without_fuel_surcharge',totalamount_without_fuel_surcharge)
-   let fuel_surcharge_new = (totalamount_without_fuel_surcharge)/100 * fuel_surcharge_percent;
+   /*let fuel_surcharge_new = (totalamount_without_fuel_surcharge)/100 * fuel_surcharge_percent;
    console.log('fuel_surcharge_new without fix',fuel_surcharge_new);
    $('.fuel_surcharge').val(fuel_surcharge_new.toFixed(2));
    
-   var totalamount = totalamount_without_fuel_surcharge + fuel_surcharge_new;
+   var totalamount = totalamount_without_fuel_surcharge + fuel_surcharge_new;*/
+   var totalamount = totalamount_without_fuel_surcharge + fuel_surcharge;
    console.log('total amount',totalamount)
-   if(is_import == "1")
-   {
-       var cgst = (totalamount * 9) / 100;
-   var sgst = (totalamount * 9) / 100;
-   finalgst = parseFloat(cgst) + parseFloat(sgst);
-   $("#cgst").val(cgst.toFixed(2));
-   $("#sgst").val(sgst.toFixed(2));
-       console.log("Import GST Calculation");
-     
+   var company_state = $('#company_state').val()
+   var customer_state = $('#customer_state').val()
+   if(company_state == customer_state) {
+      console.log('if same')
+      var cgst = (totalamount * 9) / 100;
+      var sgst = (totalamount * 9) / 100;
+      finalgst = parseFloat(cgst) + parseFloat(sgst);
+      $("#cgst").val(cgst.toFixed(2));
+      $("#sgst").val(sgst.toFixed(2));
+      console.log("Import GST Calculation");
+   } else {
+      console.log('not same')
+      var igst = (totalamount * 18) / 100;
+      finalgst = parseFloat(igst);
+      $("#igst").val(igst.toFixed(2));
+      console.log("Export GST Calculation");
    }
-   if(is_import == "0")
-   {
-   var igst = (totalamount * 18) / 100;
-   finalgst = parseFloat(igst);
-   $("#igst").val(igst.toFixed(2));
-   console.log("Export GST Calculation");
+   /*if(is_import == "1") {
+      var cgst = (totalamount * 9) / 100;
+      var sgst = (totalamount * 9) / 100;
+      finalgst = parseFloat(cgst) + parseFloat(sgst);
+      $("#cgst").val(cgst.toFixed(2));
+      $("#sgst").val(sgst.toFixed(2));
+      console.log("Import GST Calculation");
    }
+   if(is_import == "0") {
+      var igst = (totalamount * 18) / 100;
+      finalgst = parseFloat(igst);
+      $("#igst").val(igst.toFixed(2));
+      console.log("Export GST Calculation");
+   }*/
    totalamount = totalamount + finalgst;
    console.log('net amount',totalamount)
    

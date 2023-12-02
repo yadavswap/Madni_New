@@ -6,8 +6,13 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
       <style type="text/css">
-         body{margin-top:20px;
-         background:#eee;
+       
+         @page {
+            margin: 0px !important; /* Adjust the margin as needed */
+         }
+         body{
+            margin-top:20px;
+            background:#eee;
          }
          .invoice {
          padding: 15px;
@@ -20,8 +25,8 @@
          font-weight: 300;
          }
          .invoice hr {
-         margin-top: 7px;
-         margin-bottom:10px;
+         margin-top: 6px;
+         margin-bottom:4px;
          border-color: #ddd;
          }
          .invoice .table {
@@ -31,9 +36,10 @@
          border: none;
          }
          .invoice .identity {
-         margin-top: 10px;
+         margin-top: 8px;
          font-size: 1.1em;
          font-weight: 300;
+         padding-bottom:0px;
          }
          .invoice .identity strong {
          font-weight: 600;
@@ -52,13 +58,29 @@
          padding:5px; 
          }
          .invoice .table tr.line td {
-           padding:3px; 
+           padding:1.5px; 
          }
          .invoice .table tr.line :last-child {
              text-align:right;
          }
          .tax-invoice {
-            margin-top:10px;
+            margin-top:3px;
+            margin-bottom:0px;
+            font-size:17px;
+         }
+         .address {
+            font-size:12px;
+         }
+         .address address {
+            margin-bottom:10px;
+         }
+         .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+            padding:4px;
+         }
+         ol li {
+            font-size:11.5px;
+         }
+         .table {
             margin-bottom:5px;
          }
       </style>
@@ -79,7 +101,7 @@
                         </div>
                      </div>
                      <hr>
-                     <div class="row">
+                     <div class="row address">
                         <div class="col-xs-6">
                            <address>
                            <strong>To,</strong><br>
@@ -108,13 +130,13 @@
                                     <td><strong>Sr No</strong></td>
                                     <td class="text-center"><strong>Consignment No</strong></td>
                                     <td class="text-center"><strong>Booking Dt.</strong></td>
-                                    <td class="text-right"><strong>Origin</strong></td>
-                                    <td class="text-right"><strong>Destination</strong></td>
-                                    <td class="text-right"><strong>Zone</strong></td>
-                                    <td class="text-right"><strong>Product</strong></td>
-                                    <td class="text-right"><strong>Actual Weight Kgs</strong></td>
-                                    <td class="text-right"><strong>Chargable Weight Kgs</strong></td>
-                                    <td class="text-right"><strong>Amount Rs.</strong></td>
+                                    <td class="text-center"><strong>Origin</strong></td>
+                                    <td class="text-center"><strong>Destination</strong></td>
+                                    <td class="text-center"><strong>Zone</strong></td>
+                                    <td class="text-center"><strong>Product</strong></td>
+                                    <td class="text-center"><strong>Actual Weight Kgs</strong></td>
+                                    <td class="text-center"><strong>Chargable Weight Kgs</strong></td>
+                                    <td class="text-center"><strong>Amount Rs.</strong></td>
                                  </tr>
                               </thead>
                               <tbody>
@@ -148,7 +170,7 @@
 									<td class="text-center">
 										{{ roundwt($product->chargable_weight) }} 
 										@if($product->weight_size_show)
-											<br /> [<strong>{{ $product->l }} L</strong> X
+											[<strong>{{ $product->l }} L</strong> X
 											<strong>{{ $product->w }} W</strong> X <strong>{{ $product->h }} H</strong>]
 										@endif
 									</td>
@@ -160,8 +182,8 @@
                            <td class="text-center">₹ {{ $invoice->gross_amount }}</td>
                         </tr>
                         <tr class="line">
-                           <td colspan="6">Temp Global Surcharge- Minimum Rs. 73/- ++ , Then 57/- ++per kgs onwards <span</td>
-                           <td colspan="3" class="text-right">Temp Global Surcharge</td>
+                           <td colspan="7">Temp Global Surcharge- Minimum Rs. 73/- ++ , Then 57/- ++per kgs onwards <span</td>
+                           <td colspan="2" class="text-right">Temp Global Surcharge</td>
                            <td class="text-center">₹ {{ $invoice->tgsc }}</td>
                         </tr>
                         @if ($invoice->custom_clearance != 0)
@@ -232,6 +254,12 @@
                            <td class="text-center">₹ {{ $invoice->warehousing_charge }}</td>
                         </tr>
                         @endif
+                        @if($invoice->other_charge != 0 )
+                        <tr class="line">
+                           <td colspan="9" class="text-right">Other Charges</td>
+                           <td class="text-center">₹ {{ $invoice->other_charge }}</td>
+                        </tr>
+                        @endif
                         <tr class="line">
                            <td colspan="9" class="text-right">Fuel Surcharge Index</td>
                            <td class="text-center">₹ {{ $invoice->fuel_surcharge }}</td>
@@ -271,13 +299,13 @@
                   </table>
                </div>
             </div>
-			<hr style='margin-top:0px !important;margin-bottom:2px !important;'/>
+			   <hr style='margin-top:0px !important;margin-bottom:2px !important;'/>
             <div class="row"> 
                <div class="col-md-12 text-right identity">
-                  <p>For Madni International<br/><br/><strong>Authorized Signatory</strong></p>
+                  <p style="margin-bottom:0px;">For Madni International<br/><strong>Authorized Signatory</strong></p>
                </div>
                <div class="col-md-12">
-                  <p><strong>Terms & Conditions :</strong></p>
+                  <p style="margin-bottom:0px; "><strong>Terms & Conditions :</strong></p>
                <ol>
                <li>Payment of bills should be made only by an Account Payee Cheque / Demand Draft in favour of<u><b> “MADNI INTERNATIONAL” </b></u></li>
                <li>Any payment received after the due date may attract late payment charges of 2% per month</li>
@@ -341,12 +369,14 @@ function roundwt($price)
    var doc = new jsPDF();
 
    function saveDiv(divId, title) {
+      alert('save')
       doc.fromHTML(`<html><head><title>${title}</title></head><body>` + document.getElementById(divId).innerHTML + `</body></html>`);
       doc.save('div.pdf');
    }
 
    function printDiv(divId,title) {
-      let mywindow = window.open('', 'PRINT', 'height=100%,width=100%,top=50,left=50');
+      alert('print')
+      let mywindow = window.open('', 'PRINT', 'height=100%,width=100%,top=0,left=50');
       mywindow.document.write(`<html><head><title>${title}</title>`);
       mywindow.document.write('</head><body >');
       mywindow.document.write(document.getElementById(divId).innerHTML);
@@ -359,4 +389,11 @@ function roundwt($price)
       mywindow.close();
       return true;
    }
+   function setPrintStyles() {
+      // Check if the page is in print mode
+      if (window.matchMedia) {
+        var mediaQueryList = window.matchMedia('print');
+      }
+    }
+    window.onload = setPrintStyles;
 </script>

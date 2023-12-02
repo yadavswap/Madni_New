@@ -21,6 +21,8 @@ use App\Exceptions\Handler;
 use App\InvoiceProduct;
 use PDF;
 use App\FedexPrice;
+use App\Docket;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -46,12 +48,14 @@ class InvoiceController extends Controller
         if($id){
             $customerbyid = Customer::findOrFail($id);
             $pricecategory = PriceCategory::findorFail($customerbyid->price_categories_id);
-            return view('pages.invoice.details',compact(['customers','customerbyid','id']));
+            $states = DB::table('world_divisions')->where('country_id',85)->get();
+            return view('pages.invoice.details',compact(['customers','customerbyid','id','states']));
         }
 
         else{
             $id = 0;
-            return view('pages.invoice.details',compact(['customers','id']));
+            $states = DB::table('world_divisions')->where('country_id',85)->get();
+            return view('pages.invoice.details',compact(['customers','id','states']));
         }
 
     }
@@ -64,6 +68,8 @@ class InvoiceController extends Controller
             $data = [
                 'customer_id' => $request->customer_id,
                 'type_id' => $request->type,
+                'company_state' => $request->company_state,
+                'customer_state' => $request->customer_state
             ];
 
             return $this->allInvoice($data);
@@ -73,7 +79,9 @@ class InvoiceController extends Controller
             'customer_id' => 'required',
             'type' => 'required',
             'provider' => 'required',
-            'class' => 'required'
+            'class' => 'required',
+            'company_state' => 'required',
+            'customer_state' => 'required'
         ]);
 
             $customerdetails = Customer::findOrFail($request->customer_id);
@@ -453,6 +461,8 @@ class InvoiceController extends Controller
              'customer_id' => $request->customer_id,
              'price_categories_id' => $request->price_categories_id,
              'branch'=> $request->branch,
+             'company_state'=> $request->company_state,
+             'customer_state'=> $request->customer_state,
              'state_code' => $request->statecode,
              'invoice_date'=> $request->invoice_date,
              'gross_amount'=> $request->gross_amount,
@@ -469,6 +479,7 @@ class InvoiceController extends Controller
              'warehousing_charge' => $request->warehousing_charge,
              'ad_code_registration_charge' => $request->ad_code_registration_charge,
              'air_cargo_registration_charge' => $request->air_cargo_registration_charge,
+             'other_charge' => $request->other_charge,
              'gst_percentage' => 18,
              'cgst_amount' =>  round((float)$request->cgst,2),
              'sgst_amount'=> $request->sgst,
@@ -518,6 +529,9 @@ class InvoiceController extends Controller
              $productlists->product_type = $request->product_details["product_type"][$i];
              $productlists->zone = $request->product_details["zone"][$i];
              $productlists->amount = $request->product_details["amount"][$i];
+             $productlists->fuel_charge_percent = $request->product_details["fuel_charge_percent"][$i];
+             $productlists->fuel_charge = $request->product_details["fuel_charge"][$i];
+             $productlists->tgsc = $request->product_details["tgsc"][$i];
            //  dd($request->product_details["class_id"][$i]);
              // $productlists->star = $request->product_details["star"][$i];
 
@@ -558,6 +572,28 @@ class InvoiceController extends Controller
         }
         $zone = (array_key_exists($country,$country_zone)) ? $country_zone[$country] : null;
         return $zone;
+    }
+
+    public function docketCreate(Request $request) {
+        return view('pages.invoice.docket');
+    }
+    
+    public function docketSave(Request $request) {
+        $invoice = Docket::create([
+            'invoice_id' => $request->invoice_id ?? 1,
+            'customer_ref_no' => $request->customer_ref_no,
+            'to_collection_address' => $request->to_collection_address,
+            'delivery_address' => $request->delivery_address,
+            'dangours_good' => $request->dangours_good ?? 0,
+            'delivery_instruction' => $request->delivery_instruction,
+            'pirority' => $request->pirority ?? 0,
+            'inhanced_liability' => $request->inhanced_liability ?? 0,
+            'liability_value' => $request->liability_value,
+            'liability_currency' => $request->liability_currency,
+            'receiver_vat' => $request->receiver_vat,
+            'currency' => $request->currency,
+            'net_amount' => $request->net_amount,
+        ]);  
     }
     
 }
