@@ -10,6 +10,11 @@
 <link href="{{ asset('assets/plugins/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css') }}"
    rel="stylesheet" />
 <link href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" />
+<style>
+   .hide {
+      display:none !important;
+   }
+</style>
 @endpush
 @section('content')
 <div class="row">
@@ -285,7 +290,7 @@
                                                 }
                                                 @endphp
                                                 @foreach($countries as $country)
-                                                <option value="{{$country->name}}">{{$country->name}}
+                                                <option value="{{$country->name}}" data-import_zone="{{$country->import_zone}}" data-export_zone="{{$country->export_zone}}">{{$country->name}}
                                                 </option>
                                                 @endforeach
                                              </select>
@@ -474,46 +479,49 @@
                                                    </div>
                                                    <div class="modal-body">
                                                    <form>
-                                                      <div class="row">
+                                                      @for($i=1;$i<=20;$i++)
+                                                      <div class="row package_weightcalc_{{$i}}">
                                                          <div class="col-md-2">
                                                             <div class="form-group">
                                                                <label for="custom_clearance">Actual Weight: *
-                                                               <input id="weightcalc_actual_weight1" class="form-control weightcalc_actual_weight"
-                                                                  name="product_details[weightcalc][actual_weight][]" type="text" placeholder="Actual Weight">
+                                                               <input id="weightcalc_actual_weight1_{{$i}}" class="form-control weightcalc_actual_weight"
+                                                                  name="product_details['weightcalc'][actual_weight][]" type="text" placeholder="Actual Weight">
                                                             </div>
                                                          </div>
                                                          <div class="col-md-2">
                                                             <div class="form-group">
                                                                <label for="custom_clearance">L(VOLUMETRIC)*
-                                                               <input id="weightcalc_l1" class="form-control weightcalc_l"
+                                                               <input id="weightcalc_l1_{{$i}}" class="form-control weightcalc_l"
                                                                   name="product_details[weightcalc][l][]" type="text" placeholder="W">
                                                             </div>
                                                          </div>
                                                          <div class="col-md-2">
                                                             <div class="form-group">
                                                                <label for="custom_clearance">W(VOLUMETRIC)*	
-                                                               <input id="weightcalc_w1" class="form-control weightcalc_w"
+                                                               <input id="weightcalc_w1_{{$i}}" class="form-control weightcalc_w"
                                                                   name="product_details[weightcalc][w][]" type="text" placeholder="L">
                                                             </div>
                                                          </div>
                                                          <div class="col-md-2">
                                                             <div class="form-group">
                                                                <label for="custom_clearance">H(VOLUMETRIC)*	
-                                                               <input id="weightcalc_h1" class="form-control weightcalc_h"
+                                                               <input id="weightcalc_h1_{{$i}}" class="form-control weightcalc_h"
                                                                   name="product_details[weightcalc][h][]" type="text" placeholder="H">
                                                             </div>
                                                          </div>
                                                          <div class="col-md-2">
                                                             <div class="form-group">
                                                                <label for="custom_clearance">CHARGABLE WT (IN KG)*	
-                                                               <input id="weightcalc_chargable_weight1" class="form-control weightcalc_chargable_weight"
+                                                               <input id="weightcalc_chargable_weight1_{{$i}}" class="form-control weightcalc_chargable_weight"
                                                                   name="product_details[weightcalc][chargable_weight][]" type="text" placeholder="chargable WT">
                                                             </div>
                                                          </div>   
                                                       </div>
+                                                      @endfor
                                                    </form>
                                                 </div>
                                                 <div class="modal-footer">
+                                                   <button type="button" class="btn btn-primary weightcalc_btn" id="weightcalc_btn1">Calculate Total</button>
                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
                                                 </div>
                                              </div>
@@ -860,14 +868,86 @@
        
    });
 
-   // package select single constiment
-   $('body').on('change', '.package', function(){
+   $('body').on('click', '.addweightcalc', function(){
       var num = parseInt($(this).prop("id").match(/\d+/g), 10);
-      var package = $(this).val();
-      console.log('package customiment no',num)
+      var package = $("#package"+num).val();
+      console.log('package constiment no',num)
       console.log('package ',package)
+      for (let i = 1; i <= 20; i++) {
+         if (i <= package) {
+            $('.package_weightcalc_' + i).removeClass('hide');
+         } else {
+            $('.package_weightcalc_' + i).addClass('hide');
+         }
+      }
       //$('#addweightcalcmodal'+num).modal('show');
-   })  
+   })
+   $('body').on('blur', '.weightcalc_h', function(){
+      const weightcalc_h_id = $(this).attr('id');
+      console.log('weightcalc_h_id',weightcalc_h_id)
+      var matchResult = weightcalc_h_id.match(/weightcalc_h(\d+)_(\d+)/);
+      let num  = matchResult[1]
+      let packageno  = matchResult[2]
+      let suffix = num+"_"+packageno
+      console.log('num',num)
+      console.log('packageno',packageno)
+      console.log('suffix',suffix)
+      var currentvalue = $("#mode"+num).val();
+      var actualwtid = "#weightcalc_actual_weight"+suffix;
+      var currentLid = "#weightcalc_l"+suffix;
+      var currentWid = "#weightcalc_w"+suffix;
+      var currentHid = "#weightcalc_h"+suffix;
+      var chargablewtid = "#weightcalc_chargable_weight"+suffix;
+      if(currentvalue != "" && $(actualwtid).val() != "")
+      {
+         // Courier Normal Mode Calculation
+         if(currentvalue == 0 && $(currentLid).val() != "" && $(currentWid).val() != "" && $(currentHid).val() != "" )
+         {
+            var total = ( parseFloat($(currentLid).val()) * parseFloat($(currentWid).val()) * parseFloat($(currentHid).val()) ) / 5000;
+            console.log('weight calc normal mode total charge',total);
+            var actual_weight = $(actualwtid).val()
+            console.log('weight calc normal mode actual_weight',actual_weight);
+            if(Number(actual_weight) > Number(total)) {
+               $(chargablewtid).val(actual_weight)
+            } else {
+               $(chargablewtid).val(total)
+            }
+         }
+         // Cargo Mode Calculation
+         if(currentvalue == 1 && $(currentLid).val() != "" && $(currentWid).val() != "" && $(currentHid).val() != "" )
+         {
+            var total = ( parseFloat($(currentLid).val()) * parseFloat($(currentWid).val()) * parseFloat($(currentHid).val()) ) / 5000;
+            console.log('weight calc cargo mode total charge',total);
+            var actual_weight = $(actualwtid).val()
+            console.log('weight calc cargo mode actual_weight',actual_weight);
+            if(Number(actual_weight) > Number(total)) {
+               $(chargablewtid).val(actual_weight)
+            } else {
+               $(chargablewtid).val(total)
+            }
+         }
+      } else{
+         alert ("Enter Actual Value First!");
+      }
+   }); 
+
+   $('body').on('click', '.weightcalc_btn', function(){
+      let num = parseInt($(this).prop("id").match(/\d+/g), 10)
+      console.log('weightcalc_btn num',num)
+      let total_acutal_weight = 0;
+      let total_chargable_weight = 0; 
+      $("#addweightcalcmodal"+num+" .weightcalc_actual_weight:visible").each(function(index,element){
+         console.log('weightcalc_actual_weight',parseFloat($(element).val()))
+         total_acutal_weight = total_acutal_weight + parseFloat($(element).val());
+      });
+      $("#addweightcalcmodal"+num+" .weightcalc_chargable_weight:visible").each(function(index,element){
+         console.log('weightcalc_chargable_weight',parseFloat($(element).val()));
+         $(this).parent()
+         total_chargable_weight = total_chargable_weight + parseFloat($(element).val());
+      });
+      console.log('total_acutal_weight',total_acutal_weight)
+      console.log('total_chargable_weight',total_chargable_weight)
+   })
    
    
    //$("#addrow").click(function(){
@@ -908,6 +988,22 @@
    itemrow.find(".fuel_charge_percent:last").attr({"id":"fuel_charge_percent"+num,"data-num":num}).val("0");
    itemrow.find(".fuel_charge_calculate:last").attr({"id":"fuel_charge_calculate"+num,"data-num":num});
    itemrow.find(".fuel_charge:last").attr({"id":"fuel_charge"+num,"data-num":num}).val("0");
+   // for wight chagre calculate
+   itemrow.find(".package:last").attr("id","package"+num);
+   itemrow.find(".addweightcalc:last").attr("id","addweightcalc"+num);
+   itemrow.find(".addweightcalc:last").attr("data-target","#addweightcalcmodal"+num)
+   itemrow.find(".addweightcalcmodal:last").attr("id","addweightcalcmodal"+num);
+   itemrow.find(".weightcalc_btn:last").attr("id","weightcalc_btnl"+num);
+   let weight_cacl_field = <?php echo json_encode(config('madni.weight_cacl_field')) ?>;
+   let current = num-1;
+   if(weight_cacl_field) {
+      for(let i=1;i<=20;i++) {
+         weight_cacl_field.forEach(val => {
+            // itemrow.find(".addweightcalcmodal .weightcalc_"+val+":last").attr("id","weightcalc_"+val+num).val("0")
+            itemrow.find(".addweightcalcmodal #weightcalc_"+val+current+"_"+i).attr("id","weightcalc_"+val+num+"_"+i).val("0")
+         });
+      }   
+   }
    $("#itembody").append(itemrow);
    totalcount++;
      console.log(totalcount);
@@ -923,17 +1019,6 @@
    if(custom_charge_field) {
       custom_charge_field.forEach(val => {
          itemrow.find(".addcustomchargemodal .charge_"+val+":last").attr("id","charge_"+val+num).val("0")
-      });
-   }
-   // for wight chagre calculate
-   itemrow.find(".package:last").attr("id","mode"+num);
-   itemrow.find(".addweightcalc:last").attr("id","addweightcalc"+num);
-   itemrow.find(".addweightcalc:last").attr("data-target","#addweightcalcmodal"+num)
-   itemrow.find(".addweightcalcmodal:last").attr("id","addweightcalcmodal"+num);
-   let weight_cacl_field = <?php echo json_encode(config('madni.weight_cacl_field')) ?>;
-   if(weight_cacl_field) {
-      weight_cacl_field.forEach(val => {
-         itemrow.find(".addweightcalcmodal .weightcalc_"+val+":last").attr("id","weightcalc_"+val+num).val("0")
       });
    }
    console.log(itemrow.find(".addweightcalcmodal:last").html());
@@ -1033,7 +1118,7 @@
    });
    
    // Select Zone
-   $('body').on('change', '.destination', function(){
+   /*$('body').on('change', '.destination', function(){
       var currentid = "#"+ $(this).attr('id');
       var suffix = this.id.match(/\d+/)[0];
       var provider_id = $("#provider_id"+suffix).find(':selected').val()
@@ -1044,6 +1129,54 @@
          var export_zone = $(this).find(':selected').data("export_zone");
          console.log('export_zone',import_zone)
          var zone_type = $("#type_id").val();
+         console.log('zone_type',zone_type);
+         console.log('suffix',suffix)
+         $("#zone"+suffix+" option:selected").removeAttr("selected");
+         if(zone_type) {
+            $("#zone"+suffix+" option[value='"+import_zone+"']").attr("selected", "selected");
+         } else {
+            $("#zone"+suffix+" option[value='"+export_zone+"']").attr("selected", "selected");
+         }
+         $(".zone").trigger('change');
+      }   
+   })*/
+
+   // Select Zone by desination
+   $('body').on('change', '.destination', function(){
+      var currentid = "#"+ $(this).attr('id');
+      var suffix = this.id.match(/\d+/)[0];
+      var provider_id = $("#provider_id"+suffix).find(':selected').val()
+      console.log('destination change provider id',provider_id)
+      var zone_type = $("#type_id").val();
+      if(provider_id == 2 && zone_type == 0) {
+         var import_zone = $(this).find(':selected').data("import_zone");
+         console.log('import_zone',import_zone)
+         var export_zone = $(this).find(':selected').data("export_zone");
+         console.log('export_zone',import_zone)
+         console.log('zone_type',zone_type);
+         console.log('suffix',suffix)
+         $("#zone"+suffix+" option:selected").removeAttr("selected");
+         if(zone_type) {
+            $("#zone"+suffix+" option[value='"+import_zone+"']").attr("selected", "selected");
+         } else {
+            $("#zone"+suffix+" option[value='"+export_zone+"']").attr("selected", "selected");
+         }
+         $(".zone").trigger('change');
+      }   
+   })
+
+   // Select Zone by origin
+   $('body').on('change', '.origin', function(){
+      var currentid = "#"+ $(this).attr('id');
+      var suffix = this.id.match(/\d+/)[0];
+      var provider_id = $("#provider_id"+suffix).find(':selected').val()
+      console.log('origin change provider id',provider_id)
+      var zone_type = $("#type_id").val();
+      if(provider_id == 2 && zone_type == 1) {
+         var import_zone = $(this).find(':selected').data("import_zone");
+         console.log('import_zone',import_zone)
+         var export_zone = $(this).find(':selected').data("export_zone");
+         console.log('export_zone',import_zone)
          console.log('zone_type',zone_type);
          console.log('suffix',suffix)
          $("#zone"+suffix+" option:selected").removeAttr("selected");

@@ -454,6 +454,11 @@ class InvoiceController extends Controller
 
 
     public function storeAll(Request $request){
+        print_r($request->input('product_details.weightcalc'));
+        echo 'all';
+        print_r($request->all());
+        echo 'var dump';
+        var_dump($request->all());die;
         $i = 0;
         $volumetricwt = 0;
  
@@ -579,6 +584,16 @@ class InvoiceController extends Controller
     }
     
     public function docketSave(Request $request) {
+
+        $request->validate([
+            'customer_ref_no' => 'nullable',
+            'to_collection_address' => 'required',
+            'delivery_address' => 'required',
+            'receiver_vat' => 'required|numeric',
+            'currency' => 'required',
+            'net_amount' => 'required|numeric',
+        ]);
+
         $invoice = Docket::create([
             'invoice_id' => $request->invoice_id ?? 1,
             'customer_ref_no' => $request->customer_ref_no,

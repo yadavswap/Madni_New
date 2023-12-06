@@ -216,7 +216,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <label for="">Liability Currency</label>
+                        <label for="">Inhanced Liability</label>
                         <div class="form-check">
                             <input class="form-check-input inhanced_liability" type="checkbox" value="1" name="inhanced_liability" id="inhanced_liability" style="margin-left:auto;" @if(old('inhanced_liability') == 1) 'checked' @endif>
                             <label class="form-check-label" for="inhanced_liability">Yes Inhanced Liability</label>
@@ -227,12 +227,18 @@
                             <label for="liability_currency">Liability Currency</label>
                             <input id="liability_currency" class="form-control" name="liability_currency" type="text" value="{{old('liability_currency')}}" readonly>
                         </div>
+                        @if($errors->has('liability_currency'))
+                            <div class="error text-danger">{{ $errors->first('liability_currency') }}</div>
+                        @endif
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="liability_value">Liability Value</label>
                             <input id="liability_value" class="form-control" name="liability_value" type="text" value="{{old('liability_value')}}" readonly>
                         </div>
+                        @if($errors->has('liability_value'))
+                            <div class="error text-danger">{{ $errors->first('liability_value') }}</div>
+                        @endif
                     </div>    
                   </div>
                   <h6 class="">Dutiable Shipment Deatils</h6>
@@ -244,6 +250,9 @@
                             <input id="receiver_vat" class="form-control" name="receiver_vat" type="text"  required=""
                             value="{{old('receiver_vat')}}" 
                             >
+                            @if($errors->has('receiver_vat'))
+                                <div class="error text-danger">{{ $errors->first('receiver_vat') }}</div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -252,6 +261,9 @@
                             <input id="currency" class="form-control" name="currency" type="text"  required=""
                             value="{{old('currency')}}" 
                             >
+                            @if($errors->has('currency'))
+                                <div class="error text-danger">{{ $errors->first('currency') }}</div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -260,6 +272,9 @@
                             <input id="net_amount" class="form-control" name="net_amount" type="text"  required=""
                             value="{{old('net_amount')}}" 
                             >
+                            @if($errors->has('net_amount'))
+                                <div class="error text-danger">{{ $errors->first('net_amount') }}</div>
+                            @endif
                         </div>
                     </div>    
                   </div>  
@@ -318,9 +333,13 @@
             console.log('chl lib')
             $("#liability_currency").removeAttr('readonly')
             $("#liability_value").removeAttr('readonly')
+            $("#liability_currency").attr('required','')
+            $("#liability_value").attr('required','')
         } else {
             $("#liability_currency").attr("readonly", "readonly").val('');
             $("#liability_value").attr("readonly", "readonly").val('');
+            $("#liability_currency").removeAttr('required')
+            $("#liability_value").removeAttr('required')
         }
     })   
 </script>
