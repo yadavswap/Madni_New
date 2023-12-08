@@ -454,11 +454,6 @@ class InvoiceController extends Controller
 
 
     public function storeAll(Request $request){
-        print_r($request->input('product_details.weightcalc'));
-        echo 'all';
-        print_r($request->all());
-        echo 'var dump';
-        var_dump($request->all());die;
         $i = 0;
         $volumetricwt = 0;
  
@@ -579,13 +574,19 @@ class InvoiceController extends Controller
         return $zone;
     }
 
-    public function docketCreate(Request $request) {
-        return view('pages.invoice.docket');
+    public function docketCreate(Request $request,$invoice_id) {
+        $invoice = CustomerInvoice::find($invoice_id);
+        if($invoice) {
+            return view('pages.invoice.docket',compact('invoice_id'));
+        } else {
+            abort(404);
+        }
     }
     
     public function docketSave(Request $request) {
 
         $request->validate([
+            'invoice_id' => 'required',
             'customer_ref_no' => 'nullable',
             'to_collection_address' => 'required',
             'delivery_address' => 'required',
@@ -595,7 +596,7 @@ class InvoiceController extends Controller
         ]);
 
         $invoice = Docket::create([
-            'invoice_id' => $request->invoice_id ?? 1,
+            'invoice_id' => $request->invoice_id,
             'customer_ref_no' => $request->customer_ref_no,
             'to_collection_address' => $request->to_collection_address,
             'delivery_address' => $request->delivery_address,
@@ -609,6 +610,17 @@ class InvoiceController extends Controller
             'currency' => $request->currency,
             'net_amount' => $request->net_amount,
         ]);  
+    }
+
+    public function docketView(Request $request,$id) {
+        $docket = Docket::where('id',$id)->firstOrFail();
+        if($docket) {
+            $invoice = CustomerInvoice::with('customer','invoice_products')->where('id',$docket->invoice_id)->firstOrFail();
+            dd($invoice);
+        } else {
+            abort(404);
+        }
+
     }
     
 }

@@ -26,6 +26,7 @@
                   @csrf
                   <h6 class="">Customer Detils</h6> 
                   <hr/>
+                  <input type='text' name='invoice_id' value="{{ $invoice_id }}">
                   <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">

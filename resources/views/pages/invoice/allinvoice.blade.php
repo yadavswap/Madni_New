@@ -937,16 +937,17 @@
       let total_acutal_weight = 0;
       let total_chargable_weight = 0; 
       $("#addweightcalcmodal"+num+" .weightcalc_actual_weight:visible").each(function(index,element){
-         console.log('weightcalc_actual_weight',parseFloat($(element).val()))
          total_acutal_weight = total_acutal_weight + parseFloat($(element).val());
       });
       $("#addweightcalcmodal"+num+" .weightcalc_chargable_weight:visible").each(function(index,element){
-         console.log('weightcalc_chargable_weight',parseFloat($(element).val()));
-         $(this).parent()
          total_chargable_weight = total_chargable_weight + parseFloat($(element).val());
       });
+      total_acutal_weight = total_acutal_weight.toFixed(2)
+      total_chargable_weight = total_chargable_weight.toFixed(2)
       console.log('total_acutal_weight',total_acutal_weight)
       console.log('total_chargable_weight',total_chargable_weight)
+      $("#actual_weight"+num).val(total_acutal_weight)
+      $("#chargable_weight"+num).val(total_chargable_weight)
    })
    
    
@@ -996,11 +997,12 @@
    itemrow.find(".weightcalc_btn:last").attr("id","weightcalc_btnl"+num);
    let weight_cacl_field = <?php echo json_encode(config('madni.weight_cacl_field')) ?>;
    let current = num-1;
+   console.log('weight pop up no',num)
+   console.log('weight pop up current',current)
    if(weight_cacl_field) {
       for(let i=1;i<=20;i++) {
          weight_cacl_field.forEach(val => {
-            // itemrow.find(".addweightcalcmodal .weightcalc_"+val+":last").attr("id","weightcalc_"+val+num).val("0")
-            itemrow.find(".addweightcalcmodal #weightcalc_"+val+current+"_"+i).attr("id","weightcalc_"+val+num+"_"+i).val("0")
+            itemrow.find("#weightcalc_"+val+1+"_"+i+":last").attr("id","weightcalc_"+val+num+"_"+i).val("0")
          });
       }   
    }
@@ -1021,8 +1023,8 @@
          itemrow.find(".addcustomchargemodal .charge_"+val+":last").attr("id","charge_"+val+num).val("0")
       });
    }
-   console.log(itemrow.find(".addweightcalcmodal:last").html());
-   });
+   //console.log(itemrow.find(".addweightcalcmodal:last").html());
+   }) ;
    
    
    //$("#deleterow").click(function () {
