@@ -476,7 +476,6 @@
                                                          </button>
                                                       </div>
                                                       <div class="modal-body">
-                                                         <form>
                                                          @for($i=1;$i<=20;$i++)
                                                          <div class="row package_weightcalc_{{$i}}">
                                                             <div class="col-md-2">
@@ -516,7 +515,6 @@
                                                             </div>   
                                                          </div>
                                                          @endfor
-                                                         </form>
                                                       </div>
                                                       <div class="modal-footer">
                                                          <button type="button" class="btn btn-primary weightcalc_btn" id="weightcalc_btn1">Calculate Total</button>
