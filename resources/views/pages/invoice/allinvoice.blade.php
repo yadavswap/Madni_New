@@ -377,7 +377,6 @@
                                                          </button>
                                                       </div>
                                                       <div class="modal-body">
-                                                      <form>
                                                          <div class="row">
                                                             <div class="col-md-4">
                                                             <div class="form-group">
@@ -457,7 +456,6 @@
                                                             </div>
                                                             </div>
                                                          </div>
-                                                         </form>
                                                        </div>
                                                        <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
@@ -467,65 +465,66 @@
                                                 </div>
                                             </div>
 
-                                          <!-- weight charge model -->
-                                          <div class="modal fade addweightcalcmodal" id="addweightcalcmodal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                             <div class="modal-dialog modal-lg" role="document">
-                                                <div class="modal-content">
-                                                   <div class="modal-header">
-                                                      <h5 class="modal-title" id="exampleModalLabel">Weight Calculates</h5>
-                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                      <span aria-hidden="true">&times;</span>
-                                                      </button>
-                                                   </div>
-                                                   <div class="modal-body">
-                                                   <form>
-                                                      @for($i=1;$i<=20;$i++)
-                                                      <div class="row package_weightcalc_{{$i}}">
-                                                         <div class="col-md-2">
-                                                            <div class="form-group">
-                                                               <label for="custom_clearance">Actual Weight: *
-                                                               <input id="weightcalc_actual_weight1_{{$i}}" class="form-control weightcalc_actual_weight"
-                                                                  name="product_details['weightcalc'][actual_weight][]" type="text" placeholder="Actual Weight">
-                                                            </div>
-                                                         </div>
-                                                         <div class="col-md-2">
-                                                            <div class="form-group">
-                                                               <label for="custom_clearance">L(VOLUMETRIC)*
-                                                               <input id="weightcalc_l1_{{$i}}" class="form-control weightcalc_l"
-                                                                  name="product_details[weightcalc][l][]" type="text" placeholder="W">
-                                                            </div>
-                                                         </div>
-                                                         <div class="col-md-2">
-                                                            <div class="form-group">
-                                                               <label for="custom_clearance">W(VOLUMETRIC)*	
-                                                               <input id="weightcalc_w1_{{$i}}" class="form-control weightcalc_w"
-                                                                  name="product_details[weightcalc][w][]" type="text" placeholder="L">
-                                                            </div>
-                                                         </div>
-                                                         <div class="col-md-2">
-                                                            <div class="form-group">
-                                                               <label for="custom_clearance">H(VOLUMETRIC)*	
-                                                               <input id="weightcalc_h1_{{$i}}" class="form-control weightcalc_h"
-                                                                  name="product_details[weightcalc][h][]" type="text" placeholder="H">
-                                                            </div>
-                                                         </div>
-                                                         <div class="col-md-2">
-                                                            <div class="form-group">
-                                                               <label for="custom_clearance">CHARGABLE WT (IN KG)*	
-                                                               <input id="weightcalc_chargable_weight1_{{$i}}" class="form-control weightcalc_chargable_weight"
-                                                                  name="product_details[weightcalc][chargable_weight][]" type="text" placeholder="chargable WT">
-                                                            </div>
-                                                         </div>   
+                                             <!-- weight calcluate model -->
+                                             <div class="modal fade addweightcalcmodal" id="addweightcalcmodal1" tabindex="-1" role="dialog" aria-labelledby="weightModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                   <div class="modal-content">
+                                                      <div class="modal-header">
+                                                         <h5 class="modal-title" id="weightModalLabel">Weight Calculates</h5>
+                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                         <span aria-hidden="true">&times;</span>
+                                                         </button>
                                                       </div>
-                                                      @endfor
-                                                   </form>
+                                                      <div class="modal-body">
+                                                         <form>
+                                                         @for($i=1;$i<=20;$i++)
+                                                         <div class="row package_weightcalc_{{$i}}">
+                                                            <div class="col-md-2">
+                                                               <div class="form-group">
+                                                                  <label for="custom_clearance">Actual Weight: *
+                                                                  <input id="weightcalc_actual_weight1_{{$i}}" class="form-control weightcalc_actual_weight"
+                                                                     name="product_details[weightcalc][actual_weight][]" type="text" placeholder="Actual Weight">
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                               <div class="form-group">
+                                                                  <label for="custom_clearance">L(VOLUMETRIC)*
+                                                                  <input id="weightcalc_l1_{{$i}}" class="form-control weightcalc_l"
+                                                                     name="product_details[weightcalc][l][]" type="text" placeholder="W">
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                               <div class="form-group">
+                                                                  <label for="custom_clearance">W(VOLUMETRIC)*	
+                                                                  <input id="weightcalc_w1_{{$i}}" class="form-control weightcalc_w"
+                                                                     name="product_details[weightcalc][w][]" type="text" placeholder="L">
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                               <div class="form-group">
+                                                                  <label for="custom_clearance">H(VOLUMETRIC)*	
+                                                                  <input id="weightcalc_h1_{{$i}}" class="form-control weightcalc_h"
+                                                                     name="product_details[weightcalc][h][]" type="text" placeholder="H">
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                               <div class="form-group">
+                                                                  <label for="custom_clearance">CHARGABLE WT (IN KG)*	
+                                                                  <input id="weightcalc_chargable_weight1_{{$i}}" class="form-control weightcalc_chargable_weight"
+                                                                     name="product_details[weightcalc][chargable_weight][]" type="text" placeholder="chargable WT">
+                                                               </div>
+                                                            </div>   
+                                                         </div>
+                                                         @endfor
+                                                         </form>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                         <button type="button" class="btn btn-primary weightcalc_btn" id="weightcalc_btn1">Calculate Total</button>
+                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                                                      </div>
+                                                   </div>   
                                                 </div>
-                                                <div class="modal-footer">
-                                                   <button type="button" class="btn btn-primary weightcalc_btn" id="weightcalc_btn1">Calculate Total</button>
-                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
-                                                </div>
-                                             </div>
-                                          </div>               
+                                             </div>               
                                         </td>
                                     </tr>
                                 </tbody>
