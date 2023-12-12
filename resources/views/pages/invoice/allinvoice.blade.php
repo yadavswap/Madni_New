@@ -476,41 +476,41 @@
                                                          </button>
                                                       </div>
                                                       <div class="modal-body">
-                                                         @for($i=1;$i<=20;$i++)
+                                                         @for($i=1;$i<=3;$i++)
                                                          <div class="row package_weightcalc_{{$i}}">
                                                             <div class="col-md-2">
                                                                <div class="form-group">
                                                                   <label for="custom_clearance">Actual Weight: *
                                                                   <input id="weightcalc_actual_weight1_{{$i}}" class="form-control weightcalc_actual_weight"
-                                                                     name="product_details[weightcalc][actual_weight][]" type="text" placeholder="Actual Weight">
+                                                                     name="product_details[weightcalc][actual_weight][0][{{$i}}]" type="text" placeholder="Actual Weight">
                                                                </div>
                                                             </div>
                                                             <div class="col-md-2">
                                                                <div class="form-group">
                                                                   <label for="custom_clearance">L(VOLUMETRIC)*
                                                                   <input id="weightcalc_l1_{{$i}}" class="form-control weightcalc_l"
-                                                                     name="product_details[weightcalc][l][]" type="text" placeholder="W">
+                                                                     name="product_details[weightcalc][l][0][{{$i}}]" type="text" placeholder="W">
                                                                </div>
                                                             </div>
                                                             <div class="col-md-2">
                                                                <div class="form-group">
                                                                   <label for="custom_clearance">W(VOLUMETRIC)*	
                                                                   <input id="weightcalc_w1_{{$i}}" class="form-control weightcalc_w"
-                                                                     name="product_details[weightcalc][w][]" type="text" placeholder="L">
+                                                                     name="product_details[weightcalc][w][0][{{$i}}]" type="text" placeholder="L">
                                                                </div>
                                                             </div>
                                                             <div class="col-md-2">
                                                                <div class="form-group">
                                                                   <label for="custom_clearance">H(VOLUMETRIC)*	
                                                                   <input id="weightcalc_h1_{{$i}}" class="form-control weightcalc_h"
-                                                                     name="product_details[weightcalc][h][]" type="text" placeholder="H">
+                                                                     name="product_details[weightcalc][h][0][{{$i}}]" type="text" placeholder="H">
                                                                </div>
                                                             </div>
                                                             <div class="col-md-2">
                                                                <div class="form-group">
                                                                   <label for="custom_clearance">CHARGABLE WT (IN KG)*	
                                                                   <input id="weightcalc_chargable_weight1_{{$i}}" class="form-control weightcalc_chargable_weight"
-                                                                     name="product_details[weightcalc][chargable_weight][]" type="text" placeholder="chargable WT">
+                                                                     name="product_details[weightcalc][chargable_weight][0][{{$i}}]" type="text" placeholder="chargable WT">
                                                                </div>
                                                             </div>   
                                                          </div>
@@ -870,7 +870,7 @@
       var package = $("#package"+num).val();
       console.log('package constiment no',num)
       console.log('package ',package)
-      for (let i = 1; i <= 20; i++) {
+      for (let i = 1; i <= 3; i++) {
          if (i <= package) {
             $('.package_weightcalc_' + i).removeClass('hide');
          } else {
@@ -997,9 +997,15 @@
    console.log('weight pop up no',num)
    console.log('weight pop up current',current)
    if(weight_cacl_field) {
-      for(let i=1;i<=20;i++) {
+      for(let i=1;i<=3;i++) {
          weight_cacl_field.forEach(val => {
-            itemrow.find("#weightcalc_"+val+1+"_"+i+":last").attr("id","weightcalc_"+val+num+"_"+i).val("0")
+            // itemrow.find("#weightcalc_"+val+1+"_"+i+":last").attr("id","weightcalc_"+val+num+"_"+i).val("0")
+            // itemrow.find("#weightcalc_"+val+1+"_"+i+":last").attr("name","product_details[weightcalc]["+val+"][1]["+i+"]").val(0)
+            itemrow.find("#weightcalc_" + val + 1 + "_" + i + ":last")
+            .attr({
+               "id": "weightcalc_" + val + num + "_" + i,
+               "name": "product_details[weightcalc][" + val + "][" + current + "][" + i + "]"
+            }).val(0);
          });
       }   
    }
