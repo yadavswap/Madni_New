@@ -454,8 +454,28 @@ class InvoiceController extends Controller
 
 
     public function storeAll(Request $request){
+        
+        echo '<pre/>';
+        print_r($request->product_details);
         $i = 0;
         $volumetricwt = 0;
+
+        $package_weight = [];
+        for($i = 0; $i < count($request->product_details["consignment_no"]); $i++){
+            $package = $request->product_details['package'][$i];
+            if(!empty($package)) {
+                $weight_cacl_field = config('madni.weight_cacl_field');
+                foreach($weight_cacl_field as $field) {
+                    $fieldData =  $request->product_details["weightcalc"][$field][$i];
+                    $filteredField = array_intersect_key($fieldData, array_flip(range(1, $package)));
+                    $package_weight[$i][$field] = $filteredField;
+                }     
+            } else {
+                $package_weight[$i] = null;
+            }       
+        }
+        echo '<pre/>';
+        print_r($package_weight);    
  
          $invoice = CustomerInvoice::create([
              'customer_id' => $request->customer_id,
@@ -540,6 +560,8 @@ class InvoiceController extends Controller
             foreach($custom_charge_field as $field) {
                 $productlists->$field = $request->product_details["charge"][$field][$i] ?? 0;
             }
+            $productlists->package = $request->product_details["package"][$i];
+            $productlists->package_weight = $package_weight[$i];
              
             $saved = $productlists->save();
             }
