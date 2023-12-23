@@ -33,8 +33,7 @@ class InvoiceController extends Controller
 
     public function index(){
 
-        $invoices = CustomerInvoice::with('customer')->orderBy('created_at','desc')->get();
-        //return $invoices;
+        $invoices = CustomerInvoice::with('customer','docket')->orderBy('created_at','desc')->get();
         return view('pages.invoice.index',compact('invoices'));
 
     }
@@ -599,14 +598,13 @@ class InvoiceController extends Controller
     public function docketCreate(Request $request,$invoice_id) {
         $invoice = CustomerInvoice::find($invoice_id);
         if($invoice) {
-            return view('pages.invoice.docket',compact('invoice_id'));
+            return view('pages.invoice.docket-create',compact('invoice_id'));
         } else {
             abort(404);
         }
     }
     
     public function docketSave(Request $request) {
-
         $request->validate([
             'invoice_id' => 'required',
             'customer_ref_no' => 'nullable',
@@ -617,7 +615,7 @@ class InvoiceController extends Controller
             'net_amount' => 'required|numeric',
         ]);
 
-        $invoice = Docket::create([
+        $docket = Docket::create([
             'invoice_id' => $request->invoice_id,
             'customer_ref_no' => $request->customer_ref_no,
             'to_collection_address' => $request->to_collection_address,
@@ -631,18 +629,32 @@ class InvoiceController extends Controller
             'receiver_vat' => $request->receiver_vat,
             'currency' => $request->currency,
             'net_amount' => $request->net_amount,
-        ]);  
+        ]);
+        if($docket){
+            return redirect()->route('invoice.docket.view',$docket['id'])->with('success','Docket generated successully');
+        } else {
+            return back()->with('error','Some error ocucer in generate docket');
+        }
     }
 
     public function docketView(Request $request,$id) {
         $docket = Docket::where('id',$id)->firstOrFail();
         if($docket) {
             $invoice = CustomerInvoice::with('customer','invoice_products')->where('id',$docket->invoice_id)->firstOrFail();
-            dd($invoice);
+            
+            $service_class = [];
+            foreach($invoice->invoice_products as $product) {
+                if(!array_key_exists($product->class_id,$service_class)) {
+                    $service_class[$product->class_id] = [];
+                }
+                if(!in_array($product->product_type,$service_class[$product->class_id])) {
+                    $service_class[$product->class_id][] = $product->product_type;
+                }
+            }
+            return view('pages.invoice.docket-view',compact('docket','invoice','service_class'));
+
         } else {
             abort(404);
         }
-
     }
-    
 }

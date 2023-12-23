@@ -26,7 +26,7 @@
                   @csrf
                   <h6 class="">Customer Detils</h6> 
                   <hr/>
-                  <input type='text' name='invoice_id' value="{{ $invoice_id }}">
+                  <input type='hidden' name='invoice_id' value="{{ $invoice_id }}">
                   <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -72,11 +72,11 @@
                             >
                         </div>
                     </div>       
-                    <div class="col-md-3">    
+                    <div class="col-md-6">    
                         <div class="form-group">
                             <label for="address">Address</label>
                             <input id="to_collection_address_address" class="form-control" name="to_collection_address[address]" type="text"  required=""
-                            value="{{old('to_collection_address.email')}}" 
+                            value="{{old('to_collection_address.address')}}" 
                             >
                         </div>
                     </div>       
@@ -155,11 +155,11 @@
                             >
                         </div>
                     </div>       
-                    <div class="col-md-3">    
+                    <div class="col-md-6">    
                         <div class="form-group">
                             <label for="address">Address</label>
                             <input id="delivery_address_address" class="form-control" name="delivery_address[address]" type="text"  required=""
-                            value="{{old('delivery_address.email')}}" 
+                            value="{{old('delivery_address.address')}}" 
                             >
                         </div>
                     </div>       

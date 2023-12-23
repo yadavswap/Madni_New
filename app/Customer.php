@@ -8,7 +8,7 @@ class Customer extends Model
 {
     //
     
-    protected $fillable = ['fullname','mobile','email','mobile','gstin','country_id','state','pincode','address','price_categories_id'];
+    protected $fillable = ['fullname','mobile','email','mobile','gstin','account_no','country_id','state','pincode','address','price_categories_id'];
    
     public function category()
 

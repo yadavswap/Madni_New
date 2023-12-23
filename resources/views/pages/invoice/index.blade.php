@@ -45,6 +45,7 @@
                   <th>Provider Name</th>
                   <th>Net Amount</th>
                   <th>View Invoice</th>
+                  <th>View Docket</th>
                   <th>Invoice Lists</th>
                 </tr>
               </thead>
@@ -63,13 +64,20 @@
             <td class="text-danger"> <b> &#8377;  {{$invoice->net_amount}} </b></td>
             <td>
                 <a href="{{route('invoice.view',$invoice->id)}}" target="_blank">
-              <button class="btn btn-md btn-warning"><i class="fa fa-eye"></i>
-
-          
-            </button>
-              </a>
-          </td>
-          
+                  <button class="btn btn-md btn-warning"><i class="fa fa-eye"></i></button>
+                </a>
+            </td>
+            <td>
+                @if(!empty($invoice['docket']))
+                <a href="{{route('invoice.docket.view',$invoice['docket']['id'])}}" target="_blank">
+                  <button class="btn btn-md btn-warning"><i class="fa fa-eye"></i></button>
+                </a>
+                @else
+                <a href="{{route('invoice.docket.create',$invoice->id)}}" target="_blank">
+                  <button class="btn btn-md btn-warning"><i class="fa fa-eye"></i></button>
+                </a>
+                @endif
+            </td>
             <td><button class="btn btn-md btn-secondary"><i class="fa fa-list"></i></button></td>
                 
               

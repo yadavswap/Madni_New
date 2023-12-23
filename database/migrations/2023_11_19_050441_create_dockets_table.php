@@ -30,6 +30,10 @@ class CreateDocketsTable extends Migration
             $table->double('net_amount')->nullable();
             $table->timestamps();
         });
+
+        Schema::table('customers', function (Blueprint $table) {
+            $table->string('account_no')->after('gstin')->nullable();
+        });
     }
 
     /**
@@ -40,5 +44,8 @@ class CreateDocketsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('dockets');
+        Schema::table('customers', function (Blueprint $table) {
+            $table->dropColumn('account_no');
+        });
     }
 }

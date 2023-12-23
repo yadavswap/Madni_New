@@ -172,6 +172,16 @@
 										@if($product->weight_size_show)
 											[<strong>{{ $product->l }} L</strong> X
 											<strong>{{ $product->w }} W</strong> X <strong>{{ $product->h }} H</strong>]
+                                 <br/><br/>Item Wise
+                                 @if(!empty($product->package) && !empty($product->package_weight))
+                                    @for($i=1;$i<=$product->package;$i++)
+                                       <br/>
+                                       [<strong>{{ $product->package_weight['l'][$i] }} L</strong> X
+											      <strong>{{ $product->package_weight['w'][$i] }} W</strong> X 
+                                       <strong>{{ $product->package_weight['h'][$i] }} H</strong>]
+                                    @endfor
+                                 @endif
+
 										@endif
 									</td>
                            <td class="text-center">{{$product->amount}}</td>

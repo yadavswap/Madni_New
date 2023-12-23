@@ -18,4 +18,9 @@ class CustomerInvoice extends Model
     {
         return $this->hasMany('App\InvoiceProduct', 'customer_invoice_id','id');
     }
+
+    public function docket()
+    {
+        return $this->hasOne('App\Docket', 'invoice_id','id');
+    }
 }

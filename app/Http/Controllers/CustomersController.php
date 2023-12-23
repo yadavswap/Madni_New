@@ -53,7 +53,8 @@ class CustomersController extends Controller
             'state'=>$request->state,
             'pincode'=> $request->pincode,
             'address' => $request->address,
-            'price_categories_id'=>$request->price_category
+            'price_categories_id'=>$request->price_category,
+            'account_no' => $request->account_no
 
         ]);
 
