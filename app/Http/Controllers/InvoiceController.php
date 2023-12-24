@@ -454,10 +454,9 @@ class InvoiceController extends Controller
 
     public function storeAll(Request $request){
         
-        echo '<pre/>';
-        print_r($request->product_details);
         $i = 0;
-        $volumetricwt = 0;
+        //$volumetricwt = 0;
+        $volumetricwt = [];
 
         $package_weight = [];
         for($i = 0; $i < count($request->product_details["consignment_no"]); $i++){
@@ -471,12 +470,23 @@ class InvoiceController extends Controller
                 }     
             } else {
                 $package_weight[$i] = null;
-            }       
+            }  
+            
+            // volumetric weight calculation piece wise
+            $volumetricwt[$i] = 0;
+            if(!empty($package_weight[$i])) {
+                for($j=1;$j<=$package;$j++) {
+                    if($request->product_details["mode"][$i] == 0){
+                        $modedivide = 5000;
+                    }
+                    if($request->product_details["mode"][$i] == 1){
+                        $modedivide = 6000;
+                    }
+                    $volumetricwt[$i] += ($package_weight[$i]["l"][$j] * $package_weight[$i]["w"][$j] * $package_weight[$i]["h"][$j]) / $modedivide;
+                }
+            }    
         }
-        echo '<pre/>';
-        print_r($package_weight);    
- 
-         $invoice = CustomerInvoice::create([
+        $invoice = CustomerInvoice::create([
              'customer_id' => $request->customer_id,
              'price_categories_id' => $request->price_categories_id,
              'branch'=> $request->branch,
@@ -536,15 +546,15 @@ class InvoiceController extends Controller
              $productlists->weight_size_show = $request->product_details["weight_size_show"][$i] ?? 0;
              $productlists->mode = $request->product_details["mode"][$i];
              $productlists->chargable_weight = $request->product_details["chargable_weight"][$i];
-             if($request->product_details["mode"][$i] == 0){
+             /*if($request->product_details["mode"][$i] == 0){
                  $volumetricwt = ($request->product_details["l"][$i] +  $request->product_details["w"][$i] + $request->product_details["h"][$i])/5000;
              }
              if($request->product_details["mode"][$i] == 1){
                  $volumetricwt = ($request->product_details["l"][$i] +  $request->product_details["w"][$i] + $request->product_details["h"][$i])/6000;
  
-             }
+             }*/
            
-             $productlists->volumetric_weight = $volumetricwt;
+             $productlists->volumetric_weight = $volumetricwt[$i] ?? 0;
              $productlists->product_type = $request->product_details["product_type"][$i];
              $productlists->zone = $request->product_details["zone"][$i];
              $productlists->amount = $request->product_details["amount"][$i];

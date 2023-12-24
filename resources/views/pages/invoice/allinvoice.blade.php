@@ -222,7 +222,7 @@
                                           </td>
                                           <td>
                                              <input id="actual_weight1" class="form-control actual_weight"
-                                                name="product_details[actual_weight][]" type="text" placeholder="Actual Weight">
+                                                name="product_details[actual_weight][]" type="text" placeholder="Actual Weight" readonly>
                                           </td>
                                           <td>
                                              <input id="l1" class="form-control l" name="product_details[l][]"
@@ -255,7 +255,7 @@
                                           <td>
                                              <input id="chargable_weight1" class="form-control chargable_weight"
                                                 name="product_details[chargable_weight][]" type="text"
-                                                placeholder="Chargable Wt" required />
+                                                placeholder="Chargable Wt" required readonly/>
                                           </td>
                                           <td>
                                              <select class="w-100 package"
@@ -510,15 +510,15 @@
                                                                <div class="form-group">
                                                                   <label for="custom_clearance">CHARGABLE WT (IN KG)*	
                                                                   <input id="weightcalc_chargable_weight1_{{$i}}" class="form-control weightcalc_chargable_weight"
-                                                                     name="product_details[weightcalc][chargable_weight][0][{{$i}}]" type="text" placeholder="chargable WT">
+                                                                     name="product_details[weightcalc][chargable_weight][0][{{$i}}]" type="text" placeholder="chargable WT" readonly>
                                                                </div>
                                                             </div>   
                                                          </div>
                                                          @endfor
                                                       </div>
                                                       <div class="modal-footer">
-                                                         <button type="button" class="btn btn-primary weightcalc_btn" id="weightcalc_btn1">Calculate Total</button>
-                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                                                         <button type="button" class="btn btn-primary weightcalc_btn" id="weightcalc_btn1">Calculate Total Acutal & Chargeable Weight</button>
+                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                       </div>
                                                    </div>   
                                                 </div>
@@ -1058,8 +1058,27 @@
    $("#amount"+suffix).val("0");
    
    });
+
+   $('body').on("change", ".type", function(){
+      var currentid = "#"+ $(this).attr('id');
+      var suffix = this.id.match(/\d+/)[0];
+      var currentvalue = $(this).val();
+      var currentLid = "#l"+suffix;
+      var currentWid = "#w"+suffix;
+      var currentHid = "#h"+suffix;
+      console.log('product_type current',currentvalue)
+      if(currentvalue == 0) {
+         $(currentLid).val(0)
+         $(currentWid).val(0)
+         $(currentHid).val(0)
+      } else {
+         $(currentLid).val('')
+         $(currentWid).val('')
+         $(currentHid).val('')
+      }
+   })   
    
-   $(document).on("change", ".mode", function(){
+   /*$(document).on("change", ".mode", function(){
       var currentid = "#"+ $(this).attr('id');
       var suffix = this.id.match(/\d+/)[0];
       var currentvalue = $(this).val();
@@ -1083,15 +1102,6 @@
             } else {
                $(chargablewtid).val(total)
             }
-            /*if($(actualwtid).val() > total )
-            {
-            var total = $(actualwtid).val();
-            $(chargablewtid).val(total);
-            }
-            if(total > $(actualwtid).val())
-            {
-            $(chargablewtid).val(total);
-            }*/
          }
          // End Courier Mode Calculation 
          // Courier Cargo Mode
@@ -1105,22 +1115,13 @@
             } else {
                $(chargablewtid).val(total)
             }
-            /*if(total > $(actualwtid).val())
-            {
-            $(chargablewtid).val(total);
-            }
-            if($(actualwtid).val() > total ){
-            console.log(total);
-            console.log($(actualwtid).val());
-            $(chargablewtid).val($(actualwtid).val());
-            }*/
          }
          // End Courier Cargo Mode
       } else{
          $(currentid).val("");
          alert ("Enter Actual Value First!");
       }
-   });
+   });*/
    
    // Select Zone
    /*$('body').on('change', '.destination', function(){
