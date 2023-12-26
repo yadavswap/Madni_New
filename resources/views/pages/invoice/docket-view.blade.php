@@ -1003,7 +1003,38 @@
                                 <td>
                                     <p>{{ $weight_gm }}</p>
                                 </td>
-                                <td>
+                                <td colspan="3">
+                                    <table style="border-top: 1px solid #6f6f6f; border-collapse: collapse;width: 100%;">
+                                        @if(!empty($product->package) && !empty($product->package_weight))
+                                            @for($i=1;$i<=$product->package;$i++)
+                                            <tr>
+                                                <td>
+                                                    <p>{{ $product->package_weight['l'][$i] }}</p>
+                                                </td>
+                                                <td>
+                                                    <p>{{ $product->package_weight['w'][$i] }}</p>
+                                                </td>
+                                                <td>
+                                                    <p>{{ $product->package_weight['h'][$i] }}</p>
+                                                </td>    
+                                            </tr>
+                                            @endfor
+                                        @else
+                                        <tr>
+                                            <td>
+                                                <p>{{ $product->l }}</p>
+                                            </td>
+                                            <td>
+                                                <p>{{ $product->w }}</p>
+                                            </td>
+                                            <td>
+                                                <p>{{ $product->h }}</p>
+                                            </td>
+                                        </tr>    
+                                        @endif       
+                                    </table>
+                                </td>
+                                {{--<td>
                                     <p>{{ $product->l }}</p>
                                 </td>
                                 <td>
@@ -1011,7 +1042,7 @@
                                 </td>
                                 <td>
                                     <p>{{ $product->h }}</p>
-                                </td>
+                                </td>--}}
                             </tr>
                             @endforeach
                             <!--<tr>
