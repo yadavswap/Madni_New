@@ -476,7 +476,7 @@
                                                          </button>
                                                       </div>
                                                       <div class="modal-body">
-                                                         @for($i=1;$i<=3;$i++)
+                                                         @for($i=1;$i<=20;$i++)
                                                          <div class="row package_weightcalc_{{$i}}">
                                                             <div class="col-md-2">
                                                                <div class="form-group">
@@ -870,7 +870,7 @@
       var package = $("#package"+num).val();
       console.log('package constiment no',num)
       console.log('package ',package)
-      for (let i = 1; i <= 3; i++) {
+      for (let i = 1; i <= 20; i++) {
          if (i <= package) {
             $('.package_weightcalc_' + i).removeClass('hide');
          } else {

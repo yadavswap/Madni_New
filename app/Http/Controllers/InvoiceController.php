@@ -606,8 +606,11 @@ class InvoiceController extends Controller
     }
 
     public function docketCreate(Request $request,$invoice_id) {
-        $invoice = CustomerInvoice::find($invoice_id);
+        $invoice = CustomerInvoice::with('docket')->find($invoice_id);
         if($invoice) {
+            if(!empty($invoice->docket)) {
+                return redirect()->route('invoice.docket.view',$invoice->docket['id'])->with('error','Docket already generated');
+            }
             return view('pages.invoice.docket-create',compact('invoice_id'));
         } else {
             abort(404);

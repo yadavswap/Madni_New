@@ -118,9 +118,6 @@
                 <label for="account_no">Account No</label>
                 <input id="account_no" class="form-control" name="account_no" type="text">
               </div>
-
-
-           
          
             <input class="btn btn-primary" type="submit" value="Submit">
           </fieldset>

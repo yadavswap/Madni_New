@@ -111,9 +111,6 @@
                 <label for="account_no">Account No</label>
                 <input id="account_no" class="form-control" name="account_no" type="text" value="{{ $customer->account_no }}">
               </div>
-
-
-           
          
             <input class="btn btn-primary" type="submit" value="Submit">
           </fieldset>

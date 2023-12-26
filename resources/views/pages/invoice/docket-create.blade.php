@@ -240,6 +240,13 @@
                         @if($errors->has('liability_value'))
                             <div class="error text-danger">{{ $errors->first('liability_value') }}</div>
                         @endif
+                    </div>
+                    <div class="col-md-6">
+                        <label for="">Dangerous Goods</label>
+                        <div class="form-check">
+                            <input class="form-check-input dangours_good" type="checkbox" value="1" id="dangours_good" name="dangours_good" style="margin-left:auto;" @if(old('dangours_good') == 1) 'checked' @endif>
+                            <label class="form-check-label" for="dangours_good">Yes contain any dangerous doods</label>
+                        </div>
                     </div>    
                   </div>
                   <h6 class="">Dutiable Shipment Deatils</h6>

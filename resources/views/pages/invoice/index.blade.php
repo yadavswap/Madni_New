@@ -45,7 +45,7 @@
                   <th>Provider Name</th>
                   <th>Net Amount</th>
                   <th>View Invoice</th>
-                  <th>View Docket</th>
+                  <th>View/Create Docket</th>
                   <th>Invoice Lists</th>
                 </tr>
               </thead>

@@ -14,8 +14,8 @@ class AddPackageFieldInInvoiceProductTables extends Migration
     public function up()
     {
         Schema::table('invoice_products', function (Blueprint $table) {
-            //$table->integer('package')->after('destination')->nullable();
-            //$table->text('package_weight')->after('package')->nullable();
+            $table->integer('package')->after('destination')->nullable();
+            $table->text('package_weight')->after('package')->nullable();
             $table->string('l', 10)->nullable()->change();
             $table->string('w', 10)->nullable()->change();
             $table->string('h', 10)->nullable()->change();
